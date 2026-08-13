@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Acampamento | IPLF</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         TOPO
+    ========================== -->
+
+    <header class="topo">
+
+        <div class="logo-area">
+
+            <div class="logo-simbolo">
+                ✝
+            </div>
+
+            <div class="logo-texto">
+
+                <h2>
+                    IGREJA
+                </h2>
+
+                <span>
+                    PRESBITERIANA
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="index.html">
+                INÍCIO
+            </a>
+
+            <a href="acampamentos.html"
+               class="botao-acampamento">
+
+                ACAMPAMENTOS
+
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         DESTAQUE DO ACAMPAMENTO
+    ========================== -->
+
+    <section class="hero-acampamento">
+
+
+        <div class="hero-acampamento-conteudo">
+
+
+            <span class="tag-acampamento">
+                ACAMPAMENTO
+            </span>
+
+
+            <h1 id="nome-acampamento">
+                Acampamento IPLF
+            </h1>
+
+
+            <p>
+                Um tempo especial de comunhão,
+                crescimento e presença de Deus.
+            </p>
+
+
+            <div class="dados-evento">
+
+
+                <div>
+
+                    <strong>
+                        📅 Data
+                    </strong>
+
+                    <span id="data-acampamento">
+                        Em breve
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        📍 Local
+                    </strong>
+
+                    <span id="local-acampamento">
+                        Em breve
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABAS
+    ========================== -->
+
+    <section class="menu-acampamento">
+
+
+        <button
+            class="aba-acampamento ativa"
+            data-aba="inscricao">
+
+            INSCRIÇÃO
+
+        </button>
+
+
+        <button
+            class="aba-acampamento"
+            data-aba="doacoes">
+
+            DOAÇÕES
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         CONTEÚDO
+    ========================== -->
+
+    <main class="conteudo-detalhes-acampamento">
+
+
+
+        <!-- =================================
+             INSCRIÇÃO
+        ================================== -->
+
+        <section
+            id="inscricao"
+            class="conteudo-aba ativo">
+
+
+            <div class="titulo-secao">
+
+                <span>
+                    PARTICIPE
+                </span>
+
+                <h2>
+                    Faça sua inscrição
+                </h2>
+
+                <p>
+                    Preencha seus dados e informe
+                    quais dias você ficará no acampamento.
+                </p>
+
+            </div>
+
+
+
+            <div class="area-formulario">
+
+
+                <form id="form-inscricao">
+
+
+                    <!-- NOME -->
+                    <div class="grupo-formulario">
+
+                        <label for="nome">
+                            Nome completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome completo"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- TELEFONE -->
+                    <div class="grupo-formulario">
+
+                        <label for="telefone">
+                            Telefone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(34) 99999-9999"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- DIAS -->
+                    <div class="grupo-formulario">
+
+                        <label>
+                            Quais dias você ficará no acampamento?
+                        </label>
+
+
+                        <div
+                            class="lista-dias"
+                            id="lista-dias">
+
+
+                            <!--
+                            MAIS PARA FRENTE ESTES DIAS
+                            VIRÃO AUTOMATICAMENTE DO BANCO
+                            -->
+
+
+                            <div class="dia-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="dia1"
+                                    name="dias"
+                                    value="1">
+
+                                <label for="dia1">
+                                    📅 Primeiro dia
+                                </label>
+
+                            </div>
+
+
+                            <div class="dia-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="dia2"
+                                    name="dias"
+                                    value="2">
+
+                                <label for="dia2">
+                                    📅 Segundo dia
+                                </label>
+
+                            </div>
+
+
+                            <div class="dia-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="dia3"
+                                    name="dias"
+                                    value="3">
+
+                                <label for="dia3">
+                                    📅 Terceiro dia
+                                </label>
+
+                            </div>
+
+
+                            <div class="dia-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="dia4"
+                                    name="dias"
+                                    value="4">
+
+                                <label for="dia4">
+                                    📅 Quarto dia
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="botao-enviar">
+
+                        REALIZAR INSCRIÇÃO
+
+                    </button>
+
+
+                    <div
+                        id="mensagem-inscricao"
+                        class="mensagem-formulario">
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================
+             DOAÇÕES
+        ================================== -->
+
+        <section
+            id="doacoes"
+            class="conteudo-aba">
+
+
+            <div class="titulo-secao">
+
+                <span>
+                    CONTRIBUA
+                </span>
+
+                <h2>
+                    Itens para doação
+                </h2>
+
+                <p>
+                    Veja o que ainda precisamos
+                    e escolha como você deseja contribuir.
+                </p>
+
+            </div>
+
+
+
+            <div
+                id="lista-itens-doacao"
+                class="grade-doacoes">
+
+
+                <!-- EXEMPLO TEMPORÁRIO -->
+                <div class="card-doacao">
+
+
+                    <h3>
+                        Arroz
+                    </h3>
+
+
+                    <div class="quantidades-doacao">
+
+                        <span>
+                            Necessário:
+                        </span>
+
+                        <strong>
+                            20 kg
+                        </strong>
+
+                    </div>
+
+
+                    <div class="quantidades-doacao">
+
+                        <span>
+                            Já doado:
+                        </span>
+
+                        <strong>
+                            10 kg
+                        </strong>
+
+                    </div>
+
+
+                    <div class="barra-doacao">
+
+                        <div
+                            class="progresso-doacao"
+                            style="width: 50%;">
+                        </div>
+
+                    </div>
+
+
+                    <p class="falta-doacao">
+                        Faltam <strong>10 kg</strong>
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="botao-doar"
+                        onclick="abrirModalDoacao('1', 'Arroz')">
+
+                        VOU DOAR
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- SEGUNDO EXEMPLO -->
+                <div class="card-doacao">
+
+
+                    <h3>
+                        Refrigerante
+                    </h3>
+
+
+                    <div class="quantidades-doacao">
+
+                        <span>
+                            Necessário:
+                        </span>
+
+                        <strong>
+                            30 unidades
+                        </strong>
+
+                    </div>
+
+
+                    <div class="quantidades-doacao">
+
+                        <span>
+                            Já doado:
+                        </span>
+
+                        <strong>
+                            12 unidades
+                        </strong>
+
+                    </div>
+
+
+                    <div class="barra-doacao">
+
+                        <div
+                            class="progresso-doacao"
+                            style="width: 40%;">
+                        </div>
+
+                    </div>
+
+
+                    <p class="falta-doacao">
+                        Faltam <strong>18 unidades</strong>
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="botao-doar"
+                        onclick="abrirModalDoacao('2', 'Refrigerante')">
+
+                        VOU DOAR
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- TERCEIRO EXEMPLO -->
+                <div class="card-doacao">
+
+
+                    <h3>
+                        Carne
+                    </h3>
+
+
+                    <div class="quantidades-doacao">
+
+                        <span>
+                            Necessário:
+                        </span>
+
+                        <strong>
+                            30 kg
+                        </strong>
+
+                    </div>
+
+
+                    <div class="quantidades-doacao">
+
+                        <span>
+                            Já doado:
+                        </span>
+
+                        <strong>
+                            5 kg
+                        </strong>
+
+                    </div>
+
+
+                    <div class="barra-doacao">
+
+                        <div
+                            class="progresso-doacao"
+                            style="width: 17%;">
+                        </div>
+
+                    </div>
+
+
+                    <p class="falta-doacao">
+                        Faltam <strong>25 kg</strong>
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="botao-doar"
+                        onclick="abrirModalDoacao('3', 'Carne')">
+
+                        VOU DOAR
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         MODAL DOAÇÃO
+    ========================== -->
+
+    <div
+        id="modal-doacao"
+        class="modal-doacao">
+
+
+        <div class="modal-conteudo">
+
+
+            <button
+                type="button"
+                id="fechar-modal"
+                class="fechar-modal">
+
+                ×
+
+            </button>
+
+
+
+            <span class="modal-subtitulo">
+                QUERO CONTRIBUIR
+            </span>
+
+
+            <h2>
+                Fazer uma doação
+            </h2>
+
+
+            <p class="item-selecionado">
+
+                Item:
+
+                <strong id="nome-item-modal">
+                    -
+                </strong>
+
+            </p>
+
+
+
+            <form id="form-doacao">
+
+
+                <input
+                    type="hidden"
+                    id="item-doacao-id">
+
+
+
+                <div class="grupo-formulario">
+
+                    <label for="nome-doador">
+                        Seu nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome-doador"
+                        placeholder="Digite seu nome"
+                        required>
+
+                </div>
+
+
+
+                <div class="grupo-formulario">
+
+                    <label for="telefone-doador">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefone-doador"
+                        placeholder="(34) 99999-9999">
+
+                </div>
+
+
+
+                <div class="grupo-formulario">
+
+                    <label for="quantidade-doacao">
+                        Quantidade que irá doar
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidade-doacao"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="Ex.: 5"
+                        required>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="botao-enviar">
+
+                    CONFIRMAR DOAÇÃO
+
+                </button>
+
+
+                <div
+                    id="mensagem-doacao"
+                    class="mensagem-formulario">
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <footer>
+
+        <p>
+            © 2026 Igreja Presbiteriana
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        function abrirModalDoacao(id, nome) {
+
+            const modal =
+                document.getElementById("modal-doacao");
+
+            const nomeItem =
+                document.getElementById("nome-item-modal");
+
+            const itemId =
+                document.getElementById("item-doacao-id");
+
+
+            nomeItem.textContent = nome;
+
+            itemId.value = id;
+
+            modal.classList.add("aberto");
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

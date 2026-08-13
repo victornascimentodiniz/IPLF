@@ -1,6 +1,6 @@
-/* =========================
+/* ==================================================
    CONFIGURAÇÕES GERAIS
-========================= */
+================================================== */
 
 * {
     margin: 0;
@@ -19,156 +19,120 @@ body {
 }
 
 
-/* =========================
-   CORES
-========================= */
+/* ==================================================
+   CORES DO SITE
+================================================== */
 
 :root {
-
     --verde-escuro: #075b3d;
-
     --verde: #087a50;
-
     --verde-claro: #baf4ce;
-
     --verde-muito-claro: #eafaf0;
-
     --escuro: #171c1a;
-
     --cinza: #6a6a6a;
-
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* ==================================================
+   TOPO
+================================================== */
 
 .topo {
-
     height: 90px;
-
     background: #ffffff;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     padding: 0 8%;
 
     position: relative;
-
     z-index: 100;
 
     box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-
 }
 
 
-/* LOGO */
+/* ==================================================
+   LOGO
+================================================== */
 
 .logo-area {
-
     display: flex;
-
     align-items: center;
-
     gap: 13px;
 
     color: var(--verde-escuro);
-
 }
 
 
 .logo-simbolo {
-
     width: 48px;
-
     height: 48px;
 
     border-radius: 50%;
 
     background: var(--verde-escuro);
-
     color: white;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     font-size: 25px;
-
 }
 
 
 .logo-texto h2 {
-
     font-size: 17px;
-
     letter-spacing: 2px;
-
 }
 
 
 .logo-texto span {
-
     font-size: 11px;
-
     letter-spacing: 2px;
-
 }
 
 
-/* MENU */
+/* ==================================================
+   MENU
+================================================== */
 
 .menu {
-
     display: flex;
-
     align-items: center;
 
     gap: 30px;
-
 }
 
 
 .menu a {
-
     text-decoration: none;
 
     color: #292929;
 
     font-size: 13px;
-
     font-weight: bold;
 
     transition: .3s;
-
 }
 
 
 .menu a:hover {
-
     color: var(--verde);
-
 }
 
 
 .menu .ativo {
-
     color: var(--verde-escuro);
-
 }
 
 
-/* BOTÃO ACAMPAMENTO */
+/* botão acampamentos */
 
 .botao-acampamento {
-
     background: var(--verde-escuro);
 
     color: white !important;
@@ -177,30 +141,27 @@ body {
 
     border-radius: 30px;
 
+    transition: .3s;
 }
 
 
 .botao-acampamento:hover {
-
     background: var(--verde);
 
     transform: translateY(-2px);
-
 }
 
 
-/* =========================
-   HERO
-========================= */
+/* ==================================================
+   HOME - HERO
+================================================== */
 
 .hero {
-
     min-height: 570px;
 
     position: relative;
 
     display: flex;
-
     align-items: center;
 
     padding: 0 11%;
@@ -208,32 +169,25 @@ body {
     overflow: hidden;
 
     background:
-
         linear-gradient(
             100deg,
             rgba(4,50,34,.95),
             rgba(8,102,68,.75)
         ),
-
         linear-gradient(
             135deg,
             #102d25,
             #09583c
         );
-
 }
 
 
-/* elemento decorativo */
-
 .hero::after {
-
     content: "";
 
     position: absolute;
 
     width: 650px;
-
     height: 650px;
 
     background: var(--verde-claro);
@@ -243,39 +197,30 @@ body {
     border-radius: 50%;
 
     right: -180px;
-
     top: -100px;
-
 }
 
 
-/* faixa decorativa */
-
 .hero::before {
-
     content: "";
 
     position: absolute;
 
     width: 700px;
-
     height: 180px;
 
     background: rgba(186,244,206,.08);
 
     right: -100px;
-
     bottom: 30px;
 
     border-radius: 150px;
 
     transform: rotate(-10deg);
-
 }
 
 
 .hero-conteudo {
-
     position: relative;
 
     z-index: 3;
@@ -283,12 +228,10 @@ body {
     max-width: 700px;
 
     color: white;
-
 }
 
 
 .hero-subtitulo {
-
     color: var(--verde-claro);
 
     font-weight: bold;
@@ -296,38 +239,29 @@ body {
     letter-spacing: 4px;
 
     font-size: 14px;
-
 }
 
 
 .hero h1 {
-
     font-size: 60px;
 
     line-height: 1.05;
 
     margin-top: 18px;
-
     margin-bottom: 22px;
-
 }
 
 
 .hero p {
-
     font-size: 20px;
 
     color: #e2e2e2;
 
     margin-bottom: 35px;
-
 }
 
 
-/* BOTÃO */
-
 .botao-principal {
-
     display: inline-block;
 
     text-decoration: none;
@@ -343,34 +277,28 @@ body {
     border-radius: 6px;
 
     transition: .3s;
-
 }
 
 
 .botao-principal:hover {
-
     background: white;
 
     transform: translateY(-3px);
-
 }
 
 
-/* =========================
-   APRESENTAÇÃO
-========================= */
+/* ==================================================
+   HOME - APRESENTAÇÃO
+================================================== */
 
 .apresentacao {
-
     padding: 90px 10%;
 
     text-align: center;
-
 }
 
 
 .titulo-pequeno {
-
     color: var(--verde);
 
     font-weight: bold;
@@ -378,25 +306,20 @@ body {
     letter-spacing: 3px;
 
     font-size: 12px;
-
 }
 
 
 .apresentacao h2 {
-
     color: var(--verde-escuro);
 
     font-size: 38px;
 
     margin-top: 12px;
-
     margin-bottom: 15px;
-
 }
 
 
 .apresentacao > p {
-
     max-width: 650px;
 
     margin: auto;
@@ -404,14 +327,14 @@ body {
     line-height: 1.7;
 
     color: var(--cinza);
-
 }
 
 
-/* CARDS */
+/* ==================================================
+   CARDS DA HOME
+================================================== */
 
 .cards {
-
     margin-top: 55px;
 
     display: grid;
@@ -419,12 +342,10 @@ body {
     grid-template-columns: repeat(3, 1fr);
 
     gap: 25px;
-
 }
 
 
 .card {
-
     padding: 40px 30px;
 
     border-radius: 12px;
@@ -436,23 +357,18 @@ body {
     transition: .3s;
 
     text-align: left;
-
 }
 
 
 .card:hover {
-
     transform: translateY(-7px);
 
     box-shadow: 0 15px 35px rgba(0,0,0,.1);
-
 }
 
 
 .icone-card {
-
     width: 60px;
-
     height: 60px;
 
     background: var(--verde-muito-claro);
@@ -462,58 +378,46 @@ body {
     border-radius: 12px;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     font-size: 28px;
 
     margin-bottom: 20px;
-
 }
 
 
 .card h3 {
-
     color: var(--verde-escuro);
 
     margin-bottom: 12px;
-
 }
 
 
 .card p {
-
     color: var(--cinza);
 
     line-height: 1.6;
 
     margin-bottom: 15px;
-
 }
 
 
 .card a {
-
     text-decoration: none;
 
     font-weight: bold;
 
     color: var(--verde);
-
 }
 
 
-
-/* =========================
+/* ==================================================
    PÁGINA ACAMPAMENTOS
-========================= */
+================================================== */
 
 .cabecalho-pagina {
-
     background:
-
         linear-gradient(
             110deg,
             #063d2a,
@@ -523,12 +427,10 @@ body {
     color: white;
 
     padding: 80px 10%;
-
 }
 
 
 .cabecalho-pagina span {
-
     color: var(--verde-claro);
 
     font-size: 12px;
@@ -536,32 +438,28 @@ body {
     font-weight: bold;
 
     letter-spacing: 4px;
-
 }
 
 
 .cabecalho-pagina h1 {
-
     font-size: 48px;
 
     margin: 12px 0;
-
 }
 
 
 .cabecalho-pagina p {
-
     font-size: 18px;
 
     color: #e5e5e5;
-
 }
 
 
-/* LISTAGEM */
+/* ==================================================
+   LISTA DE ACAMPAMENTOS
+================================================== */
 
 .area-acampamentos {
-
     padding: 70px 10%;
 
     display: grid;
@@ -569,12 +467,10 @@ body {
     grid-template-columns: repeat(2, 1fr);
 
     gap: 30px;
-
 }
 
 
 .card-acampamento {
-
     border-radius: 15px;
 
     overflow: hidden;
@@ -584,25 +480,20 @@ body {
     border: 1px solid #e5e5e5;
 
     transition: .3s;
-
 }
 
 
 .card-acampamento:hover {
-
     transform: translateY(-5px);
 
     box-shadow: 0 18px 40px rgba(0,0,0,.12);
-
 }
 
 
 .imagem-acampamento {
-
     height: 240px;
 
     background:
-
         linear-gradient(
             135deg,
             #06452f,
@@ -612,27 +503,20 @@ body {
     position: relative;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
 }
 
 
 .icone-acampamento {
-
     font-size: 80px;
-
 }
 
 
 .status {
-
     position: absolute;
 
     top: 20px;
-
     left: 20px;
 
     background: var(--verde-claro);
@@ -646,26 +530,20 @@ body {
     font-size: 10px;
 
     font-weight: bold;
-
 }
 
 
 .em-breve {
-
     background: white;
-
 }
 
 
 .conteudo-acampamento {
-
     padding: 30px;
-
 }
 
 
 .categoria {
-
     color: var(--verde);
 
     font-size: 11px;
@@ -673,21 +551,17 @@ body {
     font-weight: bold;
 
     letter-spacing: 2px;
-
 }
 
 
 .conteudo-acampamento h2 {
-
     margin: 10px 0 20px;
 
     color: var(--verde-escuro);
-
 }
 
 
 .informacoes {
-
     display: flex;
 
     gap: 20px;
@@ -695,28 +569,22 @@ body {
     margin-bottom: 20px;
 
     flex-wrap: wrap;
-
 }
 
 
 .informacoes p {
-
     color: #555;
-
 }
 
 
 .descricao {
-
     color: #6b6b6b;
 
     line-height: 1.6;
-
 }
 
 
 .botao-saiba-mais {
-
     margin-top: 25px;
 
     border: 0;
@@ -733,44 +601,708 @@ body {
 
     font-weight: bold;
 
+    transition: .3s;
 }
 
 
 .botao-saiba-mais:hover {
-
     background: var(--verde);
-
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+.link-saiba-mais {
+    display: inline-block;
+
+    text-decoration: none;
+}
+
+
+/* ==================================================
+   PÁGINA DE UM ACAMPAMENTO
+================================================== */
+
+.hero-acampamento {
+    min-height: 390px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(3, 49, 32, .96),
+            rgba(6, 105, 69, .88)
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 70px 10%;
+
+    color: white;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.hero-acampamento::after {
+    content: "";
+
+    position: absolute;
+
+    width: 550px;
+    height: 550px;
+
+    background: rgba(186,244,206,.09);
+
+    border-radius: 50%;
+
+    right: -160px;
+    top: -220px;
+}
+
+
+.hero-acampamento-conteudo {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 800px;
+}
+
+
+.tag-acampamento {
+    color: var(--verde-claro);
+
+    letter-spacing: 4px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.hero-acampamento h1 {
+    font-size: 52px;
+
+    margin-top: 12px;
+    margin-bottom: 15px;
+}
+
+
+.hero-acampamento > div > p {
+    font-size: 19px;
+
+    color: #e3eee8;
+
+    margin-bottom: 35px;
+}
+
+
+/* ==================================================
+   DATA E LOCAL
+================================================== */
+
+.dados-evento {
+    display: flex;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+
+.dados-evento div {
+    min-width: 220px;
+
+    background: rgba(255,255,255,.10);
+
+    border: 1px solid rgba(255,255,255,.16);
+
+    padding: 16px 20px;
+
+    border-radius: 10px;
+}
+
+
+.dados-evento strong {
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+.dados-evento span {
+    color: #dfece5;
+}
+
+
+/* ==================================================
+   ABAS INSCRIÇÃO / DOAÇÕES
+================================================== */
+
+.menu-acampamento {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 25px;
+
+    background: white;
+
+    border-bottom: 1px solid #e7e7e7;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+}
+
+
+.aba-acampamento {
+    border: 1px solid #d5d5d5;
+
+    background: white;
+
+    color: var(--verde-escuro);
+
+    font-weight: bold;
+
+    padding: 13px 30px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.aba-acampamento:hover {
+    border-color: var(--verde);
+}
+
+
+.aba-acampamento.ativa {
+    background: var(--verde-escuro);
+
+    border-color: var(--verde-escuro);
+
+    color: white;
+}
+
+
+/* ==================================================
+   CONTEÚDO DAS ABAS
+================================================== */
+
+.conteudo-detalhes-acampamento {
+    background: #f7f9f8;
+
+    min-height: 600px;
+}
+
+
+.conteudo-aba {
+    display: none;
+
+    padding: 70px 10% 90px;
+}
+
+
+.conteudo-aba.ativo {
+    display: block;
+}
+
+
+.titulo-secao {
+    text-align: center;
+
+    max-width: 700px;
+
+    margin: 0 auto 45px;
+}
+
+
+.titulo-secao span {
+    color: var(--verde);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+.titulo-secao h2 {
+    color: var(--verde-escuro);
+
+    font-size: 38px;
+
+    margin: 10px 0 12px;
+}
+
+
+.titulo-secao p {
+    color: #666;
+
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   FORMULÁRIO
+================================================== */
+
+.area-formulario {
+    background: white;
+
+    max-width: 700px;
+
+    margin: auto;
+
+    padding: 40px;
+
+    border-radius: 16px;
+
+    box-shadow: 0 10px 35px rgba(0,0,0,.07);
+}
+
+
+.grupo-formulario {
+    margin-bottom: 25px;
+}
+
+
+.grupo-formulario label {
+    display: block;
+
+    color: #263b32;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+.grupo-formulario input {
+    width: 100%;
+
+    height: 52px;
+
+    border: 1px solid #d4dcd8;
+
+    border-radius: 8px;
+
+    padding: 0 15px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+
+.grupo-formulario input:focus {
+    border-color: var(--verde);
+
+    box-shadow: 0 0 0 3px rgba(8,122,80,.10);
+}
+
+
+/* ==================================================
+   DIAS DO ACAMPAMENTO
+================================================== */
+
+.lista-dias {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+
+.dia-opcao {
+    position: relative;
+}
+
+
+.dia-opcao input {
+    display: none;
+}
+
+
+.dia-opcao label {
+    border: 1px solid #d9e1dd;
+
+    padding: 15px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: normal;
+
+    transition: .2s;
+
+    background: white;
+}
+
+
+.dia-opcao input:checked + label {
+    background: var(--verde-muito-claro);
+
+    border-color: var(--verde);
+
+    color: var(--verde-escuro);
+
+    font-weight: bold;
+}
+
+
+.mensagem-carregamento {
+    color: #777;
+}
+
+
+/* ==================================================
+   BOTÃO DOS FORMULÁRIOS
+================================================== */
+
+.botao-enviar {
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: var(--verde-escuro);
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.botao-enviar:hover {
+    background: var(--verde);
+
+    transform: translateY(-2px);
+}
+
+
+/* ==================================================
+   DOAÇÕES
+================================================== */
+
+.grade-doacoes {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 25px;
+
+    max-width: 1200px;
+
+    margin: auto;
+}
+
+
+.card-doacao {
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 28px;
+
+    border: 1px solid #e2e7e4;
+
+    transition: .3s;
+}
+
+
+.card-doacao:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.09);
+}
+
+
+.card-doacao h3 {
+    color: var(--verde-escuro);
+
+    font-size: 22px;
+
+    margin-bottom: 18px;
+}
+
+
+.quantidades-doacao {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    color: #555;
+
+    font-size: 14px;
+}
+
+
+.barra-doacao {
+    background: #e6eee9;
+
+    height: 11px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin: 12px 0 17px;
+}
+
+
+.progresso-doacao {
+    height: 100%;
+
+    background: var(--verde);
+
+    border-radius: 20px;
+}
+
+
+.falta-doacao {
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+
+.botao-doar {
+    border: none;
+
+    background: var(--verde-escuro);
+
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    width: 100%;
+
+    transition: .3s;
+}
+
+
+.botao-doar:hover {
+    background: var(--verde);
+}
+
+
+.sem-itens {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    background: white;
+
+    padding: 60px 20px;
+
+    border-radius: 15px;
+
+    border: 1px solid #e3e8e5;
+}
+
+
+.icone-sem-item {
+    font-size: 45px;
+
+    color: var(--verde);
+
+    margin-bottom: 12px;
+}
+
+
+.sem-itens h3 {
+    color: var(--verde-escuro);
+
+    margin-bottom: 8px;
+}
+
+
+.sem-itens p {
+    color: #777;
+}
+
+
+/* ==================================================
+   MODAL DE DOAÇÃO
+================================================== */
+
+.modal-doacao {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.65);
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 999;
+
+    padding: 20px;
+}
+
+
+.modal-doacao.aberto {
+    display: flex;
+}
+
+
+.modal-conteudo {
+    background: white;
+
+    width: 100%;
+
+    max-width: 520px;
+
+    border-radius: 16px;
+
+    padding: 38px;
+
+    position: relative;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+}
+
+
+.fechar-modal {
+    position: absolute;
+
+    right: 18px;
+    top: 13px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+    color: #777;
+}
+
+
+.modal-subtitulo {
+    color: var(--verde);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+}
+
+
+.modal-conteudo h2 {
+    color: var(--verde-escuro);
+
+    margin: 8px 0 15px;
+}
+
+
+.item-selecionado {
+    background: var(--verde-muito-claro);
+
+    padding: 13px;
+
+    border-radius: 7px;
+
+    margin-bottom: 25px;
+
+    color: var(--verde-escuro);
+}
+
+
+/* ==================================================
+   MENSAGENS
+================================================== */
+
+.mensagem-formulario {
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+/* ==================================================
+   RODAPÉ
+================================================== */
 
 footer {
-
     background: #062d20;
 
-    color: #ddd;
+    color: #dddddd;
 
     padding: 30px;
 
     text-align: center;
 
     font-size: 13px;
+}
+
+
+/* ==================================================
+   RESPONSIVO - TABLET
+================================================== */
+
+@media(max-width: 900px) {
+
+    .grade-doacoes {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
 }
 
 
-
-/* =========================
-   CELULAR
-========================= */
+/* ==================================================
+   RESPONSIVO - CELULAR
+================================================== */
 
 @media(max-width: 800px) {
 
     .topo {
-
         height: auto;
 
         flex-direction: column;
@@ -778,60 +1310,98 @@ footer {
         padding: 20px;
 
         gap: 20px;
-
     }
 
 
     .menu {
-
         gap: 15px;
-
     }
 
 
     .hero {
-
         min-height: 500px;
 
         padding: 60px 8%;
-
     }
 
 
     .hero h1 {
-
         font-size: 40px;
-
     }
 
 
     .cards {
-
         grid-template-columns: 1fr;
-
     }
 
 
     .area-acampamentos {
-
         grid-template-columns: 1fr;
 
         padding: 40px 6%;
-
     }
 
 
     .cabecalho-pagina {
-
         padding: 60px 7%;
-
     }
 
 
     .cabecalho-pagina h1 {
-
         font-size: 37px;
+    }
 
+}
+
+
+/* ==================================================
+   RESPONSIVO - CELULAR PEQUENO
+================================================== */
+
+@media(max-width: 650px) {
+
+    .hero-acampamento {
+        padding: 55px 7%;
+    }
+
+
+    .hero-acampamento h1 {
+        font-size: 37px;
+    }
+
+
+    .menu-acampamento {
+        padding: 15px;
+    }
+
+
+    .aba-acampamento {
+        padding: 11px 18px;
+    }
+
+
+    .conteudo-aba {
+        padding: 50px 6%;
+    }
+
+
+    .area-formulario {
+        padding: 25px 20px;
+    }
+
+
+    .lista-dias {
+        grid-template-columns: 1fr;
+    }
+
+
+    .grade-doacoes {
+        grid-template-columns: 1fr;
+    }
+
+
+    .titulo-secao h2 {
+        font-size: 31px;
     }
 
 }
