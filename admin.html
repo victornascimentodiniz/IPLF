@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="robots"
+          content="noindex,nofollow">
+
+    <title>
+        Administração | IPLF
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+</head>
+
+
+<body class="pagina-admin">
+
+
+<header class="topo">
+
+    <div class="logo-area">
+
+        <div class="logo-simbolo">
+            ✝
+        </div>
+
+        <div class="logo-texto">
+
+            <h2>IGREJA</h2>
+
+            <span>PRESBITERIANA</span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="menu">
+
+        <a href="index.html">
+            VER SITE
+        </a>
+
+
+        <button
+            type="button"
+            id="botao-sair-admin"
+            class="botao-sair-admin">
+
+            SAIR
+
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<main
+    id="painel-admin"
+    class="painel-admin"
+    hidden>
+
+
+    <section class="cabecalho-admin">
+
+        <span>
+            ADMINISTRAÇÃO
+        </span>
+
+        <h1>
+            Painel Administrativo
+        </h1>
+
+        <p>
+            Cadastre os dias do acampamento
+            e os itens necessários para doação.
+        </p>
+
+    </section>
+
+
+
+    <section class="admin-acampamento-atual">
+
+        <span>
+            ACAMPAMENTO ATUAL
+        </span>
+
+        <h2 id="admin-nome-acampamento">
+            Carregando...
+        </h2>
+
+        <p id="admin-periodo-acampamento">
+        </p>
+
+    </section>
+
+
+
+    <section class="grade-admin">
+
+
+        <!-- DIAS -->
+
+        <div class="card-admin">
+
+            <h2>
+                📅 Dias do acampamento
+            </h2>
+
+            <p>
+                Cadastre os dias que aparecerão
+                para as pessoas escolherem
+                durante a inscrição.
+            </p>
+
+
+            <form id="form-admin-dia">
+
+
+                <div class="grupo-formulario">
+
+                    <label for="admin-data-dia">
+                        Data
+                    </label>
+
+                    <input
+                        type="date"
+                        id="admin-data-dia"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-enviar">
+
+                    ADICIONAR DIA
+
+                </button>
+
+
+                <div
+                    id="mensagem-admin-dia"
+                    class="mensagem-formulario">
+                </div>
+
+            </form>
+
+
+            <div class="admin-lista">
+
+                <h3>
+                    Dias cadastrados
+                </h3>
+
+                <div id="admin-lista-dias">
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DOAÇÕES -->
+
+        <div class="card-admin">
+
+            <h2>
+                🎁 Itens para doação
+            </h2>
+
+            <p>
+                Informe os itens necessários
+                para o acampamento.
+            </p>
+
+
+            <form id="form-admin-item">
+
+
+                <div class="grupo-formulario">
+
+                    <label for="admin-item-nome">
+                        Nome do item
+                    </label>
+
+                    <input
+                        type="text"
+                        id="admin-item-nome"
+                        placeholder="Ex.: Arroz"
+                        required>
+
+                </div>
+
+
+                <div class="admin-duas-colunas">
+
+
+                    <div class="grupo-formulario">
+
+                        <label for="admin-item-quantidade">
+                            Quantidade
+                        </label>
+
+                        <input
+                            type="number"
+                            id="admin-item-quantidade"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="20"
+                            required>
+
+                    </div>
+
+
+                    <div class="grupo-formulario">
+
+                        <label for="admin-item-unidade">
+                            Unidade
+                        </label>
+
+                        <input
+                            type="text"
+                            id="admin-item-unidade"
+                            placeholder="kg, unidades..."
+                            required>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="grupo-formulario">
+
+                    <label for="admin-item-observacao">
+                        Observação
+                    </label>
+
+                    <input
+                        type="text"
+                        id="admin-item-observacao"
+                        placeholder="Opcional">
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-enviar">
+
+                    CADASTRAR ITEM
+
+                </button>
+
+
+                <div
+                    id="mensagem-admin-item"
+                    class="mensagem-formulario">
+                </div>
+
+
+            </form>
+
+
+            <div class="admin-lista">
+
+                <h3>
+                    Itens cadastrados
+                </h3>
+
+                <div id="admin-lista-itens">
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>

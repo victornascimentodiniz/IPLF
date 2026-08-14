@@ -12,7 +12,10 @@
 
 <body>
 
-    <!-- TOPO -->
+    <!-- =========================
+         TOPO
+    ========================== -->
+
     <header class="topo">
 
         <div class="logo-area">
@@ -28,22 +31,39 @@
 
         </div>
 
+
         <nav class="menu">
 
             <a href="index.html" class="ativo">
                 INÍCIO
             </a>
 
-            <a href="acampamentos.html" class="botao-acampamento">
+            <a href="acampamentos.html"
+               class="botao-acampamento">
+
                 ACAMPAMENTOS
+
             </a>
+
+            <!-- BOTÃO ADMIN -->
+            <button
+                type="button"
+                id="abrir-login-admin"
+                class="botao-login-admin">
+
+                ADMIN
+
+            </button>
 
         </nav>
 
     </header>
 
 
-    <!-- DESTAQUE PRINCIPAL -->
+    <!-- =========================
+         DESTAQUE PRINCIPAL
+    ========================== -->
+
     <main>
 
         <section class="hero">
@@ -64,8 +84,11 @@
                     Um lugar de comunhão, fé e crescimento.
                 </p>
 
-                <a href="acampamentos.html" class="botao-principal">
+                <a href="acampamentos.html"
+                   class="botao-principal">
+
                     VER ACAMPAMENTOS
+
                 </a>
 
             </div>
@@ -73,7 +96,9 @@
         </section>
 
 
-        <!-- ÁREA INFERIOR -->
+        <!-- =========================
+             ÁREA INFERIOR
+        ========================== -->
 
         <section class="apresentacao">
 
@@ -93,16 +118,20 @@
 
             <div class="cards">
 
+                <!-- ACAMPAMENTOS -->
                 <div class="card">
 
                     <div class="icone-card">
                         ⛺
                     </div>
 
-                    <h3>Acampamentos</h3>
+                    <h3>
+                        Acampamentos
+                    </h3>
 
                     <p>
-                        Conheça os próximos acampamentos e eventos disponíveis.
+                        Conheça os próximos acampamentos
+                        e eventos disponíveis.
                     </p>
 
                     <a href="acampamentos.html">
@@ -112,31 +141,39 @@
                 </div>
 
 
+                <!-- COMUNHÃO -->
                 <div class="card">
 
                     <div class="icone-card">
                         ♡
                     </div>
 
-                    <h3>Comunhão</h3>
+                    <h3>
+                        Comunhão
+                    </h3>
 
                     <p>
-                        Momentos especiais para fortalecer nossa comunhão.
+                        Momentos especiais para fortalecer
+                        nossa comunhão.
                     </p>
 
                 </div>
 
 
+                <!-- FÉ -->
                 <div class="card">
 
                     <div class="icone-card">
                         ✝
                     </div>
 
-                    <h3>Fé</h3>
+                    <h3>
+                        Fé
+                    </h3>
 
                     <p>
-                        Crescendo juntos na Palavra e na presença de Deus.
+                        Crescendo juntos na Palavra
+                        e na presença de Deus.
                     </p>
 
                 </div>
@@ -148,6 +185,10 @@
     </main>
 
 
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+
     <footer>
 
         <p>
@@ -157,7 +198,99 @@
     </footer>
 
 
+    <!-- =========================
+         MODAL LOGIN ADMIN
+    ========================== -->
+
+    <div
+        id="modal-login-admin"
+        class="modal-login-admin">
+
+
+        <div class="login-admin-box">
+
+
+            <!-- FECHAR -->
+            <button
+                type="button"
+                id="fechar-login-admin"
+                class="fechar-login-admin">
+
+                ×
+
+            </button>
+
+
+            <div class="icone-login-admin">
+                🔐
+            </div>
+
+
+            <span class="login-admin-subtitulo">
+                ÁREA RESTRITA
+            </span>
+
+
+            <h2>
+                Acesso Administrativo
+            </h2>
+
+
+            <p>
+                Digite a senha para acessar
+                o painel de administração.
+            </p>
+
+
+            <form id="form-login-admin">
+
+
+                <div class="grupo-formulario">
+
+                    <label for="senha-admin">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha-admin"
+                        placeholder="Digite a senha"
+                        autocomplete="current-password"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-enviar">
+
+                    ENTRAR
+
+                </button>
+
+
+                <div
+                    id="mensagem-login-admin"
+                    class="mensagem-formulario">
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script src="script.js"></script>
+
+    <script src="admin-login.js"></script>
+
 
 </body>
 

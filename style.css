@@ -1405,3 +1405,660 @@ footer {
     }
 
 }
+.botao-doar:disabled,
+.botao-enviar:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ==================================================
+   BOTÃO ADMIN - MENU
+================================================== */
+
+.botao-login-admin {
+
+    border: 1px solid var(--verde-escuro);
+
+    background: transparent;
+
+    color: var(--verde-escuro);
+
+    padding: 12px 20px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+
+.botao-login-admin:hover {
+
+    background: var(--verde-escuro);
+
+    color: white;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ==================================================
+   MODAL LOGIN ADMIN
+================================================== */
+
+.modal-login-admin {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    background: rgba(0, 0, 0, .72);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    backdrop-filter: blur(4px);
+
+}
+
+
+.modal-login-admin.aberto {
+
+    display: flex;
+
+}
+
+
+/* CAIXA */
+
+.login-admin-box {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 42px 38px;
+
+    position: relative;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.30);
+
+    animation:
+        aparecerLogin .25s ease;
+
+}
+
+
+/* ANIMAÇÃO */
+
+@keyframes aparecerLogin {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* ÍCONE */
+
+.icone-login-admin {
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 18px;
+
+    background:
+        var(--verde-muito-claro);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+
+    margin-bottom: 22px;
+
+}
+
+
+/* SUBTÍTULO */
+
+.login-admin-subtitulo {
+
+    color: var(--verde);
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+}
+
+
+/* TÍTULO */
+
+.login-admin-box h2 {
+
+    color: var(--verde-escuro);
+
+    font-size: 28px;
+
+    margin:
+
+        8px
+        0
+        10px;
+
+}
+
+
+/* TEXTO */
+
+.login-admin-box > p {
+
+    color: #666;
+
+    line-height: 1.6;
+
+    margin-bottom: 28px;
+
+}
+
+
+/* BOTÃO X */
+
+.fechar-login-admin {
+
+    position: absolute;
+
+    right: 18px;
+
+    top: 14px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #777;
+
+    font-size: 31px;
+
+    cursor: pointer;
+
+}
+
+
+.fechar-login-admin:hover {
+
+    color: #111;
+
+}
+
+
+/* ==================================================
+   PAINEL ADMINISTRATIVO
+================================================== */
+
+.pagina-admin {
+
+    background: #f4f7f5;
+
+}
+
+
+.painel-admin {
+
+    min-height:
+        calc(100vh - 90px);
+
+}
+
+
+/* CABEÇALHO */
+
+.cabecalho-admin {
+
+    padding:
+        65px
+        10%;
+
+    background:
+
+        linear-gradient(
+            110deg,
+            #063d2a,
+            #08754e
+        );
+
+    color: white;
+
+}
+
+
+.cabecalho-admin span {
+
+    color:
+        var(--verde-claro);
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+}
+
+
+.cabecalho-admin h1 {
+
+    font-size: 42px;
+
+    margin:
+        10px
+        0;
+
+}
+
+
+.cabecalho-admin p {
+
+    color: #e3eee8;
+
+    font-size: 17px;
+
+}
+
+
+/* ==================================================
+   ACAMPAMENTO ATUAL
+================================================== */
+
+.admin-acampamento-atual {
+
+    margin:
+
+        35px
+        10%
+        0;
+
+    padding:
+
+        25px
+        30px;
+
+    border-radius: 14px;
+
+    background:
+        var(--verde-escuro);
+
+    color: white;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,.12);
+
+}
+
+
+.admin-acampamento-atual > span {
+
+    color:
+        var(--verde-claro);
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+}
+
+
+.admin-acampamento-atual h2 {
+
+    margin:
+
+        7px
+        0;
+
+    font-size: 27px;
+
+}
+
+
+.admin-acampamento-atual p {
+
+    color: #dcebe4;
+
+}
+
+
+/* ==================================================
+   CARDS ADMIN
+================================================== */
+
+.grade-admin {
+
+    padding:
+
+        35px
+        10%
+        80px;
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 30px;
+
+}
+
+
+.card-admin {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        #e1e7e3;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.05);
+
+}
+
+
+.card-admin > h2 {
+
+    color:
+        var(--verde-escuro);
+
+    margin-bottom: 8px;
+
+}
+
+
+.card-admin > p {
+
+    color: #666;
+
+    line-height: 1.5;
+
+    margin-bottom: 28px;
+
+}
+
+
+/* ==================================================
+   DUAS COLUNAS
+================================================== */
+
+.admin-duas-colunas {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+
+}
+
+
+/* ==================================================
+   LISTAGEM ADMIN
+================================================== */
+
+.admin-lista {
+
+    margin-top: 35px;
+
+    border-top:
+
+        1px solid
+        #e5e5e5;
+
+    padding-top: 25px;
+
+}
+
+
+.admin-lista h3 {
+
+    color:
+        var(--verde-escuro);
+
+    margin-bottom: 15px;
+
+}
+
+
+.admin-item-lista {
+
+    min-height: 55px;
+
+    padding:
+        13px
+        3px;
+
+    border-bottom:
+        1px solid
+        #eeeeee;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    gap: 15px;
+
+}
+
+
+.admin-item-lista strong {
+
+    color:
+        var(--verde-escuro);
+
+}
+
+
+.admin-item-lista span {
+
+    color: #666;
+
+    text-align: right;
+
+}
+
+
+/* ==================================================
+   BOTÃO SAIR
+================================================== */
+
+.botao-sair-admin {
+
+    border: none;
+
+    background: #a72e2e;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+
+.botao-sair-admin:hover {
+
+    background: #851f1f;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ==================================================
+   ADMIN TABLET
+================================================== */
+
+@media(max-width: 850px) {
+
+    .grade-admin {
+
+        grid-template-columns: 1fr;
+
+        padding:
+
+            30px
+            6%
+            60px;
+
+    }
+
+
+    .admin-acampamento-atual {
+
+        margin:
+
+            30px
+            6%
+            0;
+
+    }
+
+
+    .cabecalho-admin {
+
+        padding:
+
+            50px
+            7%;
+
+    }
+
+}
+
+
+/* ==================================================
+   ADMIN CELULAR
+================================================== */
+
+@media(max-width: 550px) {
+
+    .admin-duas-colunas {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .card-admin {
+
+        padding:
+            25px
+            20px;
+
+    }
+
+
+    .login-admin-box {
+
+        padding:
+            35px
+            25px;
+
+    }
+
+
+    .cabecalho-admin h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    .admin-item-lista {
+
+        align-items:
+            flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .admin-item-lista span {
+
+        text-align: left;
+
+    }
+
+}
