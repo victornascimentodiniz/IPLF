@@ -1,295 +1,474 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Início | Igreja</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>
+        Início | Igreja
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- =========================
-         TOPO
-    ========================== -->
 
-    <header class="topo">
+<!-- =================================
+     TOPO
+================================== -->
 
-        <div class="logo-area">
+<header class="topo">
 
-            <div class="logo-simbolo">
-                ✝
-            </div>
 
-            <div class="logo-texto">
-                <h2>IGREJA</h2>
-                <span>PRESBITERIANA</span>
-            </div>
+    <div class="logo-area">
+
+
+        <div class="logo-simbolo">
+
+            ✝
 
         </div>
 
 
-        <nav class="menu">
-
-            <a href="index.html" class="ativo">
-                INÍCIO
-            </a>
-
-            <a href="acampamentos.html"
-               class="botao-acampamento">
-
-                ACAMPAMENTOS
-
-            </a>
-
-            <!-- BOTÃO ADMIN -->
-            <button
-                type="button"
-                id="abrir-login-admin"
-                class="botao-login-admin">
-
-                ADMIN
-
-            </button>
-
-        </nav>
-
-    </header>
-
-
-    <!-- =========================
-         DESTAQUE PRINCIPAL
-    ========================== -->
-
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-overlay"></div>
-
-            <div class="hero-conteudo">
-
-                <span class="hero-subtitulo">
-                    SEJA BEM-VINDO
-                </span>
-
-                <h1>
-                    Igreja Presbiteriana
-                </h1>
-
-                <p>
-                    Um lugar de comunhão, fé e crescimento.
-                </p>
-
-                <a href="acampamentos.html"
-                   class="botao-principal">
-
-                    VER ACAMPAMENTOS
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ÁREA INFERIOR
-        ========================== -->
-
-        <section class="apresentacao">
-
-            <span class="titulo-pequeno">
-                NOSSA COMUNIDADE
-            </span>
+        <div class="logo-texto">
 
             <h2>
-                Seja bem-vindo!
+                IGREJA
             </h2>
 
-            <p>
-                Este é o nosso espaço para compartilhar informações,
-                eventos e acampamentos da igreja.
-            </p>
-
-
-            <div class="cards">
-
-                <!-- ACAMPAMENTOS -->
-                <div class="card">
-
-                    <div class="icone-card">
-                        ⛺
-                    </div>
-
-                    <h3>
-                        Acampamentos
-                    </h3>
-
-                    <p>
-                        Conheça os próximos acampamentos
-                        e eventos disponíveis.
-                    </p>
-
-                    <a href="acampamentos.html">
-                        Ver acampamentos →
-                    </a>
-
-                </div>
-
-
-                <!-- COMUNHÃO -->
-                <div class="card">
-
-                    <div class="icone-card">
-                        ♡
-                    </div>
-
-                    <h3>
-                        Comunhão
-                    </h3>
-
-                    <p>
-                        Momentos especiais para fortalecer
-                        nossa comunhão.
-                    </p>
-
-                </div>
-
-
-                <!-- FÉ -->
-                <div class="card">
-
-                    <div class="icone-card">
-                        ✝
-                    </div>
-
-                    <h3>
-                        Fé
-                    </h3>
-
-                    <p>
-                        Crescendo juntos na Palavra
-                        e na presença de Deus.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         RODAPÉ
-    ========================== -->
-
-    <footer>
-
-        <p>
-            © 2026 Igreja Presbiteriana
-        </p>
-
-    </footer>
-
-
-    <!-- =========================
-         MODAL LOGIN ADMIN
-    ========================== -->
-
-    <div
-        id="modal-login-admin"
-        class="modal-login-admin">
-
-
-        <div class="login-admin-box">
-
-
-            <!-- FECHAR -->
-            <button
-                type="button"
-                id="fechar-login-admin"
-                class="fechar-login-admin">
-
-                ×
-
-            </button>
-
-
-            <div class="icone-login-admin">
-                🔐
-            </div>
-
-
-            <span class="login-admin-subtitulo">
-                ÁREA RESTRITA
+            <span>
+                PRESBITERIANA
             </span>
-
-
-            <h2>
-                Acesso Administrativo
-            </h2>
-
-
-            <p>
-                Digite a senha para acessar
-                o painel de administração.
-            </p>
-
-
-            <form id="form-login-admin">
-
-
-                <div class="grupo-formulario">
-
-                    <label for="senha-admin">
-                        Senha
-                    </label>
-
-                    <input
-                        type="password"
-                        id="senha-admin"
-                        placeholder="Digite a senha"
-                        autocomplete="current-password"
-                        required>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="botao-enviar">
-
-                    ENTRAR
-
-                </button>
-
-
-                <div
-                    id="mensagem-login-admin"
-                    class="mensagem-formulario">
-                </div>
-
-
-            </form>
 
         </div>
+
 
     </div>
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
 
-    <script src="script.js"></script>
+    <nav class="menu">
 
-    <script src="admin-login.js"></script>
+
+        <a
+            href="index.html"
+            class="ativo">
+
+            INÍCIO
+
+        </a>
+
+
+        <a
+            href="acampamentos.html"
+            class="botao-acampamento">
+
+            ACAMPAMENTOS
+
+        </a>
+
+
+        <button
+            type="button"
+            id="abrir-login-admin"
+            class="botao-login-admin">
+
+            ADMIN
+
+        </button>
+
+
+    </nav>
+
+
+</header>
+
+
+
+<main>
+
+
+    <!-- =================================
+         HERO
+    ================================== -->
+
+    <section class="hero">
+
+
+        <div class="hero-overlay">
+        </div>
+
+
+        <div class="hero-conteudo">
+
+
+            <span class="hero-subtitulo">
+
+                SEJA BEM-VINDO
+
+            </span>
+
+
+            <h1>
+
+                Igreja Presbiteriana
+
+            </h1>
+
+
+            <p>
+
+                Um lugar de comunhão,
+                fé e crescimento.
+
+            </p>
+
+
+            <a
+                href="#acampamentos-home"
+                class="botao-principal">
+
+                VER ACAMPAMENTOS
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================
+         ACAMPAMENTOS
+    ================================== -->
+
+    <section
+        id="acampamentos-home"
+        class="home-acampamentos">
+
+
+        <div class="home-titulo-acampamentos">
+
+
+            <span class="titulo-pequeno">
+
+                NOSSOS EVENTOS
+
+            </span>
+
+
+            <h2>
+
+                Próximos acampamentos
+
+            </h2>
+
+
+            <p>
+
+                Confira os acampamentos
+                com inscrições abertas,
+                faça sua inscrição
+                e veja como contribuir.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div
+            id="home-lista-acampamentos"
+            class="home-lista-acampamentos">
+
+
+            <div class="home-carregando">
+
+                Carregando acampamentos...
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================
+         COMUNIDADE
+    ================================== -->
+
+    <section class="apresentacao">
+
+
+        <span class="titulo-pequeno">
+
+            NOSSA COMUNIDADE
+
+        </span>
+
+
+        <h2>
+
+            Seja bem-vindo!
+
+        </h2>
+
+
+        <p>
+
+            Este é o nosso espaço para
+            compartilhar informações,
+            eventos e acampamentos da igreja.
+
+        </p>
+
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+
+                <div class="icone-card">
+
+                    ⛺
+
+                </div>
+
+
+                <h3>
+
+                    Acampamentos
+
+                </h3>
+
+
+                <p>
+
+                    Conheça os próximos
+                    acampamentos e eventos
+                    disponíveis.
+
+                </p>
+
+
+                <a href="acampamentos.html">
+
+                    Ver acampamentos →
+
+                </a>
+
+
+            </div>
+
+
+
+            <div class="card">
+
+
+                <div class="icone-card">
+
+                    ♡
+
+                </div>
+
+
+                <h3>
+
+                    Comunhão
+
+                </h3>
+
+
+                <p>
+
+                    Momentos especiais
+                    para fortalecer
+                    nossa comunhão.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="card">
+
+
+                <div class="icone-card">
+
+                    ✝
+
+                </div>
+
+
+                <h3>
+
+                    Fé
+
+                </h3>
+
+
+                <p>
+
+                    Crescendo juntos
+                    na Palavra e
+                    na presença de Deus.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    <p>
+
+        © 2026 Igreja Presbiteriana
+
+    </p>
+
+</footer>
+
+
+
+<!-- =================================
+     LOGIN ADMIN
+================================== -->
+
+<div
+    id="modal-login-admin"
+    class="modal-login-admin">
+
+
+    <div class="login-admin-box">
+
+
+        <button
+            type="button"
+            id="fechar-login-admin"
+            class="fechar-login-admin">
+
+            ×
+
+        </button>
+
+
+        <div class="icone-login-admin">
+
+            🔐
+
+        </div>
+
+
+        <span class="login-admin-subtitulo">
+
+            ÁREA RESTRITA
+
+        </span>
+
+
+        <h2>
+
+            Acesso Administrativo
+
+        </h2>
+
+
+        <p>
+
+            Digite a senha para acessar
+            o painel de administração.
+
+        </p>
+
+
+
+        <form id="form-login-admin">
+
+
+            <div class="grupo-formulario">
+
+
+                <label for="senha-admin">
+
+                    Senha
+
+                </label>
+
+
+                <input
+                    type="password"
+                    id="senha-admin"
+                    placeholder="Digite a senha"
+                    autocomplete="current-password"
+                    required>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="botao-enviar">
+
+                ENTRAR
+
+            </button>
+
+
+            <div
+                id="mensagem-login-admin"
+                class="mensagem-formulario">
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+<script src="admin-login.js"></script>
+
+<script src="home.js"></script>
 
 
 </body>

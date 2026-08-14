@@ -2771,3 +2771,530 @@ footer {
     }
 
 }
+
+/* ==================================================
+   ACAMPAMENTOS NA HOME
+================================================== */
+
+.home-acampamentos {
+
+    background: #f5f8f6;
+
+    padding: 90px 8%;
+
+}
+
+
+.home-titulo-acampamentos {
+
+    text-align: center;
+
+    max-width: 700px;
+
+    margin:
+        0 auto
+        50px;
+
+}
+
+
+.home-titulo-acampamentos h2 {
+
+    color:
+        var(--verde-escuro);
+
+    font-size: 40px;
+
+    margin:
+        10px 0
+        14px;
+
+}
+
+
+.home-titulo-acampamentos p {
+
+    color: #666;
+
+    line-height: 1.7;
+
+}
+
+
+.home-lista-acampamentos {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 32px;
+
+}
+
+
+/* ==================================================
+   CARD
+================================================== */
+
+.home-card-acampamento {
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        #e1e8e4;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,.06);
+
+    transition: .3s;
+
+}
+
+
+.home-card-acampamento:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0,0,0,.11);
+
+}
+
+
+/* ==================================================
+   FOTO
+================================================== */
+
+.home-foto-acampamento {
+
+    height: 320px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06452f,
+            #0a8056
+        );
+
+}
+
+
+.home-foto-acampamento img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+.home-card-acampamento:hover
+.home-foto-acampamento img {
+
+    transform:
+        scale(1.04);
+
+}
+
+
+.home-acampamento-sem-foto {
+
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 90px;
+
+}
+
+
+.home-status-acampamento {
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 20px;
+
+    background:
+        var(--verde-claro);
+
+    color:
+        var(--verde-escuro);
+
+    padding:
+        8px 13px;
+
+    border-radius: 30px;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ==================================================
+   CONTEÚDO
+================================================== */
+
+.home-conteudo-acampamento {
+
+    padding: 32px;
+
+}
+
+
+.home-conteudo-acampamento h3 {
+
+    color:
+        var(--verde-escuro);
+
+    font-size: 29px;
+
+    margin:
+        8px 0
+        12px;
+
+}
+
+
+.home-descricao-acampamento {
+
+    color: #666;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+
+}
+
+
+/* ==================================================
+   DATA E LOCAL
+================================================== */
+
+.home-informacoes-acampamento {
+
+    border-top:
+        1px solid
+        #eeeeee;
+
+    border-bottom:
+        1px solid
+        #eeeeee;
+
+    padding:
+        18px 0;
+
+    margin-bottom: 20px;
+
+}
+
+
+.home-informacoes-acampamento > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin:
+        7px 0;
+
+}
+
+
+.home-informacoes-acampamento p {
+
+    color: #555;
+
+    margin: 0;
+
+}
+
+
+/* ==================================================
+   VALORES
+================================================== */
+
+.home-valores-acampamento {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.home-valor-item {
+
+    background:
+        var(--verde-muito-claro);
+
+    border-radius: 10px;
+
+    padding: 13px;
+
+}
+
+
+.home-valor-item span {
+
+    display: block;
+
+    color: #597066;
+
+    font-size: 10px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.home-valor-item strong {
+
+    color:
+        var(--verde-escuro);
+
+    font-size: 15px;
+
+}
+
+
+/* ==================================================
+   BOTÕES
+================================================== */
+
+.home-botoes-acampamento {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+
+}
+
+
+.home-botoes-acampamento a {
+
+    text-decoration: none;
+
+    text-align: center;
+
+    padding:
+        15px
+        10px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition: .3s;
+
+}
+
+
+.home-botao-inscricao {
+
+    background:
+        var(--verde-escuro);
+
+    color: white;
+
+}
+
+
+.home-botao-inscricao:hover {
+
+    background:
+        var(--verde);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.home-botao-doacao {
+
+    background: white;
+
+    color:
+        var(--verde-escuro);
+
+    border:
+        1px solid
+        var(--verde-escuro);
+
+}
+
+
+.home-botao-doacao:hover {
+
+    background:
+        var(--verde-muito-claro);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ==================================================
+   SEM ACAMPAMENTO
+================================================== */
+
+.home-sem-acampamento,
+.home-carregando {
+
+    grid-column:
+        1 / -1;
+
+    background: white;
+
+    padding:
+        60px
+        30px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    color: #777;
+
+}
+
+
+.home-sem-acampamento-icone {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.home-sem-acampamento h3 {
+
+    color:
+        var(--verde-escuro);
+
+    margin-bottom: 8px;
+
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media(max-width: 950px) {
+
+    .home-lista-acampamentos {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+/* ==================================================
+   CELULAR
+================================================== */
+
+@media(max-width: 600px) {
+
+    .home-acampamentos {
+
+        padding:
+            60px
+            5%;
+
+    }
+
+
+    .home-foto-acampamento {
+
+        height: 240px;
+
+    }
+
+
+    .home-conteudo-acampamento {
+
+        padding:
+            25px
+            20px;
+
+    }
+
+
+    .home-conteudo-acampamento h3 {
+
+        font-size: 25px;
+
+    }
+
+
+    .home-valores-acampamento {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .home-botoes-acampamento {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
