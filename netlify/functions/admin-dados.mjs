@@ -28,25 +28,69 @@ export default async (req, context) => {
 
     try {
 
+        const url =
+            new URL(req.url);
+
+        const id =
+            url.searchParams.get("id");
+
+
+        if (!id) {
+
+            return Response.json(
+                {
+                    erro:
+                        "Informe o acampamento."
+                },
+                {
+                    status: 400
+                }
+            );
+
+        }
+
+
+        // ==========================================
+        // ACAMPAMENTO
+        // ==========================================
+
         const acampamentos =
             await db.sql`
 
                 SELECT
+
                     id,
                     nome,
+                    descricao,
                     local,
 
                     data_inicio::text
                         AS data_inicio,
 
                     data_fim::text
-                        AS data_fim
+                        AS data_fim,
+
+                    status,
+
+                    valor_completo
+                        ::double precision
+                        AS valor_completo,
+
+                    valor_diaria
+                        ::double precision
+                        AS valor_diaria,
+
+                    valor_crianca
+                        ::double precision
+                        AS valor_crianca,
+
+                    idade_max_crianca,
+
+                    foto_key
 
                 FROM acampamentos
 
-                WHERE status = 'aberto'
-
-                ORDER BY criado_em DESC
+                WHERE id = ${id}
 
                 LIMIT 1
 
@@ -57,10 +101,11 @@ export default async (req, context) => {
 
             return Response.json(
                 {
-                    semAcampamento: true,
-                    dias: [],
-                    itens: [],
-                    inscritos: []
+                    erro:
+                        "Acampamento não encontrado."
+                },
+                {
+                    status: 404
                 }
             );
 
@@ -71,10 +116,15 @@ export default async (req, context) => {
             acampamentos[0];
 
 
+        // ==========================================
+        // DIAS
+        // ==========================================
+
         const dias =
             await db.sql`
 
                 SELECT
+
                     id,
                     data::text AS data,
                     nome_dia
@@ -82,36 +132,56 @@ export default async (req, context) => {
                 FROM dias_acampamento
 
                 WHERE acampamento_id =
-                    ${acampamento.id}
+                    ${id}
 
                 ORDER BY data
 
             `;
 
 
+        // ==========================================
+        // ITENS DE DOAÇÃO
+        // ==========================================
+
         const itens =
             await db.sql`
 
                 SELECT
-                    id,
-                    nome,
 
-                    quantidade_necessaria
-                    ::double precision
-                    AS quantidade_necessaria,
+                    i.id,
+                    i.nome,
 
-                    unidade,
-                    observacao
+                    i.quantidade_necessaria
+                        ::double precision
+                        AS quantidade_necessaria,
 
-                FROM itens_doacao
+                    i.unidade,
+                    i.observacao,
 
-                WHERE acampamento_id =
-                    ${acampamento.id}
+                    COALESCE(
+                        SUM(d.quantidade),
+                        0
+                    )::double precision
+                        AS quantidade_doada
 
-                ORDER BY nome
+                FROM itens_doacao i
+
+                LEFT JOIN doacoes d
+                    ON d.item_id = i.id
+
+                WHERE i.acampamento_id =
+                    ${id}
+
+                GROUP BY i.id
+
+                ORDER BY i.nome
 
             `;
 
+
+        // ==========================================
+        // INSCRITOS
+        // ==========================================
 
         const inscritos =
             await db.sql`
@@ -146,6 +216,7 @@ export default async (req, context) => {
                             ORDER BY d.data
 
                         )
+
                         FILTER (
                             WHERE d.id IS NOT NULL
                         ),
@@ -170,7 +241,7 @@ export default async (req, context) => {
 
 
                 WHERE i.acampamento_id =
-                    ${acampamento.id}
+                    ${id}
 
 
                 GROUP BY
@@ -200,7 +271,7 @@ export default async (req, context) => {
     } catch (erro) {
 
         console.error(
-            "Erro admin:",
+            "Erro ao carregar acampamento:",
             erro
         );
 
@@ -208,7 +279,7 @@ export default async (req, context) => {
         return Response.json(
             {
                 erro:
-                    "Erro ao carregar o painel."
+                    "Não foi possível carregar o acampamento."
             },
             {
                 status: 500
@@ -221,5 +292,8 @@ export default async (req, context) => {
 
 
 export const config = {
-    path: "/api/admin/dados"
+
+    path:
+        "/api/admin/dados"
+
 };

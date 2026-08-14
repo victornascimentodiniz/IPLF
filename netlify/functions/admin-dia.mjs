@@ -128,7 +128,6 @@ export default async (req, context) => {
                 WHERE id =
                     ${acampamentoId}
 
-                AND status = 'aberto'
 
                 AND ${data}::date
                     BETWEEN data_inicio

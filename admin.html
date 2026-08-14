@@ -25,6 +25,10 @@
 <body class="pagina-admin">
 
 
+<!-- =========================
+     TOPO
+========================== -->
+
 <header class="topo">
 
     <div class="logo-area">
@@ -35,7 +39,9 @@
 
         <div class="logo-texto">
 
-            <h2>IGREJA</h2>
+            <h2>
+                IGREJA
+            </h2>
 
             <span>
                 PRESBITERIANA
@@ -74,6 +80,10 @@
     hidden>
 
 
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
     <section class="cabecalho-admin">
 
         <span>
@@ -85,182 +95,596 @@
         </h1>
 
         <p>
-            Gerencie o acampamento,
-            inscrições e doações.
+            Crie e gerencie os acampamentos
+            da igreja.
         </p>
 
     </section>
 
 
 
-    <section
-        id="area-acampamento-admin"
-        class="admin-acampamento-atual">
+    <!-- =========================
+         LAYOUT
+    ========================== -->
+
+    <section class="admin-layout">
 
 
-        <div>
+        <!-- =========================
+             ACAMPAMENTOS
+        ========================== -->
 
-            <span>
-                ACAMPAMENTO ATUAL
-            </span>
-
-            <h2 id="admin-nome-acampamento">
-                Carregando...
-            </h2>
-
-            <p id="admin-periodo-acampamento">
-            </p>
-
-        </div>
+        <aside class="admin-sidebar">
 
 
-        <button
-            type="button"
-            id="excluir-acampamento"
-            class="botao-perigo">
+            <button
+                type="button"
+                id="novo-acampamento"
+                class="botao-novo-acampamento">
 
-            EXCLUIR ACAMPAMENTO
+                + NOVO ACAMPAMENTO
 
-        </button>
-
-
-    </section>
+            </button>
 
 
-
-    <section class="grade-admin">
-
-
-        <!-- =======================
-             DIAS
-        ======================== -->
-
-        <div class="card-admin">
-
-            <h2>
-                📅 Dias do acampamento
-            </h2>
-
-            <p>
-                Cadastre os dias que aparecerão
-                durante a inscrição.
-            </p>
-
-
-            <form id="form-admin-dia">
-
-
-                <div class="grupo-formulario">
-
-                    <label for="admin-data-dia">
-                        Data
-                    </label>
-
-                    <input
-                        type="date"
-                        id="admin-data-dia"
-                        required>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="botao-enviar">
-
-                    ADICIONAR DIA
-
-                </button>
-
-
-                <div
-                    id="mensagem-admin-dia"
-                    class="mensagem-formulario">
-                </div>
-
-
-            </form>
-
-
-            <div class="admin-lista">
+            <div class="titulo-lista-admin">
 
                 <h3>
-                    Dias cadastrados
+                    Acampamentos
                 </h3>
 
-                <div id="admin-lista-dias">
-                </div>
+                <span id="quantidade-acampamentos">
+                    0
+                </span>
 
             </div>
 
-        </div>
+
+            <div id="lista-acampamentos-admin">
+
+                <p class="texto-vazio">
+                    Carregando...
+                </p>
+
+            </div>
+
+
+        </aside>
 
 
 
-        <!-- =======================
-             ITENS
-        ======================== -->
+        <!-- =========================
+             CONTEÚDO PRINCIPAL
+        ========================== -->
 
-        <div class="card-admin">
-
-            <h2>
-                🎁 Itens para doação
-            </h2>
-
-            <p>
-                Cadastre os itens necessários
-                para o acampamento.
-            </p>
+        <div class="admin-conteudo">
 
 
-            <form id="form-admin-item">
+            <!-- =========================
+                 FORM ACAMPAMENTO
+            ========================== -->
+
+            <section class="card-admin editor-acampamento">
 
 
-                <div class="grupo-formulario">
-
-                    <label for="admin-item-nome">
-                        Nome do item
-                    </label>
-
-                    <input
-                        type="text"
-                        id="admin-item-nome"
-                        placeholder="Ex.: Arroz"
-                        required>
-
-                </div>
+                <div class="cabecalho-editor">
 
 
-                <div class="admin-duas-colunas">
+                    <div>
 
+                        <span class="admin-etiqueta">
+                            ACAMPAMENTO
+                        </span>
 
-                    <div class="grupo-formulario">
-
-                        <label for="admin-item-quantidade">
-                            Quantidade
-                        </label>
-
-                        <input
-                            type="number"
-                            id="admin-item-quantidade"
-                            min="0.01"
-                            step="0.01"
-                            required>
+                        <h2 id="titulo-editor-acampamento">
+                            Novo acampamento
+                        </h2>
 
                     </div>
 
 
+                    <button
+                        type="button"
+                        id="excluir-acampamento"
+                        class="botao-perigo"
+                        hidden>
+
+                        EXCLUIR
+
+                    </button>
+
+
+                </div>
+
+
+                <form id="form-acampamento">
+
+
+                    <input
+                        type="hidden"
+                        id="acampamento-id">
+
+
+                    <!-- NOME -->
+
                     <div class="grupo-formulario">
 
-                        <label for="admin-item-unidade">
-                            Unidade
+                        <label for="acampamento-nome">
+                            Nome do acampamento *
                         </label>
 
                         <input
                             type="text"
-                            id="admin-item-unidade"
-                            placeholder="kg, unidades..."
+                            id="acampamento-nome"
+                            placeholder="Ex.: Acampamento IPLF 2026"
+                            maxlength="150"
                             required>
+
+                    </div>
+
+
+
+                    <!-- DESCRIÇÃO -->
+
+                    <div class="grupo-formulario">
+
+                        <label for="acampamento-descricao">
+                            Descrição
+                        </label>
+
+                        <textarea
+                            id="acampamento-descricao"
+                            placeholder="Fale um pouco sobre o acampamento..."
+                            rows="4">
+                        </textarea>
+
+                    </div>
+
+
+
+                    <!-- LOCAL -->
+
+                    <div class="grupo-formulario">
+
+                        <label for="acampamento-local">
+                            Local *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="acampamento-local"
+                            placeholder="Ex.: Chácara Esperança"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- DATAS -->
+
+                    <div class="admin-duas-colunas">
+
+
+                        <div class="grupo-formulario">
+
+                            <label for="acampamento-data-inicio">
+                                Data inicial *
+                            </label>
+
+                            <input
+                                type="date"
+                                id="acampamento-data-inicio"
+                                required>
+
+                        </div>
+
+
+                        <div class="grupo-formulario">
+
+                            <label for="acampamento-data-fim">
+                                Data final *
+                            </label>
+
+                            <input
+                                type="date"
+                                id="acampamento-data-fim"
+                                required>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- VALORES -->
+
+                    <div class="bloco-formulario-admin">
+
+                        <h3>
+                            💰 Valores
+                        </h3>
+
+
+                        <div class="admin-duas-colunas">
+
+
+                            <div class="grupo-formulario">
+
+                                <label for="valor-completo">
+                                    Valor completo
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="valor-completo"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="Ex.: 250,00">
+
+                            </div>
+
+
+                            <div class="grupo-formulario">
+
+                                <label for="valor-diaria">
+                                    Valor da diária
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="valor-diaria"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="Ex.: 80,00">
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="admin-duas-colunas">
+
+
+                            <div class="grupo-formulario">
+
+                                <label for="valor-crianca">
+                                    Valor para criança
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="valor-crianca"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="Ex.: 120,00">
+
+                            </div>
+
+
+                            <div class="grupo-formulario">
+
+                                <label for="idade-max-crianca">
+                                    Até qual idade?
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="idade-max-crianca"
+                                    min="0"
+                                    max="17"
+                                    step="1"
+                                    placeholder="Ex.: 10">
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="grupo-formulario">
+
+                        <label for="acampamento-status">
+                            Status
+                        </label>
+
+                        <select id="acampamento-status">
+
+                            <option value="rascunho">
+                                Rascunho
+                            </option>
+
+                            <option value="aberto">
+                                Inscrições abertas
+                            </option>
+
+                            <option value="encerrado">
+                                Encerrado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- FOTO -->
+
+                    <div class="bloco-formulario-admin">
+
+                        <h3>
+                            🖼️ Foto do acampamento
+                        </h3>
+
+
+                        <div
+                            id="foto-acampamento-preview"
+                            class="foto-admin-preview">
+
+                            <div
+                                id="foto-admin-sem-imagem"
+                                class="foto-admin-sem-imagem">
+
+                                Nenhuma foto cadastrada
+
+                            </div>
+
+
+                            <img
+                                id="foto-admin-imagem"
+                                alt="Foto do acampamento"
+                                hidden>
+
+                        </div>
+
+
+                        <div class="grupo-formulario">
+
+                            <label for="acampamento-foto">
+                                Escolher foto
+                            </label>
+
+                            <input
+                                type="file"
+                                id="acampamento-foto"
+                                accept="image/jpeg,image/png,image/webp">
+
+                            <small class="ajuda-campo">
+                                JPG, PNG ou WEBP. Máximo de 3 MB.
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        id="salvar-acampamento"
+                        class="botao-enviar">
+
+                        CRIAR ACAMPAMENTO
+
+                    </button>
+
+
+                    <div
+                        id="mensagem-acampamento"
+                        class="mensagem-formulario">
+                    </div>
+
+
+                </form>
+
+
+            </section>
+
+
+
+            <!-- ==================================
+                 RECURSOS DO ACAMPAMENTO
+            =================================== -->
+
+            <section
+                id="recursos-acampamento"
+                hidden>
+
+
+                <!-- =============================
+                     DIAS + ITENS
+                ============================== -->
+
+                <div class="grade-admin grade-admin-interna">
+
+
+                    <!-- DIAS -->
+
+                    <div class="card-admin">
+
+
+                        <h2>
+                            📅 Dias do acampamento
+                        </h2>
+
+                        <p>
+                            Cadastre os dias disponíveis
+                            para a inscrição.
+                        </p>
+
+
+                        <form id="form-admin-dia">
+
+
+                            <div class="grupo-formulario">
+
+                                <label for="admin-data-dia">
+                                    Data
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="admin-data-dia"
+                                    required>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="botao-enviar">
+
+                                ADICIONAR DIA
+
+                            </button>
+
+
+                            <div
+                                id="mensagem-admin-dia"
+                                class="mensagem-formulario">
+                            </div>
+
+
+                        </form>
+
+
+                        <div class="admin-lista">
+
+                            <h3>
+                                Dias cadastrados
+                            </h3>
+
+                            <div id="admin-lista-dias">
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ITENS -->
+
+                    <div class="card-admin">
+
+
+                        <h2>
+                            🎁 Itens para doação
+                        </h2>
+
+                        <p>
+                            Cadastre o que será necessário
+                            para o acampamento.
+                        </p>
+
+
+                        <form id="form-admin-item">
+
+
+                            <div class="grupo-formulario">
+
+                                <label for="admin-item-nome">
+                                    Item
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="admin-item-nome"
+                                    placeholder="Ex.: Arroz"
+                                    required>
+
+                            </div>
+
+
+                            <div class="admin-duas-colunas">
+
+
+                                <div class="grupo-formulario">
+
+                                    <label for="admin-item-quantidade">
+                                        Quantidade
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        id="admin-item-quantidade"
+                                        min="0.01"
+                                        step="0.01"
+                                        required>
+
+                                </div>
+
+
+                                <div class="grupo-formulario">
+
+                                    <label for="admin-item-unidade">
+                                        Unidade
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="admin-item-unidade"
+                                        placeholder="kg, unidades..."
+                                        required>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="grupo-formulario">
+
+                                <label for="admin-item-observacao">
+                                    Observação
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="admin-item-observacao"
+                                    placeholder="Opcional">
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="botao-enviar">
+
+                                CADASTRAR ITEM
+
+                            </button>
+
+
+                            <div
+                                id="mensagem-admin-item"
+                                class="mensagem-formulario">
+                            </div>
+
+
+                        </form>
+
+
+                        <div class="admin-lista">
+
+                            <h3>
+                                Itens cadastrados
+                            </h3>
+
+                            <div id="admin-lista-itens">
+                            </div>
+
+                        </div>
+
 
                     </div>
 
@@ -268,94 +692,57 @@
                 </div>
 
 
-                <div class="grupo-formulario">
 
-                    <label for="admin-item-observacao">
-                        Observação
-                    </label>
+                <!-- =============================
+                     INSCRITOS
+                ============================== -->
 
-                    <input
-                        type="text"
-                        id="admin-item-observacao"
-                        placeholder="Opcional">
+                <div class="card-admin card-inscritos">
+
+
+                    <div class="cabecalho-inscritos">
+
+
+                        <div>
+
+                            <h2>
+                                👥 Pessoas inscritas
+                            </h2>
+
+                            <p>
+                                Pessoas cadastradas neste
+                                acampamento.
+                            </p>
+
+                        </div>
+
+
+                        <div class="contador-inscritos">
+
+                            <strong id="total-inscritos">
+                                0
+                            </strong>
+
+                            <span>
+                                inscritos
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div
+                        id="admin-lista-inscritos"
+                        class="lista-inscritos">
+                    </div>
+
 
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="botao-enviar">
-
-                    CADASTRAR ITEM
-
-                </button>
-
-
-                <div
-                    id="mensagem-admin-item"
-                    class="mensagem-formulario">
-                </div>
-
-
-            </form>
-
-
-            <div class="admin-lista">
-
-                <h3>
-                    Itens cadastrados
-                </h3>
-
-                <div id="admin-lista-itens">
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =======================
-             INSCRITOS
-        ======================== -->
-
-        <div class="card-admin card-inscritos">
-
-            <div class="cabecalho-inscritos">
-
-                <div>
-
-                    <h2>
-                        👥 Pessoas inscritas
-                    </h2>
-
-                    <p>
-                        Veja quem já confirmou
-                        participação no acampamento.
-                    </p>
-
-                </div>
-
-
-                <div class="contador-inscritos">
-
-                    <strong id="total-inscritos">
-                        0
-                    </strong>
-
-                    <span>
-                        inscritos
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="admin-lista-inscritos"
-                class="lista-inscritos">
-            </div>
+            </section>
 
 
         </div>

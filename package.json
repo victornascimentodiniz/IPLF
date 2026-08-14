@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/victornascimentodiniz/IPLF#readme",
   "dependencies": {
+    "@netlify/blobs": "^10.7.13",
     "@netlify/database": "^1.1.0"
   }
 }
