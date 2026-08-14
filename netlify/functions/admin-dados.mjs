@@ -7,8 +7,7 @@ import {
 } from "../lib/admin-auth.mjs";
 
 
-const db =
-    getDatabase();
+const db = getDatabase();
 
 
 export default async (req, context) => {
@@ -23,6 +22,7 @@ export default async (req, context) => {
                 status: 401
             }
         );
+
     }
 
 
@@ -35,8 +35,10 @@ export default async (req, context) => {
                     id,
                     nome,
                     local,
+
                     data_inicio::text
                         AS data_inicio,
+
                     data_fim::text
                         AS data_fim
 
@@ -55,13 +57,13 @@ export default async (req, context) => {
 
             return Response.json(
                 {
-                    erro:
-                        "Nenhum acampamento aberto."
-                },
-                {
-                    status: 404
+                    semAcampamento: true,
+                    dias: [],
+                    itens: [],
+                    inscritos: []
                 }
             );
+
         }
 
 
@@ -111,11 +113,86 @@ export default async (req, context) => {
             `;
 
 
+        const inscritos =
+            await db.sql`
+
+                SELECT
+
+                    i.id,
+
+                    i.nome_completo,
+
+                    i.telefone,
+
+                    i.criado_em,
+
+                    COALESCE(
+
+                        json_agg(
+
+                            json_build_object(
+
+                                'id',
+                                d.id,
+
+                                'data',
+                                d.data::text,
+
+                                'nome_dia',
+                                d.nome_dia
+
+                            )
+
+                            ORDER BY d.data
+
+                        )
+                        FILTER (
+                            WHERE d.id IS NOT NULL
+                        ),
+
+                        '[]'::json
+
+                    ) AS dias
+
+                FROM inscricoes i
+
+
+                LEFT JOIN inscricao_dias idias
+
+                    ON idias.inscricao_id =
+                        i.id
+
+
+                LEFT JOIN dias_acampamento d
+
+                    ON d.id =
+                        idias.dia_acampamento_id
+
+
+                WHERE i.acampamento_id =
+                    ${acampamento.id}
+
+
+                GROUP BY
+
+                    i.id,
+                    i.nome_completo,
+                    i.telefone,
+                    i.criado_em
+
+
+                ORDER BY
+                    i.criado_em DESC
+
+            `;
+
+
         return Response.json({
 
             acampamento,
             dias,
-            itens
+            itens,
+            inscritos
 
         });
 
@@ -137,13 +214,12 @@ export default async (req, context) => {
                 status: 500
             }
         );
+
     }
 
 };
 
 
 export const config = {
-
     path: "/api/admin/dados"
-
 };

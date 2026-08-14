@@ -2062,3 +2062,325 @@ footer {
     }
 
 }
+
+
+
+
+/* ==================================================
+   BOTÕES DE EXCLUSÃO
+================================================== */
+
+.botao-perigo {
+
+    border: 1px solid rgba(255,255,255,.4);
+
+    background: #a72e2e;
+
+    color: white;
+
+    padding: 13px 20px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+
+.botao-perigo:hover {
+
+    background: #821f1f;
+
+}
+
+
+.botao-perigo:disabled {
+
+    opacity: .4;
+
+    cursor: not-allowed;
+
+}
+
+
+.admin-acampamento-atual {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+}
+
+
+.botao-excluir-pequeno {
+
+    border: 1px solid #d8b4b4;
+
+    background: #fff5f5;
+
+    color: #a72e2e;
+
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.botao-excluir-pequeno:hover {
+
+    background: #a72e2e;
+
+    color: white;
+
+}
+
+
+/* ==================================================
+   INSCRITOS
+================================================== */
+
+.card-inscritos {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.cabecalho-inscritos {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.cabecalho-inscritos h2 {
+
+    color: var(--verde-escuro);
+
+    margin-bottom: 7px;
+
+}
+
+
+.cabecalho-inscritos p {
+
+    color: #666;
+
+}
+
+
+.contador-inscritos {
+
+    min-width: 110px;
+
+    background: var(--verde-muito-claro);
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    text-align: center;
+
+    color: var(--verde-escuro);
+
+}
+
+
+.contador-inscritos strong {
+
+    display: block;
+
+    font-size: 30px;
+
+}
+
+
+.contador-inscritos span {
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+}
+
+
+.lista-inscritos {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+}
+
+
+.pessoa-inscrita {
+
+    display: flex;
+
+    gap: 16px;
+
+    padding: 20px;
+
+    border: 1px solid #e2e8e4;
+
+    border-radius: 12px;
+
+    background: #fafcfb;
+
+}
+
+
+.pessoa-inicial {
+
+    width: 48px;
+
+    height: 48px;
+
+    min-width: 48px;
+
+    border-radius: 50%;
+
+    background: var(--verde-escuro);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+}
+
+
+.pessoa-dados {
+
+    flex: 1;
+
+}
+
+
+.pessoa-dados h3 {
+
+    color: var(--verde-escuro);
+
+    margin-bottom: 5px;
+
+}
+
+
+.pessoa-dados p {
+
+    color: #666;
+
+    margin-bottom: 12px;
+
+}
+
+
+.dias-pessoa {
+
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.tag-dia-inscrito {
+
+    display: inline-block;
+
+    padding: 6px 9px;
+
+    border-radius: 20px;
+
+    background: var(--verde-muito-claro);
+
+    color: var(--verde-escuro);
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+}
+
+
+.nenhum-inscrito {
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #777;
+
+}
+
+
+/* ==================================================
+   RESPONSIVO INSCRITOS
+================================================== */
+
+@media(max-width: 800px) {
+
+    .lista-inscritos {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .admin-acampamento-atual {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .cabecalho-inscritos {
+
+        align-items: flex-start;
+
+    }
+
+}

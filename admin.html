@@ -37,7 +37,9 @@
 
             <h2>IGREJA</h2>
 
-            <span>PRESBITERIANA</span>
+            <span>
+                PRESBITERIANA
+            </span>
 
         </div>
 
@@ -83,26 +85,44 @@
         </h1>
 
         <p>
-            Cadastre os dias do acampamento
-            e os itens necessários para doação.
+            Gerencie o acampamento,
+            inscrições e doações.
         </p>
 
     </section>
 
 
 
-    <section class="admin-acampamento-atual">
+    <section
+        id="area-acampamento-admin"
+        class="admin-acampamento-atual">
 
-        <span>
-            ACAMPAMENTO ATUAL
-        </span>
 
-        <h2 id="admin-nome-acampamento">
-            Carregando...
-        </h2>
+        <div>
 
-        <p id="admin-periodo-acampamento">
-        </p>
+            <span>
+                ACAMPAMENTO ATUAL
+            </span>
+
+            <h2 id="admin-nome-acampamento">
+                Carregando...
+            </h2>
+
+            <p id="admin-periodo-acampamento">
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="excluir-acampamento"
+            class="botao-perigo">
+
+            EXCLUIR ACAMPAMENTO
+
+        </button>
+
 
     </section>
 
@@ -111,7 +131,9 @@
     <section class="grade-admin">
 
 
-        <!-- DIAS -->
+        <!-- =======================
+             DIAS
+        ======================== -->
 
         <div class="card-admin">
 
@@ -121,7 +143,6 @@
 
             <p>
                 Cadastre os dias que aparecerão
-                para as pessoas escolherem
                 durante a inscrição.
             </p>
 
@@ -157,6 +178,7 @@
                     class="mensagem-formulario">
                 </div>
 
+
             </form>
 
 
@@ -175,7 +197,9 @@
 
 
 
-        <!-- DOAÇÕES -->
+        <!-- =======================
+             ITENS
+        ======================== -->
 
         <div class="card-admin">
 
@@ -184,7 +208,7 @@
             </h2>
 
             <p>
-                Informe os itens necessários
+                Cadastre os itens necessários
                 para o acampamento.
             </p>
 
@@ -221,7 +245,6 @@
                             id="admin-item-quantidade"
                             min="0.01"
                             step="0.01"
-                            placeholder="20"
                             required>
 
                     </div>
@@ -286,6 +309,52 @@
                 <div id="admin-lista-itens">
                 </div>
 
+            </div>
+
+        </div>
+
+
+
+        <!-- =======================
+             INSCRITOS
+        ======================== -->
+
+        <div class="card-admin card-inscritos">
+
+            <div class="cabecalho-inscritos">
+
+                <div>
+
+                    <h2>
+                        👥 Pessoas inscritas
+                    </h2>
+
+                    <p>
+                        Veja quem já confirmou
+                        participação no acampamento.
+                    </p>
+
+                </div>
+
+
+                <div class="contador-inscritos">
+
+                    <strong id="total-inscritos">
+                        0
+                    </strong>
+
+                    <span>
+                        inscritos
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="admin-lista-inscritos"
+                class="lista-inscritos">
             </div>
 
 
