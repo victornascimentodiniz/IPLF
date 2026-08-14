@@ -4,13 +4,12 @@ let acampamentoAtual = null;
 
 
 // =====================================================
-// INÍCIO
+// INICIAR PAINEL
 // =====================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     async function () {
-
 
         const autenticado =
             await verificarLogin();
@@ -26,11 +25,17 @@ document.addEventListener(
         }
 
 
-        document
-        .getElementById(
-            "painel-admin"
-        )
-        .hidden = false;
+        const painel =
+            document.getElementById(
+                "painel-admin"
+            );
+
+
+        if (painel) {
+
+            painel.hidden = false;
+
+        }
 
 
         configurarEventos();
@@ -43,80 +48,92 @@ document.addEventListener(
 
 
 // =====================================================
-// EVENTOS
+// CONFIGURAR EVENTOS
 // =====================================================
 
 function configurarEventos() {
 
+    // NOVO ACAMPAMENTO
 
     document
     .getElementById(
         "novo-acampamento"
     )
-    .addEventListener(
+    ?.addEventListener(
         "click",
         prepararNovoAcampamento
     );
 
 
+    // SALVAR ACAMPAMENTO
+
     document
     .getElementById(
         "form-acampamento"
     )
-    .addEventListener(
+    ?.addEventListener(
         "submit",
         salvarAcampamento
     );
 
 
+    // SALVAR DIA
+
     document
     .getElementById(
         "form-admin-dia"
     )
-    .addEventListener(
+    ?.addEventListener(
         "submit",
         salvarDia
     );
 
 
+    // SALVAR ITEM
+
     document
     .getElementById(
         "form-admin-item"
     )
-    .addEventListener(
+    ?.addEventListener(
         "submit",
         salvarItem
     );
 
 
+    // SAIR
+
     document
     .getElementById(
         "botao-sair-admin"
     )
-    .addEventListener(
+    ?.addEventListener(
         "click",
         sair
     );
 
 
+    // EXCLUIR ACAMPAMENTO
+
     document
     .getElementById(
         "excluir-acampamento"
     )
-    .addEventListener(
+    ?.addEventListener(
         "click",
         excluirAcampamento
     );
 
 
+    // SELECIONAR ACAMPAMENTO
+
     document
     .getElementById(
         "lista-acampamentos-admin"
     )
-    .addEventListener(
+    ?.addEventListener(
         "click",
         function(event) {
-
 
             const botao =
                 event.target.closest(
@@ -125,26 +142,45 @@ function configurarEventos() {
 
 
             if (!botao) {
+
                 return;
+
             }
 
 
-            selecionarAcampamento(
-                botao.dataset.acampamentoId
-            );
+            const id =
+                String(
+                    botao.dataset
+                    .acampamentoId || ""
+                ).trim();
+
+
+            if (!id) {
+
+                alert(
+                    "Acampamento inválido."
+                );
+
+                return;
+
+            }
+
+
+            selecionarAcampamento(id);
 
         }
     );
 
 
+    // EXCLUIR DIA
+
     document
     .getElementById(
         "admin-lista-dias"
     )
-    .addEventListener(
+    ?.addEventListener(
         "click",
         function(event) {
-
 
             const botao =
                 event.target.closest(
@@ -153,27 +189,44 @@ function configurarEventos() {
 
 
             if (!botao) {
+
                 return;
+
             }
 
 
+            const id =
+                String(
+                    botao.dataset
+                    .excluirDia || ""
+                ).trim();
+
+
+            const nome =
+                String(
+                    botao.dataset
+                    .nome || ""
+                ).trim();
+
+
             excluirDia(
-                botao.dataset.excluirDia,
-                botao.dataset.nome
+                id,
+                nome
             );
 
         }
     );
 
 
+    // EXCLUIR ITEM
+
     document
     .getElementById(
         "admin-lista-itens"
     )
-    .addEventListener(
+    ?.addEventListener(
         "click",
         function(event) {
-
 
             const botao =
                 event.target.closest(
@@ -182,24 +235,42 @@ function configurarEventos() {
 
 
             if (!botao) {
+
                 return;
+
             }
 
 
+            const id =
+                String(
+                    botao.dataset
+                    .excluirItem || ""
+                ).trim();
+
+
+            const nome =
+                String(
+                    botao.dataset
+                    .nome || ""
+                ).trim();
+
+
             excluirItem(
-                botao.dataset.excluirItem,
-                botao.dataset.nome
+                id,
+                nome
             );
 
         }
     );
 
 
+    // PREVIEW DA FOTO
+
     document
     .getElementById(
         "acampamento-foto"
     )
-    .addEventListener(
+    ?.addEventListener(
         "change",
         visualizarFotoEscolhida
     );
@@ -208,7 +279,7 @@ function configurarEventos() {
 
 
 // =====================================================
-// LOGIN
+// VERIFICAR LOGIN
 // =====================================================
 
 async function verificarLogin() {
@@ -225,17 +296,29 @@ async function verificarLogin() {
             );
 
 
+        if (!resposta.ok) {
+
+            return false;
+
+        }
+
+
         const dados =
             await resposta.json();
 
 
-        return (
-            resposta.ok &&
+        return Boolean(
             dados.autenticado
         );
 
 
-    } catch {
+    } catch (erro) {
+
+        console.error(
+            "Erro ao verificar login:",
+            erro
+        );
+
 
         return false;
 
@@ -245,7 +328,7 @@ async function verificarLogin() {
 
 
 // =====================================================
-// LISTAR ACAMPAMENTOS
+// CARREGAR LISTA DE ACAMPAMENTOS
 // =====================================================
 
 async function carregarListaAcampamentos(
@@ -282,52 +365,82 @@ async function carregarListaAcampamentos(
 
             throw new Error(
                 dados.erro ||
-                "Erro ao carregar acampamentos."
+                "Não foi possível carregar os acampamentos."
             );
 
         }
 
 
         acampamentos =
-            dados.acampamentos || [];
+            Array.isArray(
+                dados.acampamentos
+            )
+            ? dados.acampamentos
+            : [];
 
 
         renderizarListaAcampamentos();
 
 
+        // APÓS CRIAR UM NOVO
+
         if (selecionarId) {
 
+            const idLimpo =
+                String(
+                    selecionarId
+                ).trim();
+
+
             await selecionarAcampamento(
-                selecionarId
+                idLimpo
             );
+
 
             return;
 
         }
 
+
+        // MANTER ACAMPAMENTO ATUAL
 
         if (
             acampamentoAtual &&
             acampamentos.some(
+
                 item =>
-                    item.id ===
-                    acampamentoAtual.id
+                    String(item.id) ===
+                    String(
+                        acampamentoAtual.id
+                    )
+
             )
         ) {
 
             await selecionarAcampamento(
-                acampamentoAtual.id
+                String(
+                    acampamentoAtual.id
+                ).trim()
             );
+
 
             return;
 
         }
 
 
+        // SE EXISTIR ALGUM
+
         if (acampamentos.length > 0) {
 
+            const primeiroId =
+                String(
+                    acampamentos[0].id
+                ).trim();
+
+
             await selecionarAcampamento(
-                acampamentos[0].id
+                primeiroId
             );
 
         } else {
@@ -339,8 +452,15 @@ async function carregarListaAcampamentos(
 
     } catch (erro) {
 
+        console.error(
+            "Erro lista acampamentos:",
+            erro
+        );
+
+
         alert(
-            erro.message
+            erro.message ||
+            "Erro ao carregar acampamentos."
         );
 
     }
@@ -349,7 +469,7 @@ async function carregarListaAcampamentos(
 
 
 // =====================================================
-// RENDER LISTA
+// RENDERIZAR LISTA DE ACAMPAMENTOS
 // =====================================================
 
 function renderizarListaAcampamentos() {
@@ -360,12 +480,25 @@ function renderizarListaAcampamentos() {
         );
 
 
-    document
-    .getElementById(
-        "quantidade-acampamentos"
-    )
-    .textContent =
-        acampamentos.length;
+    const quantidade =
+        document.getElementById(
+            "quantidade-acampamentos"
+        );
+
+
+    if (quantidade) {
+
+        quantidade.textContent =
+            acampamentos.length;
+
+    }
+
+
+    if (!lista) {
+
+        return;
+
+    }
 
 
     if (!acampamentos.length) {
@@ -380,6 +513,7 @@ function renderizarListaAcampamentos() {
 
         `;
 
+
         return;
 
     }
@@ -387,9 +521,7 @@ function renderizarListaAcampamentos() {
 
     lista.innerHTML =
         acampamentos.map(
-
             acampamento => {
-
 
                 let statusTexto =
                     "Rascunho";
@@ -419,36 +551,32 @@ function renderizarListaAcampamentos() {
 
                 const ativo =
                     acampamentoAtual &&
-                    acampamentoAtual.id ===
-                    acampamento.id;
+                    String(
+                        acampamentoAtual.id
+                    ) ===
+                    String(
+                        acampamento.id
+                    );
+
+
+                const id =
+                    String(
+                        acampamento.id || ""
+                    ).trim();
 
 
                 return `
 
                     <button
                         type="button"
-
-                        class="
-                            item-acampamento-admin
-                            ${ativo
-                                ? "ativo"
-                                : ""
-                            }
-                        "
-
-                        data-acampamento-id="
-                            ${acampamento.id}
-                        ">
-
+                        class="item-acampamento-admin ${ativo ? "ativo" : ""}"
+                        data-acampamento-id="${id}">
 
                         <strong>
-
                             ${escaparHtml(
                                 acampamento.nome
                             )}
-
                         </strong>
-
 
                         <span>
 
@@ -464,25 +592,22 @@ function renderizarListaAcampamentos() {
 
                         </span>
 
-
                         <small
-                            class="
-                                status-admin
-                                status-${acampamento.status}
-                            ">
+                            class="status-admin status-${escaparHtml(
+                                acampamento.status
+                            )}">
 
                             ${statusTexto}
 
                         </small>
-
 
                     </button>
 
                 `;
 
             }
-
-        ).join("");
+        )
+        .join("");
 
 }
 
@@ -495,25 +620,76 @@ async function selecionarAcampamento(id) {
 
     try {
 
+        const idLimpo =
+            String(id || "")
+            .trim();
+
+
+        if (!idLimpo) {
+
+            throw new Error(
+                "ID do acampamento inválido."
+            );
+
+        }
+
+
         const resposta =
             await fetch(
-                `/api/admin/dados?id=${encodeURIComponent(id)}`,
+
+                `/api/admin/dados?id=${encodeURIComponent(
+                    idLimpo
+                )}`,
+
                 {
                     credentials:
                         "same-origin"
                 }
+
             );
 
 
-        const dados =
-            await resposta.json();
+        let dados;
+
+
+        try {
+
+            dados =
+                await resposta.json();
+
+        } catch {
+
+            throw new Error(
+                "O servidor retornou uma resposta inválida."
+            );
+
+        }
+
+
+        if (resposta.status === 401) {
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
 
 
         if (!resposta.ok) {
 
             throw new Error(
                 dados.erro ||
-                "Erro ao carregar acampamento."
+                "Não foi possível carregar o acampamento."
+            );
+
+        }
+
+
+        if (!dados.acampamento) {
+
+            throw new Error(
+                "Dados do acampamento não encontrados."
             );
 
         }
@@ -523,39 +699,73 @@ async function selecionarAcampamento(id) {
             dados.acampamento;
 
 
+        // FORMULÁRIO
+
         preencherFormulario(
             acampamentoAtual
         );
 
 
+        // DIAS
+
         renderizarDias(
-            dados.dias || []
+            Array.isArray(dados.dias)
+                ? dados.dias
+                : []
         );
 
+
+        // ITENS
 
         renderizarItens(
-            dados.itens || []
+            Array.isArray(dados.itens)
+                ? dados.itens
+                : []
         );
 
+
+        // INSCRITOS
 
         renderizarInscritos(
-            dados.inscritos || []
+            Array.isArray(
+                dados.inscritos
+            )
+                ? dados.inscritos
+                : []
         );
 
 
-        document
-        .getElementById(
-            "recursos-acampamento"
-        )
-        .hidden = false;
+        // MOSTRAR RECURSOS
+
+        const recursos =
+            document.getElementById(
+                "recursos-acampamento"
+            );
 
 
-        document
-        .getElementById(
-            "excluir-acampamento"
-        )
-        .hidden = false;
+        if (recursos) {
 
+            recursos.hidden = false;
+
+        }
+
+
+        // MOSTRAR EXCLUIR
+
+        const botaoExcluir =
+            document.getElementById(
+                "excluir-acampamento"
+            );
+
+
+        if (botaoExcluir) {
+
+            botaoExcluir.hidden = false;
+
+        }
+
+
+        // LIMITAR DATA DOS DIAS
 
         const campoData =
             document.getElementById(
@@ -563,21 +773,36 @@ async function selecionarAcampamento(id) {
             );
 
 
-        campoData.min =
-            acampamentoAtual.data_inicio;
+        if (campoData) {
+
+            campoData.min =
+                acampamentoAtual
+                .data_inicio || "";
 
 
-        campoData.max =
-            acampamentoAtual.data_fim;
+            campoData.max =
+                acampamentoAtual
+                .data_fim || "";
 
+        }
+
+
+        // ATUALIZAR DESTAQUE DA LISTA
 
         renderizarListaAcampamentos();
 
 
     } catch (erro) {
 
+        console.error(
+            "Erro selecionar acampamento:",
+            erro
+        );
+
+
         alert(
-            erro.message
+            erro.message ||
+            "Não foi possível carregar o acampamento."
         );
 
     }
@@ -586,7 +811,7 @@ async function selecionarAcampamento(id) {
 
 
 // =====================================================
-// NOVO ACAMPAMENTO
+// PREPARAR NOVO ACAMPAMENTO
 // =====================================================
 
 function prepararNovoAcampamento() {
@@ -600,59 +825,105 @@ function prepararNovoAcampamento() {
         );
 
 
-    formulario.reset();
+    if (formulario) {
+
+        formulario.reset();
+
+    }
 
 
-    document
-    .getElementById(
-        "acampamento-id"
-    )
-    .value = "";
+    const id =
+        document.getElementById(
+            "acampamento-id"
+        );
 
 
-    document
-    .getElementById(
-        "acampamento-status"
-    )
-    .value =
-        "rascunho";
+    if (id) {
+
+        id.value = "";
+
+    }
 
 
-    document
-    .getElementById(
-        "titulo-editor-acampamento"
-    )
-    .textContent =
-        "Novo acampamento";
+    const status =
+        document.getElementById(
+            "acampamento-status"
+        );
 
 
-    document
-    .getElementById(
-        "salvar-acampamento"
-    )
-    .textContent =
-        "CRIAR ACAMPAMENTO";
+    if (status) {
+
+        status.value =
+            "rascunho";
+
+    }
 
 
-    document
-    .getElementById(
-        "mensagem-acampamento"
-    )
-    .textContent = "";
+    const titulo =
+        document.getElementById(
+            "titulo-editor-acampamento"
+        );
 
 
-    document
-    .getElementById(
-        "excluir-acampamento"
-    )
-    .hidden = true;
+    if (titulo) {
+
+        titulo.textContent =
+            "Novo acampamento";
+
+    }
 
 
-    document
-    .getElementById(
-        "recursos-acampamento"
-    )
-    .hidden = true;
+    const salvar =
+        document.getElementById(
+            "salvar-acampamento"
+        );
+
+
+    if (salvar) {
+
+        salvar.textContent =
+            "CRIAR ACAMPAMENTO";
+
+    }
+
+
+    const mensagem =
+        document.getElementById(
+            "mensagem-acampamento"
+        );
+
+
+    if (mensagem) {
+
+        mensagem.textContent = "";
+
+    }
+
+
+    const excluir =
+        document.getElementById(
+            "excluir-acampamento"
+        );
+
+
+    if (excluir) {
+
+        excluir.hidden = true;
+
+    }
+
+
+    const recursos =
+        document.getElementById(
+            "recursos-acampamento"
+        );
+
+
+    if (recursos) {
+
+        recursos.hidden = true;
+
+    }
 
 
     removerPreviewFoto();
@@ -670,134 +941,132 @@ function prepararNovoAcampamento() {
 
 
 // =====================================================
-// PREENCHER FORM
+// PREENCHER FORMULÁRIO
 // =====================================================
 
 function preencherFormulario(
     acampamento
 ) {
 
-    document
-    .getElementById(
-        "acampamento-id"
-    )
-    .value =
-        acampamento.id;
+    definirValor(
+        "acampamento-id",
+        acampamento.id
+    );
 
 
-    document
-    .getElementById(
-        "acampamento-nome"
-    )
-    .value =
-        acampamento.nome || "";
+    definirValor(
+        "acampamento-nome",
+        acampamento.nome
+    );
 
 
-    document
-    .getElementById(
-        "acampamento-descricao"
-    )
-    .value =
-        acampamento.descricao || "";
+    definirValor(
+        "acampamento-descricao",
+        acampamento.descricao
+    );
 
 
-    document
-    .getElementById(
-        "acampamento-local"
-    )
-    .value =
-        acampamento.local || "";
+    definirValor(
+        "acampamento-local",
+        acampamento.local
+    );
 
 
-    document
-    .getElementById(
-        "acampamento-data-inicio"
-    )
-    .value =
-        acampamento.data_inicio || "";
+    definirValor(
+        "acampamento-data-inicio",
+        acampamento.data_inicio
+    );
 
 
-    document
-    .getElementById(
-        "acampamento-data-fim"
-    )
-    .value =
-        acampamento.data_fim || "";
+    definirValor(
+        "acampamento-data-fim",
+        acampamento.data_fim
+    );
 
 
-    document
-    .getElementById(
-        "valor-completo"
-    )
-    .value =
-        acampamento.valor_completo ??
-        "";
+    definirValor(
+        "valor-completo",
+        acampamento.valor_completo
+    );
 
 
-    document
-    .getElementById(
-        "valor-diaria"
-    )
-    .value =
-        acampamento.valor_diaria ??
-        "";
+    definirValor(
+        "valor-diaria",
+        acampamento.valor_diaria
+    );
 
 
-    document
-    .getElementById(
-        "valor-crianca"
-    )
-    .value =
-        acampamento.valor_crianca ??
-        "";
+    definirValor(
+        "valor-crianca",
+        acampamento.valor_crianca
+    );
 
 
-    document
-    .getElementById(
-        "idade-max-crianca"
-    )
-    .value =
-        acampamento.idade_max_crianca ??
-        "";
+    definirValor(
+        "idade-max-crianca",
+        acampamento.idade_max_crianca
+    );
 
 
-    document
-    .getElementById(
-        "acampamento-status"
-    )
-    .value =
+    definirValor(
+        "acampamento-status",
         acampamento.status ||
-        "rascunho";
+        "rascunho"
+    );
 
 
-    document
-    .getElementById(
-        "titulo-editor-acampamento"
-    )
-    .textContent =
-        acampamento.nome;
+    const titulo =
+        document.getElementById(
+            "titulo-editor-acampamento"
+        );
 
 
-    document
-    .getElementById(
-        "salvar-acampamento"
-    )
-    .textContent =
-        "SALVAR ALTERAÇÕES";
+    if (titulo) {
+
+        titulo.textContent =
+            acampamento.nome;
+
+    }
 
 
-    document
-    .getElementById(
-        "mensagem-acampamento"
-    )
-    .textContent = "";
+    const botao =
+        document.getElementById(
+            "salvar-acampamento"
+        );
 
 
-    document
-    .getElementById(
-        "acampamento-foto"
-    )
-    .value = "";
+    if (botao) {
+
+        botao.textContent =
+            "SALVAR ALTERAÇÕES";
+
+    }
+
+
+    const mensagem =
+        document.getElementById(
+            "mensagem-acampamento"
+        );
+
+
+    if (mensagem) {
+
+        mensagem.textContent = "";
+
+    }
+
+
+    const fotoInput =
+        document.getElementById(
+            "acampamento-foto"
+        );
+
+
+    if (fotoInput) {
+
+        fotoInput.value = "";
+
+    }
 
 
     if (acampamento.foto_key) {
@@ -823,17 +1092,21 @@ function preencherFormulario(
 // SALVAR ACAMPAMENTO
 // =====================================================
 
-async function salvarAcampamento(event) {
+async function salvarAcampamento(
+    event
+) {
 
     event.preventDefault();
 
 
     const id =
-        document
-        .getElementById(
-            "acampamento-id"
-        )
-        .value;
+        String(
+            document
+            .getElementById(
+                "acampamento-id"
+            )
+            ?.value || ""
+        ).trim();
 
 
     const mensagem =
@@ -848,91 +1121,72 @@ async function salvarAcampamento(event) {
         );
 
 
-    mensagem.textContent = "";
+    if (mensagem) {
+
+        mensagem.textContent = "";
+
+    }
 
 
     const dados = {
 
         nome:
-            document
-            .getElementById(
+            obterValor(
                 "acampamento-nome"
-            )
-            .value
-            .trim(),
+            ).trim(),
 
         descricao:
-            document
-            .getElementById(
+            obterValor(
                 "acampamento-descricao"
-            )
-            .value
-            .trim(),
+            ).trim(),
 
         local:
-            document
-            .getElementById(
+            obterValor(
                 "acampamento-local"
-            )
-            .value
-            .trim(),
+            ).trim(),
 
         dataInicio:
-            document
-            .getElementById(
+            obterValor(
                 "acampamento-data-inicio"
-            )
-            .value,
+            ),
 
         dataFim:
-            document
-            .getElementById(
+            obterValor(
                 "acampamento-data-fim"
-            )
-            .value,
+            ),
 
         valorCompleto:
             valorOuNull(
-                document
-                .getElementById(
+                obterValor(
                     "valor-completo"
                 )
-                .value
             ),
 
         valorDiaria:
             valorOuNull(
-                document
-                .getElementById(
+                obterValor(
                     "valor-diaria"
                 )
-                .value
             ),
 
         valorCrianca:
             valorOuNull(
-                document
-                .getElementById(
+                obterValor(
                     "valor-crianca"
                 )
-                .value
             ),
 
         idadeMaxCrianca:
             valorOuNull(
-                document
-                .getElementById(
+                obterValor(
                     "idade-max-crianca"
                 )
-                .value
             ),
 
         status:
-            document
-            .getElementById(
+            obterValor(
                 "acampamento-status"
             )
-            .value
 
     };
 
@@ -944,31 +1198,37 @@ async function salvarAcampamento(event) {
     }
 
 
-    const textoOriginal =
-        botao.textContent;
+    if (botao) {
 
+        botao.disabled = true;
 
-    botao.disabled = true;
+        botao.textContent =
+            "SALVANDO...";
 
-    botao.textContent =
-        "SALVANDO...";
+    }
 
 
     try {
 
+        const url =
+            id
+                ? "/api/admin/editar-acampamento"
+                : "/api/admin/acampamentos";
+
+
+        const metodo =
+            id
+                ? "PUT"
+                : "POST";
+
+
         const resposta =
             await fetch(
-
-                id
-                    ? "/api/admin/editar-acampamento"
-                    : "/api/admin/acampamentos",
-
+                url,
                 {
 
                     method:
-                        id
-                            ? "PUT"
-                            : "POST",
+                        metodo,
 
                     credentials:
                         "same-origin",
@@ -986,7 +1246,6 @@ async function salvarAcampamento(event) {
                         )
 
                 }
-
             );
 
 
@@ -998,29 +1257,45 @@ async function salvarAcampamento(event) {
 
             throw new Error(
                 resultado.erro ||
-                "Erro ao salvar acampamento."
+                "Erro ao salvar o acampamento."
             );
 
         }
 
 
         const acampamentoId =
+            String(
 
-            id ||
+                id ||
 
-            resultado
-            .acampamento
-            .id;
+                resultado
+                ?.acampamento
+                ?.id ||
+
+                ""
+
+            ).trim();
 
 
+        if (!acampamentoId) {
+
+            throw new Error(
+                "O acampamento foi salvo, mas o ID não foi retornado."
+            );
+
+        }
+
+
+        // =============================================
         // FOTO
+        // =============================================
 
         const arquivoFoto =
             document
             .getElementById(
                 "acampamento-foto"
             )
-            .files[0];
+            ?.files?.[0];
 
 
         if (arquivoFoto) {
@@ -1033,14 +1308,18 @@ async function salvarAcampamento(event) {
         }
 
 
-        mensagem.style.color =
-            "#087a50";
+        if (mensagem) {
+
+            mensagem.style.color =
+                "#087a50";
 
 
-        mensagem.textContent =
-            id
-                ? "✓ Acampamento atualizado com sucesso!"
-                : "✓ Acampamento criado com sucesso!";
+            mensagem.textContent =
+                id
+                    ? "✓ Acampamento atualizado com sucesso!"
+                    : "✓ Acampamento criado com sucesso!";
+
+        }
 
 
         await carregarListaAcampamentos(
@@ -1050,22 +1329,37 @@ async function salvarAcampamento(event) {
 
     } catch (erro) {
 
-        mensagem.style.color =
-            "#b00020";
+        console.error(
+            "Erro ao salvar:",
+            erro
+        );
 
 
-        mensagem.textContent =
-            erro.message;
+        if (mensagem) {
+
+            mensagem.style.color =
+                "#b00020";
+
+
+            mensagem.textContent =
+                erro.message;
+
+        }
 
 
     } finally {
 
-        botao.disabled = false;
+        if (botao) {
 
-        botao.textContent =
-            id
-                ? "SALVAR ALTERAÇÕES"
-                : textoOriginal;
+            botao.disabled = false;
+
+
+            botao.textContent =
+                id
+                    ? "SALVAR ALTERAÇÕES"
+                    : "CRIAR ACAMPAMENTO";
+
+        }
 
     }
 
@@ -1073,7 +1367,7 @@ async function salvarAcampamento(event) {
 
 
 // =====================================================
-// FOTO
+// ENVIAR FOTO
 // =====================================================
 
 async function enviarFoto(
@@ -1087,7 +1381,9 @@ async function enviarFoto(
 
     formData.append(
         "acampamentoId",
-        acampamentoId
+        String(
+            acampamentoId
+        ).trim()
     );
 
 
@@ -1122,7 +1418,7 @@ async function enviarFoto(
 
         throw new Error(
             dados.erro ||
-            "O acampamento foi salvo, mas ocorreu um erro ao enviar a foto."
+            "O acampamento foi salvo, mas não foi possível enviar a foto."
         );
 
     }
@@ -1130,16 +1426,67 @@ async function enviarFoto(
 }
 
 
+// =====================================================
+// PREVIEW FOTO ESCOLHIDA
+// =====================================================
+
 function visualizarFotoEscolhida(
     event
 ) {
 
     const arquivo =
-        event.target.files[0];
+        event.target
+        ?.files?.[0];
 
 
     if (!arquivo) {
+
         return;
+
+    }
+
+
+    if (
+        arquivo.size >
+        3 * 1024 * 1024
+    ) {
+
+        alert(
+            "A foto deve ter no máximo 3 MB."
+        );
+
+
+        event.target.value = "";
+
+        return;
+
+    }
+
+
+    const tiposPermitidos = [
+
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+
+    ];
+
+
+    if (
+        !tiposPermitidos.includes(
+            arquivo.type
+        )
+    ) {
+
+        alert(
+            "Escolha uma imagem JPG, PNG ou WEBP."
+        );
+
+
+        event.target.value = "";
+
+        return;
+
     }
 
 
@@ -1153,6 +1500,10 @@ function visualizarFotoEscolhida(
 
 }
 
+
+// =====================================================
+// MOSTRAR FOTO
+// =====================================================
 
 function mostrarFoto(url) {
 
@@ -1168,14 +1519,27 @@ function mostrarFoto(url) {
         );
 
 
-    imagem.src = url;
+    if (imagem) {
 
-    imagem.hidden = false;
+        imagem.src = url;
 
-    vazio.hidden = true;
+        imagem.hidden = false;
+
+    }
+
+
+    if (vazio) {
+
+        vazio.hidden = true;
+
+    }
 
 }
 
+
+// =====================================================
+// REMOVER PREVIEW FOTO
+// =====================================================
 
 function removerPreviewFoto() {
 
@@ -1191,20 +1555,28 @@ function removerPreviewFoto() {
         );
 
 
-    imagem.removeAttribute(
-        "src"
-    );
+    if (imagem) {
+
+        imagem.removeAttribute(
+            "src"
+        );
+
+        imagem.hidden = true;
+
+    }
 
 
-    imagem.hidden = true;
+    if (vazio) {
 
-    vazio.hidden = false;
+        vazio.hidden = false;
+
+    }
 
 }
 
 
 // =====================================================
-// DIAS
+// SALVAR DIA
 // =====================================================
 
 async function salvarDia(event) {
@@ -1213,7 +1585,13 @@ async function salvarDia(event) {
 
 
     if (!acampamentoAtual) {
+
+        alert(
+            "Selecione um acampamento."
+        );
+
         return;
+
     }
 
 
@@ -1221,6 +1599,13 @@ async function salvarDia(event) {
         document.getElementById(
             "mensagem-admin-dia"
         );
+
+
+    if (mensagem) {
+
+        mensagem.textContent = "";
+
+    }
 
 
     try {
@@ -1246,14 +1631,14 @@ async function salvarDia(event) {
                         JSON.stringify({
 
                             acampamentoId:
-                                acampamentoAtual.id,
+                                String(
+                                    acampamentoAtual.id
+                                ).trim(),
 
                             data:
-                                document
-                                .getElementById(
+                                obterValor(
                                     "admin-data-dia"
                                 )
-                                .value
 
                         })
 
@@ -1268,40 +1653,54 @@ async function salvarDia(event) {
         if (!resposta.ok) {
 
             throw new Error(
-                dados.erro
+                dados.erro ||
+                "Não foi possível cadastrar o dia."
             );
 
         }
 
 
-        mensagem.style.color =
-            "#087a50";
+        if (mensagem) {
 
+            mensagem.style.color =
+                "#087a50";
 
-        mensagem.textContent =
-            "✓ Dia cadastrado!";
+            mensagem.textContent =
+                "✓ Dia cadastrado!";
+
+        }
 
 
         event.target.reset();
 
 
         await selecionarAcampamento(
-            acampamentoAtual.id
+            String(
+                acampamentoAtual.id
+            ).trim()
         );
 
 
     } catch (erro) {
 
-        mensagem.style.color =
-            "#b00020";
+        if (mensagem) {
 
-        mensagem.textContent =
-            erro.message;
+            mensagem.style.color =
+                "#b00020";
+
+            mensagem.textContent =
+                erro.message;
+
+        }
 
     }
 
 }
 
+
+// =====================================================
+// RENDERIZAR DIAS
+// =====================================================
 
 function renderizarDias(dias) {
 
@@ -1309,6 +1708,13 @@ function renderizarDias(dias) {
         document.getElementById(
             "admin-lista-dias"
         );
+
+
+    if (!lista) {
+
+        return;
+
+    }
 
 
     if (!dias.length) {
@@ -1323,64 +1729,60 @@ function renderizarDias(dias) {
 
     lista.innerHTML =
         dias.map(
+            dia => {
 
-            dia => `
+                const id =
+                    String(
+                        dia.id || ""
+                    ).trim();
 
-                <div class="admin-item-lista">
 
-                    <div>
+                return `
 
-                        <strong>
+                    <div class="admin-item-lista">
 
-                            ${escaparHtml(
+                        <div>
+
+                            <strong>
+                                ${escaparHtml(
+                                    dia.nome_dia
+                                )}
+                            </strong>
+
+                            <span>
+                                ${formatarData(
+                                    dia.data
+                                )}
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="botao-excluir-pequeno"
+                            data-excluir-dia="${id}"
+                            data-nome="${escaparHtml(
                                 dia.nome_dia
-                            )}
+                            )}">
 
-                        </strong>
+                            EXCLUIR
 
-                        <span>
-
-                            ${formatarData(
-                                dia.data
-                            )}
-
-                        </span>
+                        </button>
 
                     </div>
 
+                `;
 
-                    <button
-                        type="button"
-
-                        class="
-                            botao-excluir-pequeno
-                        "
-
-                        data-excluir-dia="
-                            ${dia.id}
-                        "
-
-                        data-nome="
-                            ${escaparHtml(
-                                dia.nome_dia
-                            )}
-                        ">
-
-                        EXCLUIR
-
-                    </button>
-
-                </div>
-
-            `
-
-        ).join("");
+            }
+        )
+        .join("");
 
 }
 
 
 // =====================================================
-// ITENS
+// SALVAR ITEM
 // =====================================================
 
 async function salvarItem(event) {
@@ -1389,7 +1791,13 @@ async function salvarItem(event) {
 
 
     if (!acampamentoAtual) {
+
+        alert(
+            "Selecione um acampamento."
+        );
+
         return;
+
     }
 
 
@@ -1397,6 +1805,13 @@ async function salvarItem(event) {
         document.getElementById(
             "mensagem-admin-item"
         );
+
+
+    if (mensagem) {
+
+        mensagem.textContent = "";
+
+    }
 
 
     try {
@@ -1422,40 +1837,31 @@ async function salvarItem(event) {
                         JSON.stringify({
 
                             acampamentoId:
-                                acampamentoAtual.id,
+                                String(
+                                    acampamentoAtual.id
+                                ).trim(),
 
                             nome:
-                                document
-                                .getElementById(
+                                obterValor(
                                     "admin-item-nome"
-                                )
-                                .value
-                                .trim(),
+                                ).trim(),
 
                             quantidade:
                                 Number(
-                                    document
-                                    .getElementById(
+                                    obterValor(
                                         "admin-item-quantidade"
                                     )
-                                    .value
                                 ),
 
                             unidade:
-                                document
-                                .getElementById(
+                                obterValor(
                                     "admin-item-unidade"
-                                )
-                                .value
-                                .trim(),
+                                ).trim(),
 
                             observacao:
-                                document
-                                .getElementById(
+                                obterValor(
                                     "admin-item-observacao"
-                                )
-                                .value
-                                .trim()
+                                ).trim()
 
                         })
 
@@ -1470,41 +1876,54 @@ async function salvarItem(event) {
         if (!resposta.ok) {
 
             throw new Error(
-                dados.erro
+                dados.erro ||
+                "Não foi possível cadastrar o item."
             );
 
         }
 
 
-        mensagem.style.color =
-            "#087a50";
+        if (mensagem) {
 
+            mensagem.style.color =
+                "#087a50";
 
-        mensagem.textContent =
-            "✓ Item cadastrado!";
+            mensagem.textContent =
+                "✓ Item cadastrado!";
+
+        }
 
 
         event.target.reset();
 
 
         await selecionarAcampamento(
-            acampamentoAtual.id
+            String(
+                acampamentoAtual.id
+            ).trim()
         );
 
 
     } catch (erro) {
 
-        mensagem.style.color =
-            "#b00020";
+        if (mensagem) {
 
+            mensagem.style.color =
+                "#b00020";
 
-        mensagem.textContent =
-            erro.message;
+            mensagem.textContent =
+                erro.message;
+
+        }
 
     }
 
 }
 
+
+// =====================================================
+// RENDERIZAR ITENS
+// =====================================================
 
 function renderizarItens(itens) {
 
@@ -1512,6 +1931,13 @@ function renderizarItens(itens) {
         document.getElementById(
             "admin-lista-itens"
         );
+
+
+    if (!lista) {
+
+        return;
+
+    }
 
 
     if (!itens.length) {
@@ -1526,77 +1952,72 @@ function renderizarItens(itens) {
 
     lista.innerHTML =
         itens.map(
+            item => {
 
-            item => `
+                const id =
+                    String(
+                        item.id || ""
+                    ).trim();
 
-                <div class="admin-item-lista">
+
+                return `
+
+                    <div class="admin-item-lista">
+
+                        <div>
+
+                            <strong>
+                                ${escaparHtml(
+                                    item.nome
+                                )}
+                            </strong>
+
+                            <span>
+
+                                ${formatarNumero(
+                                    item.quantidade_doada
+                                )}
+
+                                /
+
+                                ${formatarNumero(
+                                    item.quantidade_necessaria
+                                )}
+
+                                ${escaparHtml(
+                                    item.unidade
+                                )}
+
+                            </span>
+
+                        </div>
 
 
-                    <div>
-
-                        <strong>
-
-                            ${escaparHtml(
+                        <button
+                            type="button"
+                            class="botao-excluir-pequeno"
+                            data-excluir-item="${id}"
+                            data-nome="${escaparHtml(
                                 item.nome
-                            )}
+                            )}">
 
-                        </strong>
+                            EXCLUIR
 
-
-                        <span>
-
-                            ${formatarNumero(
-                                item.quantidade_doada
-                            )}
-
-                            /
-
-                            ${formatarNumero(
-                                item.quantidade_necessaria
-                            )}
-
-                            ${escaparHtml(
-                                item.unidade
-                            )}
-
-                        </span>
+                        </button>
 
                     </div>
 
+                `;
 
-                    <button
-                        type="button"
-
-                        class="
-                            botao-excluir-pequeno
-                        "
-
-                        data-excluir-item="
-                            ${item.id}
-                        "
-
-                        data-nome="
-                            ${escaparHtml(
-                                item.nome
-                            )}
-                        ">
-
-                        EXCLUIR
-
-                    </button>
-
-
-                </div>
-
-            `
-
-        ).join("");
+            }
+        )
+        .join("");
 
 }
 
 
 // =====================================================
-// INSCRITOS
+// RENDERIZAR INSCRITOS
 // =====================================================
 
 function renderizarInscritos(
@@ -1609,12 +2030,25 @@ function renderizarInscritos(
         );
 
 
-    document
-    .getElementById(
-        "total-inscritos"
-    )
-    .textContent =
-        inscritos.length;
+    const total =
+        document.getElementById(
+            "total-inscritos"
+        );
+
+
+    if (total) {
+
+        total.textContent =
+            inscritos.length;
+
+    }
+
+
+    if (!lista) {
+
+        return;
+
+    }
 
 
     if (!inscritos.length) {
@@ -1629,6 +2063,7 @@ function renderizarInscritos(
 
         `;
 
+
         return;
 
     }
@@ -1636,27 +2071,48 @@ function renderizarInscritos(
 
     lista.innerHTML =
         inscritos.map(
-
             pessoa => {
 
+                let dias =
+                    pessoa.dias;
 
-                const dias =
-                    Array.isArray(
-                        pessoa.dias
-                    )
-                    ? pessoa.dias
-                    : [];
+
+                // CASO O BANCO RETORNE JSON COMO TEXTO
+
+                if (
+                    typeof dias ===
+                    "string"
+                ) {
+
+                    try {
+
+                        dias =
+                            JSON.parse(dias);
+
+                    } catch {
+
+                        dias = [];
+
+                    }
+
+                }
+
+
+                if (!Array.isArray(dias)) {
+
+                    dias = [];
+
+                }
 
 
                 const diasHtml =
-                    dias.map(
+                    dias.length
 
+                    ? dias.map(
                         dia => `
 
                             <span
-                                class="
-                                    tag-dia-inscrito
-                                ">
+                                class="tag-dia-inscrito">
 
                                 ${escaparHtml(
                                     dia.nome_dia
@@ -1671,21 +2127,40 @@ function renderizarInscritos(
                             </span>
 
                         `
+                    ).join("")
 
-                    ).join("");
+                    : `
+
+                        <span class="tag-dia-inscrito">
+
+                            Nenhum dia selecionado
+
+                        </span>
+
+                    `;
+
+
+                const nome =
+                    String(
+                        pessoa.nome_completo ||
+                        ""
+                    );
+
+
+                const inicial =
+                    nome
+                    .charAt(0)
+                    .toUpperCase();
 
 
                 return `
 
                     <div class="pessoa-inscrita">
 
-
                         <div class="pessoa-inicial">
 
                             ${escaparHtml(
-                                pessoa.nome_completo
-                                    .charAt(0)
-                                    .toUpperCase()
+                                inicial
                             )}
 
                         </div>
@@ -1693,11 +2168,10 @@ function renderizarInscritos(
 
                         <div class="pessoa-dados">
 
-
                             <h3>
 
                                 ${escaparHtml(
-                                    pessoa.nome_completo
+                                    nome
                                 )}
 
                             </h3>
@@ -1708,7 +2182,8 @@ function renderizarInscritos(
                                 📱
 
                                 ${escaparHtml(
-                                    pessoa.telefone
+                                    pessoa.telefone ||
+                                    "Não informado"
                                 )}
 
                             </p>
@@ -1720,17 +2195,15 @@ function renderizarInscritos(
 
                             </div>
 
-
                         </div>
-
 
                     </div>
 
                 `;
 
             }
-
-        ).join("");
+        )
+        .join("");
 
 }
 
@@ -1745,35 +2218,69 @@ async function excluirDia(
 ) {
 
     if (!acampamentoAtual) {
+
         return;
+
     }
 
 
-    if (
-        !confirm(
-            `Excluir ${nome}?`
-        )
-    ) {
+    const idLimpo =
+        String(id || "")
+        .trim();
+
+
+    if (!idLimpo) {
+
         return;
+
     }
 
 
-    await executarExclusao(
-        "/api/admin/excluir-dia",
-        {
+    const confirmou =
+        confirm(
+            `Deseja excluir "${nome}"?`
+        );
 
-            id,
 
-            acampamentoId:
+    if (!confirmou) {
+
+        return;
+
+    }
+
+
+    try {
+
+        await executarExclusao(
+            "/api/admin/excluir-dia",
+            {
+
+                id:
+                    idLimpo,
+
+                acampamentoId:
+                    String(
+                        acampamentoAtual.id
+                    ).trim()
+
+            }
+        );
+
+
+        await selecionarAcampamento(
+            String(
                 acampamentoAtual.id
+            ).trim()
+        );
 
-        }
-    );
 
+    } catch (erro) {
 
-    await selecionarAcampamento(
-        acampamentoAtual.id
-    );
+        console.error(
+            erro
+        );
+
+    }
 
 }
 
@@ -1788,35 +2295,71 @@ async function excluirItem(
 ) {
 
     if (!acampamentoAtual) {
+
         return;
+
     }
 
 
-    if (
-        !confirm(
-            `Excluir o item "${nome}"?\n\nAs doações ligadas a ele também serão apagadas.`
-        )
-    ) {
+    const idLimpo =
+        String(id || "")
+        .trim();
+
+
+    if (!idLimpo) {
+
         return;
+
     }
 
 
-    await executarExclusao(
-        "/api/admin/excluir-item",
-        {
+    const confirmou =
+        confirm(
 
-            id,
+            `Deseja excluir o item "${nome}"?\n\nAs doações ligadas a ele também serão apagadas.`
 
-            acampamentoId:
+        );
+
+
+    if (!confirmou) {
+
+        return;
+
+    }
+
+
+    try {
+
+        await executarExclusao(
+            "/api/admin/excluir-item",
+            {
+
+                id:
+                    idLimpo,
+
+                acampamentoId:
+                    String(
+                        acampamentoAtual.id
+                    ).trim()
+
+            }
+        );
+
+
+        await selecionarAcampamento(
+            String(
                 acampamentoAtual.id
+            ).trim()
+        );
 
-        }
-    );
 
+    } catch (erro) {
 
-    await selecionarAcampamento(
-        acampamentoAtual.id
-    );
+        console.error(
+            erro
+        );
+
+    }
 
 }
 
@@ -1828,7 +2371,9 @@ async function excluirItem(
 async function excluirAcampamento() {
 
     if (!acampamentoAtual) {
+
         return;
+
     }
 
 
@@ -1836,43 +2381,75 @@ async function excluirAcampamento() {
         acampamentoAtual.nome;
 
 
-    if (
-        !confirm(
-            `Deseja excluir "${nome}"?\n\nTodos os dias, inscrições, itens e doações deste acampamento também serão apagados.`
-        )
-    ) {
+    const primeiraConfirmacao =
+        confirm(
+
+            `Deseja realmente excluir "${nome}"?\n\nTodos os dias, inscrições, itens e doações deste acampamento serão apagados.`
+
+        );
+
+
+    if (!primeiraConfirmacao) {
+
         return;
+
     }
 
 
-    if (
-        !confirm(
-            "Esta ação não pode ser desfeita. Tem certeza?"
-        )
-    ) {
+    const segundaConfirmacao =
+        confirm(
+
+            "Esta ação não pode ser desfeita.\n\nTem certeza que deseja continuar?"
+
+        );
+
+
+    if (!segundaConfirmacao) {
+
         return;
+
     }
 
 
-    await executarExclusao(
-        "/api/admin/excluir-acampamento",
-        {
-            id:
-                acampamentoAtual.id
-        }
-    );
+    try {
+
+        await executarExclusao(
+            "/api/admin/excluir-acampamento",
+            {
+
+                id:
+                    String(
+                        acampamentoAtual.id
+                    ).trim()
+
+            }
+        );
 
 
-    acampamentoAtual = null;
+        acampamentoAtual = null;
 
 
-    await carregarListaAcampamentos();
+        alert(
+            "Acampamento excluído com sucesso."
+        );
+
+
+        await carregarListaAcampamentos();
+
+
+    } catch (erro) {
+
+        console.error(
+            erro
+        );
+
+    }
 
 }
 
 
 // =====================================================
-// EXECUTAR DELETE
+// EXECUTAR EXCLUSÃO
 // =====================================================
 
 async function executarExclusao(
@@ -1917,32 +2494,47 @@ async function executarExclusao(
             "Não foi possível excluir."
         );
 
+
         throw new Error(
-            resultado.erro
+            resultado.erro ||
+            "Erro ao excluir."
         );
 
     }
+
+
+    return resultado;
 
 }
 
 
 // =====================================================
-// LOGOUT
+// SAIR
 // =====================================================
 
 async function sair() {
 
-    await fetch(
-        "/api/admin/logout",
-        {
+    try {
 
-            method: "POST",
+        await fetch(
+            "/api/admin/logout",
+            {
 
-            credentials:
-                "same-origin"
+                method: "POST",
 
-        }
-    );
+                credentials:
+                    "same-origin"
+
+            }
+        );
+
+    } catch (erro) {
+
+        console.error(
+            erro
+        );
+
+    }
 
 
     window.location.href =
@@ -1952,7 +2544,56 @@ async function sair() {
 
 
 // =====================================================
-// AUXILIARES
+// PEGAR VALOR DE CAMPO
+// =====================================================
+
+function obterValor(id) {
+
+    const elemento =
+        document.getElementById(id);
+
+
+    if (!elemento) {
+
+        return "";
+
+    }
+
+
+    return elemento.value ?? "";
+
+}
+
+
+// =====================================================
+// DEFINIR VALOR
+// =====================================================
+
+function definirValor(
+    id,
+    valor
+) {
+
+    const elemento =
+        document.getElementById(id);
+
+
+    if (!elemento) {
+
+        return;
+
+    }
+
+
+    elemento.value =
+        valor ??
+        "";
+
+}
+
+
+// =====================================================
+// VALOR OU NULL
 // =====================================================
 
 function valorOuNull(valor) {
@@ -1968,10 +2609,25 @@ function valorOuNull(valor) {
     }
 
 
-    return Number(valor);
+    const numero =
+        Number(valor);
+
+
+    if (!Number.isFinite(numero)) {
+
+        return null;
+
+    }
+
+
+    return numero;
 
 }
 
+
+// =====================================================
+// FORMATAR NÚMERO
+// =====================================================
 
 function formatarNumero(valor) {
 
@@ -1988,17 +2644,33 @@ function formatarNumero(valor) {
 }
 
 
+// =====================================================
+// FORMATAR DATA
+// =====================================================
+
 function formatarData(data) {
 
     if (!data) {
+
         return "";
+
     }
 
 
-    const partes =
+    const texto =
         String(data)
-        .substring(0, 10)
-        .split("-");
+        .substring(0, 10);
+
+
+    const partes =
+        texto.split("-");
+
+
+    if (partes.length !== 3) {
+
+        return texto;
+
+    }
 
 
     return (
@@ -2011,6 +2683,10 @@ function formatarData(data) {
 
 }
 
+
+// =====================================================
+// ESCAPAR HTML
+// =====================================================
 
 function escaparHtml(valor) {
 

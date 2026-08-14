@@ -10,7 +10,16 @@ import {
 const db = getDatabase();
 
 
+const UUID_REGEX =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+
+
 export default async (req, context) => {
+
+    // =====================================================
+    // VERIFICAR LOGIN
+    // =====================================================
 
     if (!adminAutenticado(context)) {
 
@@ -28,11 +37,18 @@ export default async (req, context) => {
 
     try {
 
+        // =====================================================
+        // PEGAR ID DO ACAMPAMENTO
+        // =====================================================
+
         const url =
             new URL(req.url);
 
+
         const id =
-            url.searchParams.get("id");
+            String(
+                url.searchParams.get("id") || ""
+            ).trim();
 
 
         if (!id) {
@@ -40,7 +56,7 @@ export default async (req, context) => {
             return Response.json(
                 {
                     erro:
-                        "Informe o acampamento."
+                        "ID do acampamento não informado."
                 },
                 {
                     status: 400
@@ -50,9 +66,30 @@ export default async (req, context) => {
         }
 
 
-        // ==========================================
-        // ACAMPAMENTO
-        // ==========================================
+        if (!UUID_REGEX.test(id)) {
+
+            console.error(
+                "UUID inválido recebido:",
+                JSON.stringify(id)
+            );
+
+
+            return Response.json(
+                {
+                    erro:
+                        "ID do acampamento inválido."
+                },
+                {
+                    status: 400
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // BUSCAR ACAMPAMENTO
+        // =====================================================
 
         const acampamentos =
             await db.sql`
@@ -116,9 +153,9 @@ export default async (req, context) => {
             acampamentos[0];
 
 
-        // ==========================================
-        // DIAS
-        // ==========================================
+        // =====================================================
+        // BUSCAR DIAS
+        // =====================================================
 
         const dias =
             await db.sql`
@@ -126,7 +163,10 @@ export default async (req, context) => {
                 SELECT
 
                     id,
-                    data::text AS data,
+
+                    data::text
+                        AS data,
+
                     nome_dia
 
                 FROM dias_acampamento
@@ -134,14 +174,14 @@ export default async (req, context) => {
                 WHERE acampamento_id =
                     ${id}
 
-                ORDER BY data
+                ORDER BY data ASC
 
             `;
 
 
-        // ==========================================
-        // ITENS DE DOAÇÃO
-        // ==========================================
+        // =====================================================
+        // BUSCAR ITENS DE DOAÇÃO
+        // =====================================================
 
         const itens =
             await db.sql`
@@ -149,6 +189,7 @@ export default async (req, context) => {
                 SELECT
 
                     i.id,
+
                     i.nome,
 
                     i.quantidade_necessaria
@@ -156,88 +197,23 @@ export default async (req, context) => {
                         AS quantidade_necessaria,
 
                     i.unidade,
+
                     i.observacao,
 
                     COALESCE(
                         SUM(d.quantidade),
                         0
-                    )::double precision
+                    )
+                    ::double precision
                         AS quantidade_doada
 
                 FROM itens_doacao i
 
+
                 LEFT JOIN doacoes d
-                    ON d.item_id = i.id
 
-                WHERE i.acampamento_id =
-                    ${id}
-
-                GROUP BY i.id
-
-                ORDER BY i.nome
-
-            `;
-
-
-        // ==========================================
-        // INSCRITOS
-        // ==========================================
-
-        const inscritos =
-            await db.sql`
-
-                SELECT
-
-                    i.id,
-
-                    i.nome_completo,
-
-                    i.telefone,
-
-                    i.criado_em,
-
-                    COALESCE(
-
-                        json_agg(
-
-                            json_build_object(
-
-                                'id',
-                                d.id,
-
-                                'data',
-                                d.data::text,
-
-                                'nome_dia',
-                                d.nome_dia
-
-                            )
-
-                            ORDER BY d.data
-
-                        )
-
-                        FILTER (
-                            WHERE d.id IS NOT NULL
-                        ),
-
-                        '[]'::json
-
-                    ) AS dias
-
-                FROM inscricoes i
-
-
-                LEFT JOIN inscricao_dias idias
-
-                    ON idias.inscricao_id =
+                    ON d.item_id =
                         i.id
-
-
-                LEFT JOIN dias_acampamento d
-
-                    ON d.id =
-                        idias.dia_acampamento_id
 
 
                 WHERE i.acampamento_id =
@@ -247,22 +223,122 @@ export default async (req, context) => {
                 GROUP BY
 
                     i.id,
-                    i.nome_completo,
-                    i.telefone,
-                    i.criado_em
+
+                    i.nome,
+
+                    i.quantidade_necessaria,
+
+                    i.unidade,
+
+                    i.observacao
 
 
                 ORDER BY
-                    i.criado_em DESC
+                    i.nome ASC
 
             `;
 
 
+        // =====================================================
+        // BUSCAR INSCRITOS
+        // =====================================================
+
+        const inscritos =
+            await db.sql`
+
+                SELECT
+
+                    ins.id,
+
+                    ins.nome_completo,
+
+                    ins.telefone,
+
+                    ins.criado_em,
+
+                    COALESCE(
+
+                        json_agg(
+
+                            json_build_object(
+
+                                'id',
+                                dia.id,
+
+                                'data',
+                                dia.data::text,
+
+                                'nome_dia',
+                                dia.nome_dia
+
+                            )
+
+                            ORDER BY
+                                dia.data ASC
+
+                        )
+
+                        FILTER (
+                            WHERE dia.id
+                            IS NOT NULL
+                        ),
+
+                        '[]'::json
+
+                    ) AS dias
+
+
+                FROM inscricoes ins
+
+
+                LEFT JOIN inscricao_dias idias
+
+                    ON idias.inscricao_id =
+                        ins.id
+
+
+                LEFT JOIN dias_acampamento dia
+
+                    ON dia.id =
+                        idias.dia_acampamento_id
+
+
+                WHERE ins.acampamento_id =
+                    ${id}
+
+
+                GROUP BY
+
+                    ins.id,
+
+                    ins.nome_completo,
+
+                    ins.telefone,
+
+                    ins.criado_em
+
+
+                ORDER BY
+
+                    ins.criado_em DESC
+
+            `;
+
+
+        // =====================================================
+        // RESPOSTA
+        // =====================================================
+
         return Response.json({
 
+            sucesso: true,
+
             acampamento,
+
             dias,
+
             itens,
+
             inscritos
 
         });
@@ -271,7 +347,7 @@ export default async (req, context) => {
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar acampamento:",
+            "ERRO ADMIN-DADOS:",
             erro
         );
 
@@ -289,6 +365,7 @@ export default async (req, context) => {
     }
 
 };
+
 
 
 export const config = {
