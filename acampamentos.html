@@ -25,60 +25,54 @@
 <body>
 
 
-<!-- ==================================================
-     TOPO
-================================================== -->
+    <!-- ==================================================
+         TOPO
+    ================================================== -->
 
-<header class="topo">
+    <header class="topo">
 
-    <div class="logo-area">
+        <div class="logo-area">
 
-        <div class="logo-simbolo">
-            ✝
+            <div class="logo-simbolo">
+                ✝
+            </div>
+
+            <div class="logo-texto">
+
+                <h2>
+                    IGREJA
+                </h2>
+
+                <span>
+                    PRESBITERIANA
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="logo-texto">
 
-            <h2>
-                IGREJA
-            </h2>
+        <nav class="menu">
 
-            <span>
-                PRESBITERIANA
-            </span>
+            <a href="index.html">
+                INÍCIO
+            </a>
 
-        </div>
+            <a
+                href="acampamentos.html"
+                class="botao-acampamento"
+            >
+                ACAMPAMENTOS
+            </a>
 
-    </div>
+        </nav>
 
+    </header>
 
-    <nav class="menu">
-
-        <a href="index.html">
-            INÍCIO
-        </a>
-
-        <a
-            href="acampamentos.html"
-            class="botao-acampamento"
-        >
-            ACAMPAMENTOS
-        </a>
-
-    </nav>
-
-</header>
-
-
-<!-- ==================================================
-     ACAMPAMENTO
-================================================== -->
-
-<main>
 
 
     <!-- ==================================================
-         HERO DO ACAMPAMENTO
+         DESTAQUE DO ACAMPAMENTO
     ================================================== -->
 
     <section class="hero-acampamento">
@@ -91,28 +85,18 @@
             </span>
 
 
-            <!--
-                O JavaScript colocará aqui
-                o nome do acampamento
-            -->
+            <!-- NOME DO ACAMPAMENTO -->
 
-            <h1 id="acampamento-nome">
-
-                <span id="nome-acampamento">
-                    Carregando...
-                </span>
-
+            <h1 id="nome-acampamento">
+                Carregando...
             </h1>
 
 
             <!-- DESCRIÇÃO -->
 
-            <p id="acampamento-descricao">
-
-                <span id="descricao-acampamento">
-                    Carregando informações...
-                </span>
-
+            <p>
+                Um tempo especial de comunhão,
+                crescimento e presença de Deus.
             </p>
 
 
@@ -127,12 +111,8 @@
                         📅 Data
                     </strong>
 
-                    <span id="acampamento-data">
-
-                        <span id="data-acampamento">
-                            Carregando...
-                        </span>
-
+                    <span id="data-acampamento">
+                        Carregando...
                     </span>
 
                 </div>
@@ -144,12 +124,8 @@
                         📍 Local
                     </strong>
 
-                    <span id="acampamento-local">
-
-                        <span id="local-acampamento">
-                            Carregando...
-                        </span>
-
+                    <span id="local-acampamento">
+                        Carregando...
                     </span>
 
                 </div>
@@ -165,18 +141,16 @@
 
 
     <!-- ==================================================
-         MENU DAS ABAS
+         ABAS
     ================================================== -->
 
-    <div class="menu-acampamento">
+    <section class="menu-acampamento">
 
 
         <button
             type="button"
             class="aba-acampamento ativa"
             data-aba="inscricao"
-            data-target="inscricao"
-            id="botao-inscricao"
         >
 
             INSCRIÇÃO
@@ -188,8 +162,6 @@
             type="button"
             class="aba-acampamento"
             data-aba="doacoes"
-            data-target="doacoes"
-            id="botao-doacoes"
         >
 
             DOAÇÕES
@@ -197,156 +169,142 @@
         </button>
 
 
-    </div>
+    </section>
 
 
 
     <!-- ==================================================
-         CONTEÚDO DAS ABAS
+         CONTEÚDO
     ================================================== -->
 
-    <div class="conteudo-detalhes-acampamento">
+    <main class="conteudo-detalhes-acampamento">
+
 
 
         <!-- ==================================================
-             ABA INSCRIÇÃO
+             INSCRIÇÃO
         ================================================== -->
 
         <section
             id="inscricao"
             class="conteudo-aba ativo"
-            data-conteudo-aba="inscricao"
         >
 
 
-            <div id="conteudo-inscricao">
+            <div class="titulo-secao">
 
+                <span>
+                    PARTICIPE
+                </span>
 
-                <div class="titulo-secao">
+                <h2>
+                    Faça sua inscrição
+                </h2>
 
-                    <span>
-                        PARTICIPE CONOSCO
-                    </span>
+                <p>
+                    Preencha seus dados e informe
+                    quais dias você ficará no acampamento.
+                </p>
 
-
-                    <h2>
-                        Faça sua inscrição
-                    </h2>
-
-
-                    <p>
-                        Preencha seus dados e escolha
-                        os dias em que você participará
-                        do acampamento.
-                    </p>
-
-                </div>
+            </div>
 
 
 
-                <!-- FORMULÁRIO -->
-
-                <div class="area-formulario">
+            <div class="area-formulario">
 
 
-                    <form id="form-inscricao">
+                <form id="form-inscricao">
 
 
-                        <!-- NOME -->
+                    <!-- NOME -->
 
-                        <div class="grupo-formulario">
+                    <div class="grupo-formulario">
 
-                            <label for="nome-completo">
-                                Nome completo
-                            </label>
+                        <label for="nome">
+                            Nome completo
+                        </label>
 
-                            <input
-                                type="text"
-                                id="nome-completo"
-                                name="nomeCompleto"
-                                placeholder="Digite seu nome completo"
-                                maxlength="150"
-                                required
-                            >
-
-                        </div>
-
-
-
-                        <!-- TELEFONE -->
-
-                        <div class="grupo-formulario">
-
-                            <label for="telefone">
-                                Telefone
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="telefone"
-                                name="telefone"
-                                placeholder="(34) 99999-9999"
-                                maxlength="20"
-                                required
-                            >
-
-                        </div>
-
-
-
-                        <!-- DIAS -->
-
-                        <div class="grupo-formulario">
-
-                            <label>
-                                Quais dias você ficará?
-                            </label>
-
-
-                            <div
-                                id="lista-dias"
-                                class="lista-dias"
-                            >
-
-                                <div
-                                    id="dias-acampamento"
-                                    class="mensagem-carregamento"
-                                >
-                                    Carregando dias...
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- BOTÃO -->
-
-                        <button
-                            type="submit"
-                            class="botao-enviar"
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome completo"
+                            maxlength="150"
+                            required
                         >
 
-                            FAZER INSCRIÇÃO
-
-                        </button>
+                    </div>
 
 
 
-                        <!-- MENSAGEM -->
+                    <!-- TELEFONE -->
+
+                    <div class="grupo-formulario">
+
+                        <label for="telefone">
+                            Telefone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(34) 99999-9999"
+                            maxlength="30"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- DIAS -->
+
+                    <div class="grupo-formulario">
+
+                        <label>
+                            Quais dias você ficará no acampamento?
+                        </label>
+
 
                         <div
-                            id="mensagem-inscricao"
-                            class="mensagem-formulario"
+                            class="lista-dias"
+                            id="lista-dias"
                         >
+
+                            <p class="mensagem-carregamento">
+                                Carregando dias...
+                            </p>
+
                         </div>
 
+                    </div>
 
-                    </form>
 
 
-                </div>
+                    <!-- BOTÃO INSCRIÇÃO -->
+
+                    <button
+                        type="submit"
+                        class="botao-enviar"
+                    >
+
+                        REALIZAR INSCRIÇÃO
+
+                    </button>
+
+
+
+                    <!-- MENSAGEM -->
+
+                    <div
+                        id="mensagem-inscricao"
+                        class="mensagem-formulario"
+                    >
+                    </div>
+
+
+                </form>
 
 
             </div>
@@ -357,65 +315,60 @@
 
 
         <!-- ==================================================
-             ABA DOAÇÕES
+             DOAÇÕES
         ================================================== -->
 
         <section
             id="doacoes"
             class="conteudo-aba"
-            data-conteudo-aba="doacoes"
         >
 
 
-            <div id="conteudo-doacoes">
+            <div class="titulo-secao">
 
+                <span>
+                    CONTRIBUA CONOSCO
+                </span>
 
-                <div class="titulo-secao">
+                <h2>
+                    Faça uma doação
+                </h2>
 
-                    <span>
-                        CONTRIBUA CONOSCO
-                    </span>
+                <p>
+                    Escolha um dos itens abaixo
+                    e informe quanto deseja doar
+                    para o nosso acampamento.
+                </p>
 
-
-                    <h2>
-                        Faça uma doação
-                    </h2>
-
-
-                    <p>
-                        Escolha um dos itens abaixo
-                        e informe quanto deseja doar
-                        para o nosso acampamento.
-                    </p>
-
-                </div>
+            </div>
 
 
 
-                <!-- ITENS DE DOAÇÃO -->
+            <!--
+                IMPORTANTE:
+                ESTE ID PRECISA SER
+                lista-itens-doacao
+            -->
 
-                <div
-                    id="lista-doacoes"
-                    class="grade-doacoes"
-                >
+            <div
+                id="lista-itens-doacao"
+                class="grade-doacoes"
+            >
 
 
-                    <div class="sem-itens">
+                <div class="sem-itens">
 
-                        <div class="icone-sem-item">
-                            ♡
-                        </div>
-
-                        <h3>
-                            Carregando itens...
-                        </h3>
-
-                        <p>
-                            Aguarde um momento.
-                        </p>
-
+                    <div class="icone-sem-item">
+                        ♡
                     </div>
 
+                    <h3>
+                        Carregando itens...
+                    </h3>
+
+                    <p>
+                        Aguarde um momento.
+                    </p>
 
                 </div>
 
@@ -426,448 +379,268 @@
         </section>
 
 
-    </div>
-
-
-</main>
+    </main>
 
 
 
-<!-- ==================================================
-     MODAL DE DOAÇÃO
-================================================== -->
+    <!-- ==================================================
+         MODAL DE DOAÇÃO
+    ================================================== -->
 
-<div
-    id="modal-doacao"
-    class="modal-doacao"
->
-
-
-    <div class="modal-conteudo">
+    <div
+        id="modal-doacao"
+        class="modal-doacao"
+    >
 
 
-        <!-- FECHAR -->
-
-        <button
-            type="button"
-            id="fechar-modal"
-            class="fechar-modal"
-            aria-label="Fechar"
-        >
-
-            ×
-
-        </button>
+        <div class="modal-conteudo">
 
 
-
-        <span class="modal-subtitulo">
-            FAZER UMA DOAÇÃO
-        </span>
-
-
-        <h2>
-            Quero contribuir
-        </h2>
-
-
-        <p>
-            Informe seus dados e a quantidade
-            que deseja doar.
-        </p>
-
-
-
-        <!-- ITEM SELECIONADO -->
-
-        <div
-            id="item-selecionado"
-            class="item-selecionado"
-        >
-
-            Selecione um item.
-
-        </div>
-
-
-
-        <!-- FORMULÁRIO DA DOAÇÃO -->
-
-        <form id="form-doacao">
-
-
-            <!-- ID DO ITEM -->
-
-            <input
-                type="hidden"
-                id="item-doacao-id"
-            >
-
-
-
-            <!-- NOME -->
-
-            <div class="grupo-formulario">
-
-                <label for="nome-doador">
-                    Seu nome
-                </label>
-
-                <input
-                    type="text"
-                    id="nome-doador"
-                    name="nomeDoador"
-                    placeholder="Digite seu nome"
-                    maxlength="150"
-                    required
-                >
-
-            </div>
-
-
-
-            <!-- TELEFONE -->
-
-            <div class="grupo-formulario">
-
-                <label for="telefone-doador">
-                    Telefone
-                    <small>
-                        (opcional)
-                    </small>
-                </label>
-
-                <input
-                    type="tel"
-                    id="telefone-doador"
-                    name="telefoneDoador"
-                    placeholder="(34) 99999-9999"
-                    maxlength="20"
-                >
-
-            </div>
-
-
-
-            <!-- QUANTIDADE -->
-
-            <div class="grupo-formulario">
-
-                <label for="quantidade-doacao">
-                    Quantidade que deseja doar
-                </label>
-
-                <input
-                    type="number"
-                    id="quantidade-doacao"
-                    name="quantidadeDoacao"
-                    min="0.01"
-                    step="0.01"
-                    placeholder="Ex.: 5"
-                    required
-                >
-
-            </div>
-
-
-
-            <!-- BOTÃO -->
+            <!-- FECHAR -->
 
             <button
-                type="submit"
-                class="botao-enviar"
+                type="button"
+                id="fechar-modal"
+                class="fechar-modal"
+                aria-label="Fechar"
             >
 
-                CONFIRMAR DOAÇÃO
+                ×
 
             </button>
 
 
 
-            <!-- MENSAGEM -->
+            <span class="modal-subtitulo">
+                FAZER UMA DOAÇÃO
+            </span>
 
-            <div
-                id="mensagem-doacao"
-                class="mensagem-formulario"
-            >
+
+            <h2>
+                Quero contribuir
+            </h2>
+
+
+            <p>
+                Informe seus dados e a quantidade
+                que deseja doar.
+            </p>
+
+
+
+            <!-- ITEM SELECIONADO -->
+
+            <div class="item-selecionado">
+
+                <span>
+                    Item selecionado:
+                </span>
+
+                <strong id="nome-item-modal">
+                    Selecione um item
+                </strong>
+
             </div>
 
 
-        </form>
+
+            <!-- FORMULÁRIO DA DOAÇÃO -->
+
+            <form id="form-doacao">
+
+
+                <!-- ID DO ITEM -->
+
+                <input
+                    type="hidden"
+                    id="item-doacao-id"
+                >
+
+
+
+                <!-- NOME -->
+
+                <div class="grupo-formulario">
+
+                    <label for="nome-doador">
+                        Seu nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome-doador"
+                        name="nome-doador"
+                        placeholder="Digite seu nome"
+                        maxlength="150"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- TELEFONE -->
+
+                <div class="grupo-formulario">
+
+                    <label for="telefone-doador">
+
+                        Telefone
+
+                        <small>
+                            (opcional)
+                        </small>
+
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefone-doador"
+                        name="telefone-doador"
+                        placeholder="(34) 99999-9999"
+                        maxlength="30"
+                    >
+
+                </div>
+
+
+
+                <!-- QUANTIDADE -->
+
+                <div class="grupo-formulario">
+
+                    <label for="quantidade-doacao">
+                        Quantidade que deseja doar
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidade-doacao"
+                        name="quantidade-doacao"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="Quantidade"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CONFIRMAR -->
+
+                <button
+                    type="submit"
+                    class="botao-enviar"
+                >
+
+                    CONFIRMAR DOAÇÃO
+
+                </button>
+
+
+
+                <!-- MENSAGEM -->
+
+                <div
+                    id="mensagem-doacao"
+                    class="mensagem-formulario"
+                >
+                </div>
+
+
+            </form>
+
+
+        </div>
 
 
     </div>
 
 
-</div>
+
+    <!-- ==================================================
+         RODAPÉ
+    ================================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Igreja Presbiteriana
+        </p>
+
+    </footer>
 
 
 
-<!-- ==================================================
-     RODAPÉ
-================================================== -->
+    <!-- ==================================================
+         JAVASCRIPT PRINCIPAL
+    ================================================== -->
 
-<footer>
-
-    <p>
-        © 2026 Igreja Presbiteriana
-    </p>
-
-</footer>
+    <script src="script.js"></script>
 
 
 
-<!-- ==================================================
-     JAVASCRIPT PRINCIPAL
-================================================== -->
+    <!-- ==================================================
+         ABRIR ABA VINDO DA HOME
+    ================================================== -->
 
-<script src="script.js"></script>
+    <script>
 
-
-
-<!-- ==================================================
-     ABRIR A ABA CORRETA
-================================================== -->
-
-<script>
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
 
 
-        // =============================================
-        // ELEMENTOS
-        // =============================================
-
-        const botoes =
-            document.querySelectorAll(
-                ".aba-acampamento"
-            );
-
-
-        const conteudos =
-            document.querySelectorAll(
-                ".conteudo-aba"
-            );
-
-
-        // =============================================
-        // FUNÇÃO PARA ABRIR UMA ABA
-        // =============================================
-
-        function abrirAba(
-            nomeAba,
-            atualizarUrl = false
-        ) {
-
-
-            // TIRAR ATIVO DOS BOTÕES
-
-            botoes.forEach(
-                function (botao) {
-
-                    botao.classList.remove(
-                        "ativa"
+                const parametros =
+                    new URLSearchParams(
+                        window.location.search
                     );
+
+
+                const aba =
+                    parametros.get("aba");
+
+
+                if (
+                    aba !== "inscricao" &&
+                    aba !== "doacoes"
+                ) {
+
+                    return;
 
                 }
-            );
 
 
-            // ESCONDER CONTEÚDOS
+                /*
+                    O script.js já controla
+                    as abas normalmente.
 
-            conteudos.forEach(
-                function (conteudo) {
-
-                    conteudo.classList.remove(
-                        "ativo"
-                    );
-
-                }
-            );
-
-
-            // ATIVAR BOTÃO
-
-            const botaoAtivo =
-                document.querySelector(
-
-                    `.aba-acampamento[data-aba="${nomeAba}"]`
-
-                );
-
-
-            // ATIVAR CONTEÚDO
-
-            const conteudoAtivo =
-                document.querySelector(
-
-                    `[data-conteudo-aba="${nomeAba}"]`
-
-                );
-
-
-            if (botaoAtivo) {
-
-                botaoAtivo.classList.add(
-                    "ativa"
-                );
-
-            }
-
-
-            if (conteudoAtivo) {
-
-                conteudoAtivo.classList.add(
-                    "ativo"
-                );
-
-            }
-
-
-            // =========================================
-            // ATUALIZAR ENDEREÇO
-            // SEM RECARREGAR A PÁGINA
-            // =========================================
-
-            if (atualizarUrl) {
-
-                const url =
-                    new URL(
-                        window.location.href
-                    );
-
-
-                url.searchParams.set(
-                    "aba",
-                    nomeAba
-                );
-
-
-                window.history.replaceState(
-                    {},
-                    "",
-                    url
-                );
-
-            }
-
-        }
-
-
-        // =============================================
-        // CLIQUE NOS BOTÕES
-        // =============================================
-
-        botoes.forEach(
-            function (botao) {
-
-
-                botao.addEventListener(
-                    "click",
-                    function () {
-
-
-                        const aba =
-                            botao.dataset.aba;
-
-
-                        abrirAba(
-                            aba,
-                            true
-                        );
-
-                    }
-                );
-
-
-            }
-        );
-
-
-        // =============================================
-        // VER QUAL ABA VEIO DA HOME
-        // =============================================
-
-        const parametros =
-            new URLSearchParams(
-                window.location.search
-            );
-
-
-        const abaUrl =
-            parametros.get(
-                "aba"
-            );
-
-
-        // =============================================
-        // SE CLICOU EM "FAÇA UMA DOAÇÃO"
-        // =============================================
-
-        if (
-            abaUrl === "doacoes"
-        ) {
-
-
-            abrirAba(
-                "doacoes"
-            );
-
-
-            setTimeout(
-                function () {
-
-
-                    const menu =
-                        document.querySelector(
-                            ".menu-acampamento"
-                        );
-
-
-                    if (menu) {
-
-                        menu.scrollIntoView({
-
-                            behavior:
-                                "smooth",
-
-                            block:
-                                "start"
-
-                        });
-
-                    }
-
-
-                },
-                300
-            );
-
-
-        }
-
-
-        // =============================================
-        // SE CLICOU EM "INSCREVA-SE"
-        // =============================================
-
-        else {
-
-
-            abrirAba(
-                "inscricao"
-            );
-
-
-            if (
-                abaUrl === "inscricao"
-            ) {
-
+                    Aqui apenas clicamos
+                    automaticamente na aba
+                    que veio no endereço.
+                */
 
                 setTimeout(
                     function () {
+
+
+                        const botao =
+                            document.querySelector(
+
+                                `.aba-acampamento[data-aba="${aba}"]`
+
+                            );
+
+
+                        if (!botao) {
+
+                            return;
+
+                        }
+
+
+                        botao.click();
 
 
                         const menu =
@@ -892,19 +665,14 @@ document.addEventListener(
 
 
                     },
-                    300
+                    100
                 );
 
 
             }
+        );
 
-        }
-
-
-    }
-);
-
-</script>
+    </script>
 
 
 </body>
