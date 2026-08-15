@@ -51,13 +51,13 @@
     */
 
     --leader-1-image:
-        url("img/pexels-photo-37059754.avif");
-
-    --leader-2-image:
         url("img/Screenshot_1.png");
 
-    --leader-3-image:
+    --leader-2-image:
         url("img/Screenshot_3.png");
+
+    --leader-3-image:
+        url("img/");
 
     --leader-4-image:
         url("img/Screenshot_2.png");
