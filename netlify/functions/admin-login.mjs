@@ -1,103 +1,320 @@
-import {
-    senhaCorreta,
-    criarSessao,
-    origemValida
-} from "../lib/admin-auth.mjs";
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
 
-export default async (req, context) => {
+        // =====================================================
+        // ELEMENTOS
+        // =====================================================
 
-    if (req.method !== "POST") {
-
-        return Response.json(
-            {
-                erro: "Método não permitido."
-            },
-            {
-                status: 405
-            }
-        );
-    }
-
-
-    if (!origemValida(req)) {
-
-        return Response.json(
-            {
-                erro: "Origem não autorizada."
-            },
-            {
-                status: 403
-            }
-        );
-    }
-
-
-    try {
-
-        const dados =
-            await req.json();
-
-
-        const senha =
-            String(
-                dados.senha || ""
+        const botoesAbrir =
+            document.querySelectorAll(
+                "[data-admin-login]"
             );
 
 
-        if (!senhaCorreta(senha)) {
-
-            await new Promise(
-                resolve =>
-                    setTimeout(
-                        resolve,
-                        600
-                    )
+        const modal =
+            document.getElementById(
+                "modal-login-admin"
             );
 
 
-            return Response.json(
-                {
-                    erro: "Senha incorreta."
-                },
-                {
-                    status: 401
-                }
+        const fechar =
+            document.getElementById(
+                "fechar-login-admin"
             );
+
+
+        const formulario =
+            document.getElementById(
+                "form-login-admin"
+            );
+
+
+        const campoSenha =
+            document.getElementById(
+                "senha-admin"
+            );
+
+
+        if (
+            !modal ||
+            !formulario ||
+            !campoSenha
+        ) {
+
+            return;
+
         }
 
 
-        criarSessao(context);
+        // =====================================================
+        // ABRIR
+        // =====================================================
+
+        function abrirModal() {
+
+            modal.classList.add(
+                "aberto"
+            );
 
 
-        return Response.json({
-
-            sucesso: true
-
-        });
+            document.body.style.overflow =
+                "hidden";
 
 
-    } catch (erro) {
+            setTimeout(
+                function () {
 
-        console.error(erro);
+                    campoSenha.focus();
+
+                },
+                100
+            );
+
+        }
 
 
-        return Response.json(
-            {
-                erro:
-                    "Não foi possível realizar o login."
-            },
-            {
-                status: 500
+        // =====================================================
+        // FECHAR
+        // =====================================================
+
+        function fecharModal() {
+
+            modal.classList.remove(
+                "aberto"
+            );
+
+
+            document.body.style.overflow =
+                "";
+
+
+            const mensagem =
+                document.getElementById(
+                    "mensagem-login-admin"
+                );
+
+
+            if (mensagem) {
+
+                mensagem.textContent =
+                    "";
+
+            }
+
+        }
+
+
+        // =====================================================
+        // TODOS OS BOTÕES ADMIN
+        // =====================================================
+
+        botoesAbrir.forEach(
+            botao => {
+
+                botao.addEventListener(
+                    "click",
+                    abrirModal
+                );
+
             }
         );
+
+
+        // =====================================================
+        // BOTÃO X
+        // =====================================================
+
+        if (fechar) {
+
+            fechar.addEventListener(
+                "click",
+                fecharModal
+            );
+
+        }
+
+
+        // =====================================================
+        // CLIQUE FORA
+        // =====================================================
+
+        modal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    modal
+                ) {
+
+                    fecharModal();
+
+                }
+
+            }
+        );
+
+
+        // =====================================================
+        // ESC
+        // =====================================================
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                    &&
+                    modal.classList
+                    .contains(
+                        "aberto"
+                    )
+                ) {
+
+                    fecharModal();
+
+                }
+
+            }
+        );
+
+
+        // =====================================================
+        // LOGIN
+        // =====================================================
+
+        formulario.addEventListener(
+            "submit",
+            async function (
+                event
+            ) {
+
+                event.preventDefault();
+
+
+                const senha =
+                    campoSenha.value;
+
+
+                const mensagem =
+                    document.getElementById(
+                        "mensagem-login-admin"
+                    );
+
+
+                const botao =
+                    formulario
+                    .querySelector(
+                        'button[type="submit"]'
+                    );
+
+
+                if (mensagem) {
+
+                    mensagem.textContent =
+                        "";
+
+                }
+
+
+                const textoOriginal =
+                    botao.textContent;
+
+
+                botao.disabled =
+                    true;
+
+
+                botao.textContent =
+                    "ENTRANDO...";
+
+
+                try {
+
+                    const resposta =
+                        await fetch(
+                            "/api/admin/login",
+                            {
+
+                                method:
+                                    "POST",
+
+                                credentials:
+                                    "same-origin",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        {
+                                            senha
+                                        }
+                                    )
+
+                            }
+                        );
+
+
+                    const dados =
+                        await resposta.json();
+
+
+                    if (
+                        !resposta.ok
+                    ) {
+
+                        throw new Error(
+
+                            dados.erro
+                            ||
+                            "Não foi possível entrar."
+
+                        );
+
+                    }
+
+
+                    window.location.href =
+                        "admin.html";
+
+
+                } catch (erro) {
+
+                    if (mensagem) {
+
+                        mensagem.style.color =
+                            "#b00020";
+
+
+                        mensagem.textContent =
+                            erro.message;
+
+                    }
+
+
+                } finally {
+
+                    botao.disabled =
+                        false;
+
+
+                    botao.textContent =
+                        textoOriginal;
+
+                }
+
+            }
+        );
+
+
     }
-
-};
-
-
-export const config = {
-
-    path: "/api/admin/login"
-
-};
+);

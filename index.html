@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 
 <head>
 
@@ -9,88 +7,234 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="IPLF - Igreja Presbiteriana. Uma comunidade para caminhar em fé."
+    >
 
     <title>
-        Início | Igreja
+        IPLF | Igreja Presbiteriana
     </title>
+
+
+    <!-- FONTES -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- CSS EXISTENTE -->
 
     <link
         rel="stylesheet"
-        href="style.css">
+        href="style.css"
+    >
+
+
+    <!-- CSS NOVO EXCLUSIVO DA HOME -->
+
+    <link
+        rel="stylesheet"
+        href="home-modern.css"
+    >
 
 </head>
 
 
-<body>
+<body class="home-page">
 
 
-<!-- =================================
-     TOPO
-================================== -->
+<!-- ==================================================
+     TOPBAR
+================================================== -->
 
-<header class="topo">
-
-
-    <div class="logo-area">
-
-
-        <div class="logo-simbolo">
-
-            ✝
-
-        </div>
+<header
+    id="home-topbar"
+    class="home-topbar"
+>
 
 
-        <div class="logo-texto">
+    <div class="home-nav">
 
-            <h2>
-                IGREJA
-            </h2>
 
-            <span>
-                PRESBITERIANA
-            </span>
+        <!-- LOGO -->
 
-        </div>
+        <a
+            href="#inicio"
+            class="home-brand"
+            aria-label="Ir para o início"
+        >
+
+
+            <div class="home-brand-symbol">
+                ✦
+            </div>
+
+
+            <div class="home-brand-text">
+
+                <strong>
+                    IPLF
+                </strong>
+
+                <span>
+                    IGREJA PRESBITERIANA
+                </span>
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- MENU DESKTOP -->
+
+        <nav
+            class="home-menu-desktop"
+            aria-label="Menu principal"
+        >
+
+
+            <a
+                href="#inicio"
+                class="home-nav-link"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="acampamentos.html"
+                class="home-nav-link"
+            >
+                Acampamentos
+            </a>
+
+
+            <a
+                href="#comunidade"
+                class="home-nav-link"
+            >
+                A Igreja
+            </a>
+
+
+            <a
+                href="#lideranca"
+                class="home-nav-link"
+            >
+                Liderança
+            </a>
+
+
+            <a
+                href="#contato"
+                class="home-nav-link"
+            >
+                Contato
+            </a>
+
+
+            <button
+                type="button"
+                class="home-admin-button"
+                data-admin-login
+            >
+                ADMIN
+            </button>
+
+
+        </nav>
+
+
+
+        <!-- MENU CELULAR -->
+
+        <button
+            type="button"
+            id="home-menu-toggle"
+            class="home-menu-toggle"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
 
 
     </div>
 
 
 
-    <nav class="menu">
+    <!-- MENU MOBILE ABERTO -->
+
+    <div
+        id="home-mobile-menu"
+        class="home-mobile-menu"
+    >
 
 
-        <a
-            href="index.html"
-            class="ativo">
-
-            INÍCIO
-
-        </a>
+        <nav>
 
 
-        <a
-            href="acampamentos.html"
-            class="botao-acampamento">
-
-            ACAMPAMENTOS
-
-        </a>
+            <a href="#inicio">
+                Início
+            </a>
 
 
-        <button
-            type="button"
-            id="abrir-login-admin"
-            class="botao-login-admin">
-
-            ADMIN
-
-        </button>
+            <a href="acampamentos.html">
+                Acampamentos
+            </a>
 
 
-    </nav>
+            <a href="#comunidade">
+                A Igreja
+            </a>
+
+
+            <a href="#lideranca">
+                Liderança
+            </a>
+
+
+            <a href="#contato">
+                Contato
+            </a>
+
+
+            <button
+                type="button"
+                class="home-mobile-admin"
+                data-admin-login
+            >
+                ÁREA ADMINISTRATIVA
+            </button>
+
+
+        </nav>
+
+
+    </div>
 
 
 </header>
@@ -100,180 +244,85 @@
 <main>
 
 
-    <!-- =================================
-         HERO
-    ================================== -->
+<!-- ==================================================
+     HERO
+================================================== -->
 
-    <section class="hero">
-
-
-        <div class="hero-overlay">
-        </div>
-
-
-        <div class="hero-conteudo">
+<section
+    id="inicio"
+    class="home-hero"
+>
 
 
-            <span class="hero-subtitulo">
+    <div class="home-hero-overlay">
+    </div>
 
-                SEJA BEM-VINDO
+
+    <div
+        class="home-stained-glass"
+        aria-hidden="true"
+    >
+    </div>
+
+
+    <div class="home-container home-hero-container">
+
+
+        <div
+            class="home-hero-content"
+            data-reveal
+        >
+
+
+            <span class="home-eyebrow">
+
+                UMA COMUNIDADE PARA
+                CAMINHAR EM FÉ
 
             </span>
 
 
             <h1>
 
-                Igreja Presbiteriana
+                Onde a fé encontra
+                <span>uma família.</span>
 
             </h1>
 
 
             <p>
 
-                Um lugar de comunhão,
-                fé e crescimento.
+                Seja bem-vindo à IPLF.
+                Um lugar para adorar a Deus,
+                crescer na Palavra e viver
+                em comunhão.
 
             </p>
 
 
-            <a
-                href="#acampamentos-home"
-                class="botao-principal">
+            <div class="home-hero-actions">
 
-                VER ACAMPAMENTOS
 
-            </a>
+                <a
+                    href="#comunidade"
+                    class="home-primary-button"
+                >
 
+                    CONHEÇA A IPLF
 
-        </div>
+                    <span>
+                        ↘
+                    </span>
 
+                </a>
 
-    </section>
 
+                <a
+                    href="#acampamentos-home"
+                    class="home-secondary-button"
+                >
 
-
-    <!-- =================================
-         ACAMPAMENTOS
-    ================================== -->
-
-    <section
-        id="acampamentos-home"
-        class="home-acampamentos">
-
-
-        <div class="home-titulo-acampamentos">
-
-
-            <span class="titulo-pequeno">
-
-                NOSSOS EVENTOS
-
-            </span>
-
-
-            <h2>
-
-                Próximos acampamentos
-
-            </h2>
-
-
-            <p>
-
-                Confira os acampamentos
-                com inscrições abertas,
-                faça sua inscrição
-                e veja como contribuir.
-
-            </p>
-
-
-        </div>
-
-
-
-        <div
-            id="home-lista-acampamentos"
-            class="home-lista-acampamentos">
-
-
-            <div class="home-carregando">
-
-                Carregando acampamentos...
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =================================
-         COMUNIDADE
-    ================================== -->
-
-    <section class="apresentacao">
-
-
-        <span class="titulo-pequeno">
-
-            NOSSA COMUNIDADE
-
-        </span>
-
-
-        <h2>
-
-            Seja bem-vindo!
-
-        </h2>
-
-
-        <p>
-
-            Este é o nosso espaço para
-            compartilhar informações,
-            eventos e acampamentos da igreja.
-
-        </p>
-
-
-
-        <div class="cards">
-
-
-            <div class="card">
-
-
-                <div class="icone-card">
-
-                    ⛺
-
-                </div>
-
-
-                <h3>
-
-                    Acampamentos
-
-                </h3>
-
-
-                <p>
-
-                    Conheça os próximos
-                    acampamentos e eventos
-                    disponíveis.
-
-                </p>
-
-
-                <a href="acampamentos.html">
-
-                    Ver acampamentos →
+                    VER ACAMPAMENTOS
 
                 </a>
 
@@ -281,61 +330,125 @@
             </div>
 
 
+        </div>
 
-            <div class="card">
+
+    </div>
 
 
-                <div class="icone-card">
+    <div class="home-scroll-indicator">
 
-                    ♡
+        <span>
+            SCROLL
+        </span>
+
+        <div>
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     NOSSA MISSÃO
+================================================== -->
+
+<section
+    id="comunidade"
+    class="home-mission"
+>
+
+
+    <div class="home-container home-mission-grid">
+
+
+        <div
+            class="home-section-label"
+            data-reveal
+        >
+
+            <span>
+                NOSSA MISSÃO
+            </span>
+
+        </div>
+
+
+        <div
+            class="home-mission-content"
+            data-reveal
+        >
+
+
+            <span class="home-small-title">
+
+                QUEM SOMOS
+
+            </span>
+
+
+            <h2>
+
+                Cultivando vidas
+                firmadas em Cristo.
+
+            </h2>
+
+
+            <p>
+
+                Somos uma igreja comprometida
+                com o ensino das Escrituras,
+                com o amor ao próximo e com
+                uma presença transformadora
+                em nossa comunidade.
+
+            </p>
+
+
+            <div class="home-mission-points">
+
+
+                <div>
+
+                    <strong>
+                        01
+                    </strong>
+
+                    <span>
+                        Palavra
+                    </span>
 
                 </div>
 
 
-                <h3>
+                <div>
 
-                    Comunhão
+                    <strong>
+                        02
+                    </strong>
 
-                </h3>
-
-
-                <p>
-
-                    Momentos especiais
-                    para fortalecer
-                    nossa comunhão.
-
-                </p>
-
-
-            </div>
-
-
-
-            <div class="card">
-
-
-                <div class="icone-card">
-
-                    ✝
+                    <span>
+                        Comunhão
+                    </span>
 
                 </div>
 
 
-                <h3>
+                <div>
 
-                    Fé
+                    <strong>
+                        03
+                    </strong>
 
-                </h3>
+                    <span>
+                        Serviço
+                    </span>
 
-
-                <p>
-
-                    Crescendo juntos
-                    na Palavra e
-                    na presença de Deus.
-
-                </p>
+                </div>
 
 
             </div>
@@ -344,32 +457,570 @@
         </div>
 
 
-    </section>
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     ACAMPAMENTOS DINÂMICOS
+================================================== -->
+
+<section
+    id="acampamentos-home"
+    class="modern-camps-section"
+>
+
+
+    <div class="home-container">
+
+
+        <div class="modern-section-heading">
+
+
+            <div data-reveal>
+
+
+                <span class="home-small-title">
+                    PRÓXIMOS EVENTOS
+                </span>
+
+
+                <h2>
+                    Acampamentos
+                </h2>
+
+
+            </div>
+
+
+            <div
+                class="modern-section-heading-right"
+                data-reveal
+            >
+
+
+                <p>
+
+                    Confira os acampamentos
+                    com inscrições abertas,
+                    faça sua inscrição e veja
+                    como você pode contribuir.
+
+                </p>
+
+
+                <a href="acampamentos.html">
+
+                    VER TODOS
+                    <span>→</span>
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- CONTEÚDO VEM DO BANCO -->
+
+        <div
+            id="home-lista-acampamentos"
+            class="modern-camps-grid"
+        >
+
+
+            <div class="modern-loading">
+
+                <div class="modern-loading-spinner">
+                </div>
+
+                <span>
+                    Carregando acampamentos...
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     FRASE
+================================================== -->
+
+<section class="home-quote-section">
+
+
+    <div
+        class="home-container"
+        data-reveal
+    >
+
+
+        <span class="home-quote-mark">
+            “
+        </span>
+
+
+        <blockquote>
+
+            Uma igreja que cresce na Palavra,
+            vive em comunhão e serve com amor.
+
+        </blockquote>
+
+
+        <p>
+            IPLF • IGREJA PRESBITERIANA
+        </p>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     LIDERANÇA
+================================================== -->
+
+<section
+    id="lideranca"
+    class="home-leadership"
+>
+
+
+    <div class="home-container">
+
+
+        <div class="modern-section-heading">
+
+
+            <div data-reveal>
+
+
+                <span class="home-small-title">
+                    PESSOAS QUE SERVEM
+                </span>
+
+
+                <h2>
+                    Nossa Liderança
+                </h2>
+
+
+            </div>
+
+
+            <p
+                class="leadership-introduction"
+                data-reveal
+            >
+
+                Conheça os líderes que caminham
+                com a IPLF no cuidado, ensino
+                e serviço à nossa igreja.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="leadership-grid">
+
+
+            <!-- ======================================
+                 LÍDER 1
+                 TROQUE A FOTO NO home-modern.css
+            ======================================= -->
+
+            <article
+                class="leader-card"
+                data-reveal
+            >
+
+
+                <div
+                    class="leader-photo leader-photo-1"
+                >
+                </div>
+
+
+                <div class="leader-content">
+
+
+                    <span>
+                        PASTOR TITULAR
+                    </span>
+
+
+                    <h3>
+                        Pr. Nome do Pastor
+                    </h3>
+
+
+                    <p>
+
+                        Dedicado ao ensino da Palavra
+                        e ao cuidado de pessoas.
+
+                    </p>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- LÍDER 2 -->
+
+            <article
+                class="leader-card"
+                data-reveal
+            >
+
+
+                <div
+                    class="leader-photo leader-photo-2"
+                >
+                </div>
+
+
+                <div class="leader-content">
+
+
+                    <span>
+                        PASTOR AUXILIAR
+                    </span>
+
+
+                    <h3>
+                        Pr. Nome do Pastor
+                    </h3>
+
+
+                    <p>
+
+                        Servindo com alegria
+                        no discipulado e na comunhão.
+
+                    </p>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- LÍDER 3 -->
+
+            <article
+                class="leader-card"
+                data-reveal
+            >
+
+
+                <div
+                    class="leader-photo leader-photo-3"
+                >
+                </div>
+
+
+                <div class="leader-content">
+
+
+                    <span>
+                        PRESBÍTERO
+                    </span>
+
+
+                    <h3>
+                        Presb. Nome
+                    </h3>
+
+
+                    <p>
+
+                        Cuidando da vida comunitária
+                        com dedicação e zelo.
+
+                    </p>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- LÍDER 4 -->
+
+            <article
+                class="leader-card"
+                data-reveal
+            >
+
+
+                <div
+                    class="leader-photo leader-photo-4"
+                >
+                </div>
+
+
+                <div class="leader-content">
+
+
+                    <span>
+                        PRESBÍTERO
+                    </span>
+
+
+                    <h3>
+                        Presb. Nome
+                    </h3>
+
+
+                    <p>
+
+                        Servindo à igreja
+                        com sabedoria, fé e generosidade.
+
+                    </p>
+
+
+                </div>
+
+
+            </article>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     CONTATO
+================================================== -->
+
+<section
+    id="contato"
+    class="home-contact"
+>
+
+
+    <div class="home-container home-contact-grid">
+
+
+        <div data-reveal>
+
+
+            <span class="home-small-title home-small-light">
+                VENHA NOS CONHECER
+            </span>
+
+
+            <h2>
+
+                Há um lugar
+                para você aqui.
+
+            </h2>
+
+
+        </div>
+
+
+        <div
+            class="home-contact-content"
+            data-reveal
+        >
+
+
+            <p>
+
+                Será uma alegria receber você
+                em nossa comunidade.
+                Acompanhe nossa programação
+                e participe conosco.
+
+            </p>
+
+
+            <div class="home-contact-actions">
+
+
+                <a
+                    href="acampamentos.html"
+                    class="home-contact-primary"
+                >
+
+                    VER ACAMPAMENTOS
+                    <span>→</span>
+
+                </a>
+
+
+                <!--
+                    DEPOIS VOCÊ PODE TROCAR O #
+                    PELO LINK DO INSTAGRAM/WHATSAPP
+                -->
+
+                <a
+                    href="#"
+                    class="home-contact-secondary"
+                >
+
+                    FALE CONOSCO
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
 
 
 </main>
 
 
 
-<footer>
+<!-- ==================================================
+     RODAPÉ
+================================================== -->
 
-    <p>
+<footer class="home-footer">
 
-        © 2026 Igreja Presbiteriana
 
-    </p>
+    <div class="home-container home-footer-grid">
+
+
+        <div>
+
+
+            <div class="home-footer-brand">
+
+                <div>
+                    ✦
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        IPLF
+                    </strong>
+
+                    <span>
+                        IGREJA PRESBITERIANA
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <p>
+
+                Uma comunidade para
+                caminhar em fé.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="home-footer-links">
+
+
+            <a href="#inicio">
+                Início
+            </a>
+
+
+            <a href="acampamentos.html">
+                Acampamentos
+            </a>
+
+
+            <a href="#comunidade">
+                A Igreja
+            </a>
+
+
+            <a href="#lideranca">
+                Liderança
+            </a>
+
+
+        </div>
+
+
+
+        <div class="home-footer-copy">
+
+            <p>
+                © 2026 IPLF
+            </p>
+
+            <span>
+                Igreja Presbiteriana
+            </span>
+
+        </div>
+
+
+    </div>
+
 
 </footer>
 
 
 
-<!-- =================================
-     LOGIN ADMIN
-================================== -->
+<!-- ==================================================
+     MODAL ADMIN
+================================================== -->
 
 <div
     id="modal-login-admin"
-    class="modal-login-admin">
+    class="modal-login-admin"
+>
 
 
     <div class="login-admin-box">
@@ -378,31 +1029,24 @@
         <button
             type="button"
             id="fechar-login-admin"
-            class="fechar-login-admin">
-
+            class="fechar-login-admin"
+        >
             ×
-
         </button>
 
 
         <div class="icone-login-admin">
-
-            🔐
-
+            ✦
         </div>
 
 
         <span class="login-admin-subtitulo">
-
             ÁREA RESTRITA
-
         </span>
 
 
         <h2>
-
             Acesso Administrativo
-
         </h2>
 
 
@@ -414,7 +1058,6 @@
         </p>
 
 
-
         <form id="form-login-admin">
 
 
@@ -422,9 +1065,7 @@
 
 
                 <label for="senha-admin">
-
                     Senha
-
                 </label>
 
 
@@ -433,7 +1074,8 @@
                     id="senha-admin"
                     placeholder="Digite a senha"
                     autocomplete="current-password"
-                    required>
+                    required
+                >
 
 
             </div>
@@ -441,16 +1083,16 @@
 
             <button
                 type="submit"
-                class="botao-enviar">
-
+                class="botao-enviar"
+            >
                 ENTRAR
-
             </button>
 
 
             <div
                 id="mensagem-login-admin"
-                class="mensagem-formulario">
+                class="mensagem-formulario"
+            >
             </div>
 
 
@@ -463,8 +1105,6 @@
 </div>
 
 
-
-<script src="script.js"></script>
 
 <script src="admin-login.js"></script>
 
