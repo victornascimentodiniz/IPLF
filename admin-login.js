@@ -2,9 +2,14 @@ document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-        const botaoAbrir =
-            document.getElementById(
-                "abrir-login-admin"
+        // ==========================================
+        // BOTÕES ADMIN
+        // Funciona no computador e no celular
+        // ==========================================
+
+        const botoesAbrir =
+            document.querySelectorAll(
+                "[data-admin-login]"
             );
 
 
@@ -26,33 +31,124 @@ document.addEventListener(
             );
 
 
+        const campoSenha =
+            document.getElementById(
+                "senha-admin"
+            );
+
+
+        const mensagem =
+            document.getElementById(
+                "mensagem-login-admin"
+            );
+
+
+        // ==========================================
+        // VERIFICAR ELEMENTOS
+        // ==========================================
+
         if (
-            !botaoAbrir ||
             !modal ||
-            !formulario
+            !formulario ||
+            !campoSenha
         ) {
+
+            console.error(
+                "Elementos do login administrativo não encontrados."
+            );
+
             return;
+
         }
 
 
-        botaoAbrir.addEventListener(
-            "click",
-            function () {
+        // ==========================================
+        // ABRIR MODAL
+        // ==========================================
 
-                modal.classList.add(
-                    "aberto"
+        function abrirModalAdmin() {
+
+            modal.classList.add(
+                "aberto"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            if (mensagem) {
+
+                mensagem.textContent =
+                    "";
+
+            }
+
+
+            setTimeout(
+                function () {
+
+                    campoSenha.focus();
+
+                },
+                100
+            );
+
+        }
+
+
+        // ==========================================
+        // FECHAR MODAL
+        // ==========================================
+
+        function fecharModalAdmin() {
+
+            modal.classList.remove(
+                "aberto"
+            );
+
+
+            document.body.style.overflow =
+                "";
+
+
+            campoSenha.value =
+                "";
+
+
+            if (mensagem) {
+
+                mensagem.textContent =
+                    "";
+
+            }
+
+        }
+
+
+        // ==========================================
+        // BOTÕES ADMIN
+        // ==========================================
+
+        botoesAbrir.forEach(
+            function (botao) {
+
+                botao.addEventListener(
+                    "click",
+                    function () {
+
+                        abrirModalAdmin();
+
+                    }
                 );
-
-
-                document
-                .getElementById(
-                    "senha-admin"
-                )
-                .focus();
 
             }
         );
 
+
+        // ==========================================
+        // BOTÃO X
+        // ==========================================
 
         if (fechar) {
 
@@ -60,9 +156,7 @@ document.addEventListener(
                 "click",
                 function () {
 
-                    modal.classList.remove(
-                        "aberto"
-                    );
+                    fecharModalAdmin();
 
                 }
             );
@@ -70,21 +164,52 @@ document.addEventListener(
         }
 
 
+        // ==========================================
+        // CLICAR FORA DA CAIXA
+        // ==========================================
+
         modal.addEventListener(
             "click",
             function (event) {
 
-                if (event.target === modal) {
+                if (
+                    event.target === modal
+                ) {
 
-                    modal.classList.remove(
-                        "aberto"
-                    );
+                    fecharModalAdmin();
 
                 }
 
             }
         );
 
+
+        // ==========================================
+        // TECLA ESC
+        // ==========================================
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains(
+                        "aberto"
+                    )
+                ) {
+
+                    fecharModalAdmin();
+
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // ENVIAR LOGIN
+        // ==========================================
 
         formulario.addEventListener(
             "submit",
@@ -94,31 +219,50 @@ document.addEventListener(
 
 
                 const senha =
-                    document
-                    .getElementById(
-                        "senha-admin"
-                    )
-                    .value;
+                    campoSenha.value.trim();
 
 
-                const mensagem =
-                    document.getElementById(
-                        "mensagem-login-admin"
-                    );
-
-
-                const botao =
+                const botaoEntrar =
                     formulario.querySelector(
                         'button[type="submit"]'
                     );
 
 
-                mensagem.textContent = "";
+                if (!senha) {
 
-                botao.disabled = true;
+                    if (mensagem) {
 
-                botao.textContent =
+                        mensagem.style.color =
+                            "#b00020";
+
+                        mensagem.textContent =
+                            "Digite a senha.";
+
+                    }
+
+                    return;
+
+                }
+
+
+                const textoOriginal =
+                    botaoEntrar.textContent;
+
+
+                botaoEntrar.disabled =
+                    true;
+
+
+                botaoEntrar.textContent =
                     "ENTRANDO...";
+
+
+                if (mensagem) {
+
+                    mensagem.textContent =
+                        "";
+
+                }
 
 
                 try {
@@ -128,27 +272,43 @@ document.addEventListener(
                             "/api/admin/login",
                             {
 
-                                method: "POST",
+                                method:
+                                    "POST",
 
                                 credentials:
                                     "same-origin",
 
                                 headers: {
+
                                     "Content-Type":
                                         "application/json"
+
                                 },
 
                                 body:
-                                    JSON.stringify({
-                                        senha
-                                    })
+                                    JSON.stringify(
+                                        {
+                                            senha
+                                        }
+                                    )
 
                             }
                         );
 
 
-                    const dados =
-                        await resposta.json();
+                    let dados;
+
+
+                    try {
+
+                        dados =
+                            await resposta.json();
+
+                    } catch {
+
+                        dados = {};
+
+                    }
 
 
                     if (!resposta.ok) {
@@ -161,25 +321,42 @@ document.addEventListener(
                     }
 
 
+                    // ==================================
+                    // LOGIN CORRETO
+                    // ==================================
+
                     window.location.href =
                         "admin.html";
 
 
                 } catch (erro) {
 
-                    mensagem.style.color =
-                        "#b00020";
+                    console.error(
+                        "Erro no login:",
+                        erro
+                    );
 
-                    mensagem.textContent =
-                        erro.message;
+
+                    if (mensagem) {
+
+                        mensagem.style.color =
+                            "#b00020";
+
+
+                        mensagem.textContent =
+                            erro.message;
+
+                    }
 
 
                 } finally {
 
-                    botao.disabled = false;
+                    botaoEntrar.disabled =
+                        false;
 
-                    botao.textContent =
-                        "ENTRAR";
+
+                    botaoEntrar.textContent =
+                        textoOriginal;
 
                 }
 
