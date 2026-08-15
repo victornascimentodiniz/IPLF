@@ -1,8 +1,448 @@
+// =====================================================
+// IPLF - HOME MODERNA
+// =====================================================
+
+
 document.addEventListener(
     "DOMContentLoaded",
-    carregarAcampamentosHome
+    function () {
+
+        configurarTopbar();
+
+        configurarMenuMobile();
+
+        configurarAnimacoes();
+
+        configurarLinksInternos();
+
+        carregarAcampamentosHome();
+
+    }
 );
 
+
+// =====================================================
+// TOPBAR AO ROLAR A TELA
+// =====================================================
+
+function configurarTopbar() {
+
+    const topbar =
+        document.getElementById(
+            "home-topbar"
+        );
+
+
+    if (!topbar) {
+        return;
+    }
+
+
+    function atualizar() {
+
+        if (
+            window.scrollY > 30
+        ) {
+
+            topbar.classList.add(
+                "is-scrolled"
+            );
+
+        } else {
+
+            topbar.classList.remove(
+                "is-scrolled"
+            );
+
+        }
+
+    }
+
+
+    atualizar();
+
+
+    window.addEventListener(
+        "scroll",
+        atualizar,
+        {
+            passive: true
+        }
+    );
+
+}
+
+
+// =====================================================
+// MENU CELULAR
+// =====================================================
+
+function configurarMenuMobile() {
+
+    const botao =
+        document.getElementById(
+            "home-menu-toggle"
+        );
+
+
+    const menu =
+        document.getElementById(
+            "home-mobile-menu"
+        );
+
+
+    if (
+        !botao ||
+        !menu
+    ) {
+        return;
+    }
+
+
+    function fecharMenu() {
+
+        menu.classList.remove(
+            "is-open"
+        );
+
+
+        botao.classList.remove(
+            "is-open"
+        );
+
+
+        botao.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+
+        botao.setAttribute(
+            "aria-label",
+            "Abrir menu"
+        );
+
+    }
+
+
+    botao.addEventListener(
+        "click",
+        function () {
+
+            const aberto =
+                menu.classList
+                .contains(
+                    "is-open"
+                );
+
+
+            if (aberto) {
+
+                fecharMenu();
+
+            } else {
+
+                menu.classList.add(
+                    "is-open"
+                );
+
+
+                botao.classList.add(
+                    "is-open"
+                );
+
+
+                botao.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+
+                botao.setAttribute(
+                    "aria-label",
+                    "Fechar menu"
+                );
+
+            }
+
+        }
+    );
+
+
+    menu
+        .querySelectorAll(
+            "a"
+        )
+        .forEach(
+            link => {
+
+                link.addEventListener(
+                    "click",
+                    fecharMenu
+                );
+
+            }
+        );
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (
+                window.innerWidth >
+                1050
+            ) {
+
+                fecharMenu();
+
+            }
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// SCROLL SUAVE NOS LINKS INTERNOS
+// =====================================================
+
+function configurarLinksInternos() {
+
+    document
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
+        .forEach(
+            link => {
+
+                const destino =
+                    link.getAttribute(
+                        "href"
+                    );
+
+
+                if (
+                    !destino ||
+                    destino === "#"
+                ) {
+                    return;
+                }
+
+
+                link.addEventListener(
+                    "click",
+                    function (event) {
+
+                        const elemento =
+                            document
+                                .querySelector(
+                                    destino
+                                );
+
+
+                        if (!elemento) {
+                            return;
+                        }
+
+
+                        event.preventDefault();
+
+
+                        const topbar =
+                            document
+                                .getElementById(
+                                    "home-topbar"
+                                );
+
+
+                        const altura =
+                            topbar
+                                ?.offsetHeight ||
+                            0;
+
+
+                        const posicao =
+                            elemento
+                                .getBoundingClientRect()
+                                .top
+                            +
+                            window.scrollY
+                            -
+                            altura;
+
+
+                        window.scrollTo({
+
+                            top:
+                                posicao,
+
+                            behavior:
+                                "smooth"
+
+                        });
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+// =====================================================
+// ANIMAÇÕES AO ENTRAR NA TELA
+// =====================================================
+
+function configurarAnimacoes() {
+
+    const elementos =
+        document.querySelectorAll(
+            "[data-reveal]"
+        );
+
+
+    if (!elementos.length) {
+        return;
+    }
+
+
+    const reduzirMovimento =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    if (reduzirMovimento) {
+
+        elementos.forEach(
+            elemento => {
+
+                elemento.classList.add(
+                    "is-visible"
+                );
+
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    // =================================================
+    // COMPATIBILIDADE COM NAVEGADORES MAIS ANTIGOS
+    // =================================================
+
+    if (
+        !("IntersectionObserver" in window)
+    ) {
+
+        elementos.forEach(
+            elemento => {
+
+                elemento.classList.add(
+                    "is-visible"
+                );
+
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    const observador =
+        new IntersectionObserver(
+
+            entradas => {
+
+                entradas.forEach(
+                    entrada => {
+
+                        if (
+                            entrada.isIntersecting
+                        ) {
+
+                            entrada
+                                .target
+                                .classList
+                                .add(
+                                    "is-visible"
+                                );
+
+
+                            observador
+                                .unobserve(
+                                    entrada.target
+                                );
+
+                        }
+
+                    }
+                );
+
+            },
+
+            {
+
+                threshold:
+                    0.08,
+
+                rootMargin:
+                    "0px 0px -30px 0px"
+
+            }
+
+        );
+
+
+    elementos.forEach(
+        elemento => {
+
+            observador.observe(
+                elemento
+            );
+
+        }
+    );
+
+
+    // =================================================
+    // GARANTIR QUE O TEXTO DA FOTO PRINCIPAL APAREÇA
+    // =================================================
+
+    const hero =
+        document.querySelector(
+            ".home-hero-content[data-reveal]"
+        );
+
+
+    if (hero) {
+
+        requestAnimationFrame(
+            function () {
+
+                hero.classList.add(
+                    "is-visible"
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+// =====================================================
+// CARREGAR ACAMPAMENTOS
+// =====================================================
 
 async function carregarAcampamentosHome() {
 
@@ -33,7 +473,7 @@ async function carregarAcampamentosHome() {
 
             throw new Error(
                 dados.erro ||
-                "Erro ao carregar acampamentos."
+                "Não foi possível carregar os acampamentos."
             );
 
         }
@@ -43,28 +483,45 @@ async function carregarAcampamentosHome() {
             Array.isArray(
                 dados.acampamentos
             )
-            ? dados.acampamentos
-            : [];
+                ? dados.acampamentos
+                : [];
 
 
-        if (!acampamentos.length) {
+        // =================================================
+        // NENHUM ACAMPAMENTO
+        // =================================================
+
+        if (
+            acampamentos.length === 0
+        ) {
 
             area.innerHTML = `
 
-                <div class="home-sem-acampamento">
+                <div class="modern-empty">
 
-                    <div class="home-sem-acampamento-icone">
-                        ⛺
-                    </div>
+                    <span
+                        style="
+                            font-family: Fraunces, serif;
+                            font-size: 55px;
+                            color: #d4b56c;
+                        "
+                    >
+                        ✦
+                    </span>
 
-                    <h3>
+                    <strong
+                        style="
+                            color:#06231c;
+                            font-size:18px;
+                        "
+                    >
                         Nenhum acampamento disponível
-                    </h3>
+                    </strong>
 
-                    <p>
-                        No momento não temos
+                    <span>
+                        No momento não existem
                         inscrições abertas.
-                    </p>
+                    </span>
 
                 </div>
 
@@ -76,29 +533,87 @@ async function carregarAcampamentosHome() {
         }
 
 
+        // =================================================
+        // MOSTRAR ACAMPAMENTOS
+        // =================================================
+
         area.innerHTML =
             acampamentos
-            .map(
-                criarCardAcampamento
+                .map(
+                    criarCardAcampamento
+                )
+                .join("");
+
+
+        // =================================================
+        // ANIMAÇÃO DOS CARDS
+        // =================================================
+
+        area
+            .querySelectorAll(
+                ".modern-camp-card"
             )
-            .join("");
+            .forEach(
+                (card, indice) => {
+
+                    card.style.opacity =
+                        "0";
+
+
+                    card.style.transform =
+                        "translateY(25px)";
+
+
+                    setTimeout(
+                        function () {
+
+                            card.style.transition =
+                                "opacity .6s ease, transform .6s ease, box-shadow .3s ease";
+
+
+                            card.style.opacity =
+                                "1";
+
+
+                            card.style.transform =
+                                "translateY(0)";
+
+                        },
+
+                        100 +
+                        indice * 120
+
+                    );
+
+                }
+            );
 
 
     } catch (erro) {
 
         console.error(
+            "Erro Home:",
             erro
         );
 
 
         area.innerHTML = `
 
-            <div class="home-sem-acampamento">
+            <div class="modern-empty">
 
-                <p>
+                <strong
+                    style="
+                        color:#06231c;
+                        font-size:18px;
+                    "
+                >
                     Não foi possível carregar
-                    os acampamentos no momento.
-                </p>
+                    os acampamentos
+                </strong>
+
+                <span>
+                    Tente novamente em alguns instantes.
+                </span>
 
             </div>
 
@@ -109,6 +624,9 @@ async function carregarAcampamentosHome() {
 }
 
 
+// =====================================================
+// CRIAR CARD DO ACAMPAMENTO
+// =====================================================
 
 function criarCardAcampamento(
     acampamento
@@ -116,32 +634,42 @@ function criarCardAcampamento(
 
     const id =
         String(
-            acampamento.id || ""
+            acampamento.id ||
+            ""
         ).trim();
 
 
     const nome =
         escaparHtml(
-            acampamento.nome
+            acampamento.nome ||
+            "Acampamento"
         );
 
 
     const descricao =
         escaparHtml(
-            acampamento.descricao || ""
+            acampamento.descricao ||
+            ""
         );
 
 
     const local =
         escaparHtml(
-            acampamento.local || ""
+            acampamento.local ||
+            "Local a definir"
         );
 
 
-    let imagemHtml;
+    // =================================================
+    // FOTO
+    // =================================================
+
+    let fotoHtml;
 
 
-    if (acampamento.foto_key) {
+    if (
+        acampamento.foto_key
+    ) {
 
         const fotoUrl =
 
@@ -150,21 +678,22 @@ function criarCardAcampamento(
             )}`;
 
 
-        imagemHtml = `
+        fotoHtml = `
 
             <img
                 src="${fotoUrl}"
-                alt="Foto de ${nome}"
-                loading="lazy">
+                alt="Foto do ${nome}"
+                loading="lazy"
+            >
 
         `;
 
     } else {
 
-        imagemHtml = `
+        fotoHtml = `
 
-            <div class="home-acampamento-sem-foto">
-                ⛺
+            <div class="modern-camp-no-photo">
+                ✦
             </div>
 
         `;
@@ -172,19 +701,25 @@ function criarCardAcampamento(
     }
 
 
-    let valoresHtml = "";
+    // =================================================
+    // VALORES
+    // =================================================
+
+    const valores = [];
 
 
     if (
-        acampamento.valor_completo !== null
+        temValor(
+            acampamento.valor_completo
+        )
     ) {
 
-        valoresHtml += `
+        valores.push(`
 
-            <div class="home-valor-item">
+            <div class="modern-price">
 
                 <span>
-                    Valor completo
+                    Pacote completo
                 </span>
 
                 <strong>
@@ -197,18 +732,20 @@ function criarCardAcampamento(
 
             </div>
 
-        `;
+        `);
 
     }
 
 
     if (
-        acampamento.valor_diaria !== null
+        temValor(
+            acampamento.valor_diaria
+        )
     ) {
 
-        valoresHtml += `
+        valores.push(`
 
-            <div class="home-valor-item">
+            <div class="modern-price">
 
                 <span>
                     Diária
@@ -224,40 +761,49 @@ function criarCardAcampamento(
 
             </div>
 
-        `;
+        `);
 
     }
 
 
     if (
-        acampamento.valor_crianca !== null
+        temValor(
+            acampamento.valor_crianca
+        )
     ) {
 
-        let textoCrianca =
+        let tituloCrianca =
             "Criança";
 
 
         if (
-            acampamento.idade_max_crianca !==
+            acampamento
+                .idade_max_crianca !==
             null
+            &&
+            acampamento
+                .idade_max_crianca !==
+            undefined
         ) {
 
-            textoCrianca =
+            tituloCrianca =
 
-                `Crianças até ${
-                    acampamento
-                    .idade_max_crianca
+                `Criança até ${
+                    Number(
+                        acampamento
+                            .idade_max_crianca
+                    )
                 } anos`;
 
         }
 
 
-        valoresHtml += `
+        valores.push(`
 
-            <div class="home-valor-item">
+            <div class="modern-price">
 
                 <span>
-                    ${textoCrianca}
+                    ${tituloCrianca}
                 </span>
 
                 <strong>
@@ -270,37 +816,43 @@ function criarCardAcampamento(
 
             </div>
 
-        `;
+        `);
 
     }
 
 
+    // =================================================
+    // CARD
+    // =================================================
+
     return `
 
-        <article
-            class="home-card-acampamento">
+        <article class="modern-camp-card">
 
 
-            <div class="home-foto-acampamento">
-
-                ${imagemHtml}
+            <div class="modern-camp-photo">
 
 
-                <span class="home-status-acampamento">
+                ${fotoHtml}
+
+
+                <div class="modern-camp-status">
 
                     INSCRIÇÕES ABERTAS
 
-                </span>
+                </div>
+
 
             </div>
 
 
-            <div class="home-conteudo-acampamento">
+
+            <div class="modern-camp-content">
 
 
-                <span class="titulo-pequeno">
+                <span class="modern-camp-label">
 
-                    ACAMPAMENTO
+                    ACAMPAMENTO IPLF
 
                 </span>
 
@@ -314,50 +866,51 @@ function criarCardAcampamento(
 
                 ${
                     descricao
-                        ? `
-                            <p class="home-descricao-acampamento">
-                                ${descricao}
-                            </p>
-                        `
-                        : ""
+
+                    ? `
+
+                        <p class="modern-camp-description">
+
+                            ${descricao}
+
+                        </p>
+
+                    `
+
+                    : ""
                 }
 
 
-                <div class="home-informacoes-acampamento">
+                <div class="modern-camp-meta">
 
 
                     <div>
 
-                        <span>
-                            📅
+                        <span class="modern-camp-meta-icon">
+                            ◷
                         </span>
 
-                        <p>
+                        <span>
 
-                            ${formatarData(
-                                acampamento.data_inicio
-                            )}
-
-                            até
-
-                            ${formatarData(
+                            ${formatarPeriodo(
+                                acampamento.data_inicio,
                                 acampamento.data_fim
                             )}
 
-                        </p>
+                        </span>
 
                     </div>
 
 
                     <div>
 
-                        <span>
-                            📍
+                        <span class="modern-camp-meta-icon">
+                            ◆
                         </span>
 
-                        <p>
+                        <span>
                             ${local}
-                        </p>
+                        </span>
 
                     </div>
 
@@ -366,13 +919,13 @@ function criarCardAcampamento(
 
 
                 ${
-                    valoresHtml
+                    valores.length
 
                     ? `
 
-                        <div class="home-valores-acampamento">
+                        <div class="modern-camp-values">
 
-                            ${valoresHtml}
+                            ${valores.join("")}
 
                         </div>
 
@@ -382,12 +935,13 @@ function criarCardAcampamento(
                 }
 
 
-                <div class="home-botoes-acampamento">
+                <div class="modern-camp-actions">
 
 
                     <a
                         href="acampamento.html?id=${encodeURIComponent(id)}&aba=inscricao"
-                        class="home-botao-inscricao">
+                        class="modern-camp-register"
+                    >
 
                         INSCREVA-SE
 
@@ -396,7 +950,8 @@ function criarCardAcampamento(
 
                     <a
                         href="acampamento.html?id=${encodeURIComponent(id)}&aba=doacoes"
-                        class="home-botao-doacao">
+                        class="modern-camp-donate"
+                    >
 
                         FAÇA UMA DOAÇÃO
 
@@ -416,23 +971,61 @@ function criarCardAcampamento(
 }
 
 
+// =====================================================
+// VERIFICAR VALOR
+// =====================================================
+
+function temValor(
+    valor
+) {
+
+    return (
+
+        valor !== null
+        &&
+        valor !== undefined
+        &&
+        valor !== ""
+        &&
+        Number.isFinite(
+            Number(valor)
+        )
+
+    );
+
+}
+
+
+// =====================================================
+// FORMATAR DINHEIRO
+// =====================================================
 
 function formatarDinheiro(
     valor
 ) {
 
-    return Number(valor)
+    return Number(
+        valor
+    )
         .toLocaleString(
             "pt-BR",
             {
-                style: "currency",
-                currency: "BRL"
+
+                style:
+                    "currency",
+
+                currency:
+                    "BRL"
+
             }
         );
 
 }
 
 
+// =====================================================
+// FORMATAR DATA
+// =====================================================
 
 function formatarData(
     data
@@ -443,62 +1036,129 @@ function formatarData(
     }
 
 
-    const partes =
+    const texto =
         String(data)
-        .substring(0, 10)
-        .split("-");
+            .substring(
+                0,
+                10
+            );
 
 
-    if (partes.length !== 3) {
+    const partes =
+        texto.split("-");
 
-        return data;
+
+    if (
+        partes.length !== 3
+    ) {
+
+        return texto;
 
     }
 
 
     return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
+
+        partes[2]
+        +
+        "/"
+        +
+        partes[1]
+        +
+        "/"
+        +
         partes[0]
+
     );
 
 }
 
 
+// =====================================================
+// FORMATAR PERÍODO
+// =====================================================
+
+function formatarPeriodo(
+    inicio,
+    fim
+) {
+
+    if (
+        !inicio &&
+        !fim
+    ) {
+
+        return "Data a definir";
+
+    }
+
+
+    if (
+        inicio &&
+        fim
+    ) {
+
+        return (
+
+            formatarData(
+                inicio
+            )
+            +
+            " — "
+            +
+            formatarData(
+                fim
+            )
+
+        );
+
+    }
+
+
+    return formatarData(
+        inicio ||
+        fim
+    );
+
+}
+
+
+// =====================================================
+// ESCAPAR HTML
+// =====================================================
 
 function escaparHtml(
     valor
 ) {
 
     return String(
-        valor ?? ""
+        valor ??
+        ""
     )
 
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
