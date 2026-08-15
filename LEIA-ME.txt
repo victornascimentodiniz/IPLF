@@ -1,0 +1,27 @@
+IPLF - pacote visual moderno
+
+Substitua/crie estes arquivos na raiz do projeto:
+- admin.html
+- admin-modern.css
+- internal-modern.css
+- internal-nav.js
+- acampamento.html
+- acampamentos.html
+- acampamentos.js
+- script.js
+
+Substitua:
+- netlify/functions/acampamento.mjs
+
+Mantenha os arquivos já existentes:
+- home-modern.css
+- home.js
+- admin.js
+- admin-login.js
+- style.css (pode permanecer, mas estas novas telas não dependem dele)
+- demais Netlify Functions
+
+Depois execute:
+git add .
+git commit -m "Aplicar design profissional nas telas internas"
+git push

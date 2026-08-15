@@ -1,0 +1,932 @@
+/* =========================================================
+   IPLF - PÁGINAS PÚBLICAS INTERNAS
+========================================================= */
+
+:root {
+    --internal-forest: #0b3027;
+    --internal-forest-deep: #06231c;
+    --internal-gold: #d4b56c;
+    --internal-gold-light: #ead497;
+    --internal-cream: #f7f4eb;
+    --internal-mist: #eef2ef;
+    --internal-white: #ffffff;
+    --internal-text: #173b31;
+    --internal-muted: #64766f;
+    --internal-line: #dde5e0;
+    --internal-danger: #a64039;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.internal-public-page {
+    margin: 0;
+    overflow-x: hidden;
+    background: #f4f6f3;
+    color: var(--internal-text);
+    font-family: "DM Sans", sans-serif;
+}
+
+.internal-public-page button,
+.internal-public-page input,
+.internal-public-page textarea,
+.internal-public-page select {
+    font: inherit;
+}
+
+.internal-container {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.internal-public-page .home-topbar {
+    background: rgba(6, 35, 28, .95);
+}
+
+
+/* HERO DETALHE */
+
+.camp-detail-hero {
+    position: relative;
+    min-height: 570px;
+    padding-top: 82px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--internal-forest-deep);
+}
+
+.camp-hero-image {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 78% 25%, rgba(212,181,108,.16), transparent 27%),
+        linear-gradient(130deg, #0b382d, #061e18);
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.025);
+}
+
+.camp-detail-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(4, 28, 22, .98) 0%,
+            rgba(4, 28, 22, .90) 38%,
+            rgba(4, 28, 22, .56) 70%,
+            rgba(4, 28, 22, .34) 100%);
+}
+
+.camp-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    padding-top: 90px;
+    padding-bottom: 62px;
+    color: white;
+}
+
+.camp-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--internal-gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .22em;
+}
+
+.camp-hero-eyebrow::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--internal-gold);
+}
+
+.camp-detail-hero h1 {
+    margin: 16px 0 14px;
+    color: white;
+    font-family: "Fraunces", serif;
+    font-size: clamp(45px, 6vw, 72px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -.035em;
+}
+
+.camp-hero-description {
+    max-width: 680px;
+    margin: 0;
+    color: rgba(255,255,255,.78);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.camp-hero-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.camp-hero-meta > div {
+    min-width: 190px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(8px);
+}
+
+.camp-hero-meta span {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--internal-gold);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.camp-hero-meta strong {
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* VALORES */
+
+.camp-values-strip {
+    position: relative;
+    z-index: 3;
+    margin-top: -1px;
+    background: var(--internal-gold);
+}
+
+.camp-values-grid {
+    min-height: 92px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.camp-public-price {
+    padding: 20px 28px;
+    border-right: 1px solid rgba(6,35,28,.16);
+}
+
+.camp-public-price:last-child {
+    border-right: 0;
+}
+
+.camp-public-price span {
+    display: block;
+    margin-bottom: 5px;
+    color: #305145;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.camp-public-price strong {
+    color: var(--internal-forest-deep);
+    font-family: "Fraunces", serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+/* ABAS */
+
+.camp-tabs-wrap {
+    position: sticky;
+    top: 72px;
+    z-index: 200;
+    background: rgba(247, 244, 235, .96);
+    border-bottom: 1px solid var(--internal-line);
+    backdrop-filter: blur(12px);
+}
+
+.menu-acampamento {
+    width: min(1180px, calc(100% - 48px));
+    min-height: 76px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.aba-acampamento {
+    position: relative;
+    min-height: 48px;
+    padding: 0 22px;
+    border: 0;
+    background: transparent;
+    color: #6c7d76;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+}
+
+.aba-acampamento::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 4px;
+    height: 2px;
+    transform: scaleX(0);
+    background: var(--internal-gold);
+    transition: transform .25s ease;
+}
+
+.aba-acampamento.ativa {
+    color: var(--internal-forest-deep);
+}
+
+.aba-acampamento.ativa::after {
+    transform: scaleX(1);
+}
+
+
+/* CONTEÚDO */
+
+.conteudo-detalhes-acampamento {
+    width: min(1180px, calc(100% - 48px));
+    margin: auto;
+    padding: 70px 0 90px;
+}
+
+.conteudo-aba {
+    display: none;
+}
+
+.conteudo-aba.ativo {
+    display: block;
+    animation: internalFade .35s ease;
+}
+
+@keyframes internalFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.public-section-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.45fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.titulo-secao {
+    position: sticky;
+    top: 170px;
+}
+
+.titulo-secao > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #9b792e;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .2em;
+}
+
+.titulo-secao > span::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--internal-gold);
+}
+
+.titulo-secao h2 {
+    margin: 13px 0 14px;
+    color: var(--internal-forest-deep);
+    font-family: "Fraunces", serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -.025em;
+}
+
+.titulo-secao p {
+    margin: 0;
+    color: var(--internal-muted);
+    line-height: 1.75;
+    font-size: 14px;
+}
+
+.public-side-note {
+    margin-top: 28px;
+    padding: 18px;
+    border-left: 2px solid var(--internal-gold);
+    background: #ecf1ee;
+    color: #50665e;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+
+/* FORM */
+
+.area-formulario {
+    background: white;
+    padding: 34px;
+    border: 1px solid var(--internal-line);
+    box-shadow: 0 16px 45px rgba(6,35,28,.05);
+}
+
+.public-form-heading {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--internal-line);
+}
+
+.public-form-heading span {
+    color: #9b792e;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .18em;
+}
+
+.public-form-heading h3 {
+    margin: 7px 0 0;
+    color: var(--internal-forest-deep);
+    font-family: "Fraunces", serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.grupo-formulario {
+    margin-bottom: 19px;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--internal-forest-deep);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.grupo-formulario input,
+.grupo-formulario textarea,
+.grupo-formulario select {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 14px;
+    border: 1px solid #cad5cf;
+    border-radius: 0;
+    outline: 0;
+    background: #fff;
+    color: var(--internal-text);
+    transition: .2s ease;
+}
+
+.grupo-formulario input:focus,
+.grupo-formulario textarea:focus,
+.grupo-formulario select:focus {
+    border-color: #709382;
+    box-shadow: 0 0 0 3px rgba(11,48,39,.06);
+}
+
+
+/* DIAS */
+
+.lista-dias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.lista-dias > p {
+    grid-column: 1 / -1;
+    color: var(--internal-muted);
+}
+
+.dia-opcao {
+    position: relative;
+}
+
+.dia-opcao input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dia-opcao label {
+    min-height: 58px;
+    margin: 0;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #d4ddd8;
+    background: #f8faf8;
+    color: #49635a;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    transition: .2s ease;
+}
+
+.dia-opcao label:hover {
+    border-color: #9eb6aa;
+}
+
+.dia-opcao input:checked + label {
+    border-color: var(--internal-forest);
+    background: #e7f0eb;
+    color: var(--internal-forest);
+    box-shadow: inset 3px 0 0 var(--internal-gold);
+}
+
+.botao-enviar {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 4px;
+    border: 0;
+    background: var(--internal-forest);
+    color: white;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    transition: .25s ease;
+}
+
+.botao-enviar:hover:not(:disabled) {
+    background: var(--internal-forest-deep);
+    transform: translateY(-2px);
+}
+
+.botao-enviar:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.mensagem-formulario {
+    min-height: 22px;
+    margin-top: 12px;
+    font-size: 12px;
+}
+
+
+/* DOAÇÕES */
+
+.donations-section-layout {
+    display: grid;
+    grid-template-columns: .72fr 1.6fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.grade-doacoes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.card-doacao {
+    position: relative;
+    overflow: hidden;
+    padding: 25px;
+    background: white;
+    border: 1px solid var(--internal-line);
+    box-shadow: 0 12px 35px rgba(6,35,28,.04);
+    transition: .25s ease;
+}
+
+.card-doacao::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--internal-gold);
+}
+
+.card-doacao:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(6,35,28,.10);
+}
+
+.card-doacao h3 {
+    margin: 0 0 20px;
+    color: var(--internal-forest-deep);
+    font-family: "Fraunces", serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.quantidades-doacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid #edf0ee;
+    color: var(--internal-muted);
+    font-size: 10px;
+}
+
+.quantidades-doacao strong {
+    color: var(--internal-forest);
+    font-size: 11px;
+}
+
+.barra-doacao {
+    height: 6px;
+    margin-top: 18px;
+    overflow: hidden;
+    background: #e8eeea;
+}
+
+.progresso-doacao {
+    height: 100%;
+    background: linear-gradient(90deg, #b99a53, #d4b56c);
+}
+
+.falta-doacao {
+    min-height: 20px;
+    margin: 12px 0 18px;
+    color: #61726b;
+    font-size: 10px;
+}
+
+.falta-doacao strong {
+    color: var(--internal-forest);
+}
+
+.botao-doar {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid var(--internal-forest);
+    background: transparent;
+    color: var(--internal-forest);
+    cursor: pointer;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    transition: .2s ease;
+}
+
+.botao-doar:hover:not(:disabled) {
+    background: var(--internal-forest);
+    color: white;
+}
+
+.botao-doar:disabled {
+    border-color: #c8d1cc;
+    color: #88958f;
+    cursor: not-allowed;
+}
+
+.sem-itens {
+    grid-column: 1 / -1;
+    min-height: 230px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #c6d1cb;
+    color: var(--internal-muted);
+    text-align: center;
+}
+
+.sem-itens h3 {
+    margin: 0 0 7px;
+    color: var(--internal-forest-deep);
+    font-family: "Fraunces", serif;
+    font-size: 23px;
+}
+
+
+/* MODAL DOAÇÃO */
+
+.modal-doacao,
+.modal-login-admin {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    padding: 22px;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    background: rgba(2, 19, 15, .78);
+    backdrop-filter: blur(9px);
+}
+
+.modal-doacao.aberto,
+.modal-login-admin.aberto {
+    display: flex;
+}
+
+.modal-conteudo,
+.login-admin-box {
+    position: relative;
+    width: min(100%, 460px);
+    padding: 38px;
+    background: white;
+    border-top: 3px solid var(--internal-gold);
+    box-shadow: 0 30px 90px rgba(0,0,0,.25);
+    animation: modalIn .25s ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fechar-modal,
+.fechar-login-admin {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    border: 0;
+    background: transparent;
+    color: #73827c;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.modal-subtitulo,
+.login-admin-subtitulo {
+    color: #9b792e;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .2em;
+}
+
+.modal-conteudo h2,
+.login-admin-box h2 {
+    margin: 10px 0 8px;
+    color: var(--internal-forest-deep);
+    font-family: "Fraunces", serif;
+    font-size: 31px;
+    font-weight: 600;
+}
+
+.modal-conteudo > p,
+.login-admin-box > p {
+    margin: 0 0 22px;
+    color: var(--internal-muted);
+    line-height: 1.6;
+    font-size: 12px;
+}
+
+.item-selecionado {
+    margin-bottom: 22px;
+    padding: 14px 16px;
+    background: #eef3ef;
+    color: #65776f;
+    font-size: 10px;
+}
+
+.item-selecionado strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--internal-forest-deep);
+    font-size: 14px;
+}
+
+.icone-login-admin {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 20px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--internal-forest-deep);
+    color: var(--internal-gold);
+    font-size: 20px;
+}
+
+
+/* LISTA DE ACAMPAMENTOS */
+
+.camps-list-hero {
+    padding: 150px 0 78px;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(212,181,108,.14), transparent 25%),
+        linear-gradient(125deg, #06231c, #0d3a2f);
+    color: white;
+}
+
+.camps-list-hero span {
+    color: var(--internal-gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .21em;
+}
+
+.camps-list-hero h1 {
+    max-width: 760px;
+    margin: 12px 0 13px;
+    color: white;
+    font-family: "Fraunces", serif;
+    font-size: clamp(46px, 6vw, 68px);
+    font-weight: 600;
+    line-height: 1.05;
+}
+
+.camps-list-hero p {
+    max-width: 650px;
+    margin: 0;
+    color: rgba(255,255,255,.72);
+    line-height: 1.7;
+}
+
+.camps-list-main {
+    padding: 70px 0 90px;
+}
+
+.camps-list-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 38px;
+}
+
+.camps-list-heading span {
+    color: #9b792e;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .18em;
+}
+
+.camps-list-heading h2 {
+    margin: 8px 0 0;
+    color: var(--internal-forest-deep);
+    font-family: "Fraunces", serif;
+    font-size: 38px;
+    font-weight: 600;
+}
+
+.camps-list-heading p {
+    max-width: 440px;
+    margin: 0;
+    color: var(--internal-muted);
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+
+/* FOOTER */
+
+.internal-footer {
+    padding: 45px 0;
+    background: #031713;
+    color: rgba(255,255,255,.68);
+}
+
+.internal-footer-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.internal-footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.internal-footer-symbol {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--internal-gold);
+    border-radius: 50%;
+    color: var(--internal-gold);
+}
+
+.internal-footer strong {
+    display: block;
+    color: white;
+    font-size: 12px;
+}
+
+.internal-footer span {
+    font-size: 9px;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 1050px) {
+    .internal-public-page .home-menu-desktop {
+        display: none;
+    }
+
+    .internal-public-page .home-menu-toggle {
+        display: block;
+    }
+
+    .public-section-grid,
+    .donations-section-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .titulo-secao {
+        position: static;
+    }
+}
+
+@media (max-width: 760px) {
+    .internal-container,
+    .menu-acampamento,
+    .conteudo-detalhes-acampamento,
+    .internal-public-page .home-nav {
+        width: calc(100% - 34px);
+    }
+
+    .camp-detail-hero {
+        min-height: 560px;
+    }
+
+    .camp-hero-content {
+        padding-top: 80px;
+        padding-bottom: 45px;
+    }
+
+    .camp-hero-meta {
+        flex-direction: column;
+    }
+
+    .camp-hero-meta > div {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .camp-values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .camp-public-price {
+        padding: 14px 18px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(6,35,28,.14);
+    }
+
+    .camp-tabs-wrap {
+        top: 72px;
+    }
+
+    .menu-acampamento {
+        min-height: 66px;
+    }
+
+    .aba-acampamento {
+        flex: 1;
+        padding-inline: 10px;
+    }
+
+    .conteudo-detalhes-acampamento {
+        padding: 50px 0 65px;
+    }
+
+    .area-formulario,
+    .modal-conteudo,
+    .login-admin-box {
+        padding: 25px 20px;
+    }
+
+    .lista-dias,
+    .grade-doacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .camps-list-hero {
+        padding: 125px 0 62px;
+    }
+
+    .camps-list-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .camps-list-heading p {
+        text-align: left;
+    }
+
+    .internal-footer-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -1,4 +1,4 @@
-console.log("Site IPLF carregado.");
+console.log("Página do acampamento IPLF carregada.");
 
 let acampamentoAtualId = null;
 
@@ -12,26 +12,12 @@ document.addEventListener(
     function () {
 
         configurarAbas();
-
         configurarModal();
-
-        const formInscricao =
-            document.getElementById(
-                "form-inscricao"
-            );
-
-
-        if (formInscricao) {
-
-            configurarFormularioInscricao();
-
-            configurarFormularioDoacao();
-
-            configurarBotoesDoacao();
-
-            carregarAcampamento();
-
-        }
+        configurarFormularioInscricao();
+        configurarFormularioDoacao();
+        configurarBotoesDoacao();
+        abrirAbaDaUrl();
+        carregarAcampamento();
 
     }
 );
@@ -48,69 +34,143 @@ function configurarAbas() {
             ".aba-acampamento"
         );
 
+
+    botoes.forEach(
+        function (botao) {
+
+            botao.addEventListener(
+                "click",
+                function () {
+
+                    abrirAba(
+                        this.dataset.aba,
+                        true
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+function abrirAba(
+    nomeAba,
+    atualizarUrl = false
+) {
+
+    const botoes =
+        document.querySelectorAll(
+            ".aba-acampamento"
+        );
+
+
     const conteudos =
         document.querySelectorAll(
             ".conteudo-aba"
         );
 
 
-    botoes.forEach(botao => {
+    botoes.forEach(
+        function (item) {
 
-        botao.addEventListener(
-            "click",
-            function () {
+            item.classList.remove(
+                "ativa"
+            );
 
-                const aba =
-                    this.dataset.aba;
-
-
-                botoes.forEach(item => {
-
-                    item.classList.remove(
-                        "ativa"
-                    );
-
-                });
+        }
+    );
 
 
-                conteudos.forEach(item => {
+    conteudos.forEach(
+        function (item) {
 
-                    item.classList.remove(
-                        "ativo"
-                    );
+            item.classList.remove(
+                "ativo"
+            );
 
-                });
-
-
-                this.classList.add(
-                    "ativa"
-                );
+        }
+    );
 
 
-                const conteudo =
-                    document.getElementById(
-                        aba
-                    );
-
-
-                if (conteudo) {
-
-                    conteudo.classList.add(
-                        "ativo"
-                    );
-
-                }
-
-            }
+    const botao =
+        document.querySelector(
+            `.aba-acampamento[data-aba="${nomeAba}"]`
         );
 
-    });
+
+    const conteudo =
+        document.getElementById(
+            nomeAba
+        );
+
+
+    if (botao) {
+        botao.classList.add("ativa");
+    }
+
+
+    if (conteudo) {
+        conteudo.classList.add("ativo");
+    }
+
+
+    if (atualizarUrl) {
+
+        const url =
+            new URL(
+                window.location.href
+            );
+
+
+        url.searchParams.set(
+            "aba",
+            nomeAba
+        );
+
+
+        window.history.replaceState(
+            {},
+            "",
+            url
+        );
+
+    }
+
+}
+
+
+function abrirAbaDaUrl() {
+
+    const parametros =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const aba =
+        parametros.get("aba");
+
+
+    if (
+        aba === "inscricao" ||
+        aba === "doacoes"
+    ) {
+
+        abrirAba(
+            aba,
+            false
+        );
+
+    }
 
 }
 
 
 // =====================================================
-// CARREGAR ACAMPAMENTO DO BANCO
+// CARREGAR ACAMPAMENTO
 // =====================================================
 
 async function carregarAcampamento() {
@@ -119,6 +179,7 @@ async function carregarAcampamento() {
         document.getElementById(
             "lista-dias"
         );
+
 
     const listaItens =
         document.getElementById(
@@ -136,24 +197,49 @@ async function carregarAcampamento() {
 
     if (listaItens) {
 
-        listaItens.innerHTML =
-            `
+        listaItens.innerHTML = `
+
             <div class="sem-itens">
-                <p>
+
+                <h3>
                     Carregando itens...
+                </h3>
+
+                <p>
+                    Aguarde um momento.
                 </p>
+
             </div>
-            `;
+
+        `;
 
     }
 
 
     try {
 
-        const resposta =
-            await fetch(
-                "/api/acampamento"
+        const parametros =
+            new URLSearchParams(
+                window.location.search
             );
+
+
+        const id =
+            String(
+                parametros.get("id") || ""
+            ).trim();
+
+
+        const url =
+            id
+
+                ? `/api/acampamento?id=${encodeURIComponent(id)}`
+
+                : "/api/acampamento";
+
+
+        const resposta =
+            await fetch(url);
 
 
         const dados =
@@ -184,42 +270,45 @@ async function carregarAcampamento() {
 
 
         renderizarDias(
-            dados.dias
+            dados.dias || []
         );
 
 
         renderizarItens(
-            dados.itens
+            dados.itens || []
         );
 
 
     } catch (erro) {
 
-        console.error(erro);
+        console.error(
+            "Erro ao carregar acampamento:",
+            erro
+        );
 
 
         if (listaDias) {
 
-            listaDias.innerHTML =
-                `
-                <p style="color:#b00020;">
+            listaDias.innerHTML = `
+
+                <p style="color:#a64039;">
                     Não foi possível carregar
                     os dias do acampamento.
                 </p>
-                `;
+
+            `;
 
         }
 
 
         if (listaItens) {
 
-            listaItens.innerHTML =
-                `
+            listaItens.innerHTML = `
+
                 <div class="sem-itens">
 
                     <h3>
-                        Não foi possível carregar
-                        as doações
+                        Não foi possível carregar as doações
                     </h3>
 
                     <p>
@@ -229,7 +318,8 @@ async function carregarAcampamento() {
                     </p>
 
                 </div>
-                `;
+
+            `;
 
         }
 
@@ -251,10 +341,18 @@ function atualizarCabecalho(
             "nome-acampamento"
         );
 
+
+    const descricao =
+        document.getElementById(
+            "descricao-acampamento"
+        );
+
+
     const data =
         document.getElementById(
             "data-acampamento"
         );
+
 
     const local =
         document.getElementById(
@@ -262,13 +360,30 @@ function atualizarCabecalho(
         );
 
 
+    const foto =
+        document.getElementById(
+            "acampamento-foto-hero"
+        );
+
+
     if (nome) {
 
         nome.textContent =
-            acampamento.nome;
+            acampamento.nome ||
+            "Acampamento IPLF";
+
 
         document.title =
-            `${acampamento.nome} | IPLF`;
+            `${acampamento.nome || "Acampamento"} | IPLF`;
+
+    }
+
+
+    if (descricao) {
+
+        descricao.textContent =
+            acampamento.descricao ||
+            "Um tempo especial de comunhão, crescimento e presença de Deus.";
 
     }
 
@@ -289,6 +404,164 @@ function atualizarCabecalho(
         local.textContent =
             acampamento.local ||
             "Local não informado";
+
+    }
+
+
+    if (
+        foto &&
+        acampamento.foto_key
+    ) {
+
+        foto.style.backgroundImage =
+            `url("/api/foto-acampamento/${encodeURIComponent(
+                acampamento.foto_key
+            )}")`;
+
+    }
+
+
+    atualizarValores(
+        acampamento
+    );
+
+}
+
+
+// =====================================================
+// VALORES
+// =====================================================
+
+function atualizarValores(
+    acampamento
+) {
+
+    const area =
+        document.getElementById(
+            "acampamento-valores"
+        );
+
+
+    const configuracoes = [
+
+        {
+            valor:
+                acampamento.valor_completo,
+
+            bloco:
+                "bloco-valor-completo",
+
+            destino:
+                "valor-completo-publico"
+        },
+
+        {
+            valor:
+                acampamento.valor_diaria,
+
+            bloco:
+                "bloco-valor-diaria",
+
+            destino:
+                "valor-diaria-publico"
+        },
+
+        {
+            valor:
+                acampamento.valor_crianca,
+
+            bloco:
+                "bloco-valor-crianca",
+
+            destino:
+                "valor-crianca-publico"
+        }
+
+    ];
+
+
+    let algumValor =
+        false;
+
+
+    configuracoes.forEach(
+        function (configuracao) {
+
+            const bloco =
+                document.getElementById(
+                    configuracao.bloco
+                );
+
+
+            const destino =
+                document.getElementById(
+                    configuracao.destino
+                );
+
+
+            const existe =
+                configuracao.valor !== null &&
+                configuracao.valor !== undefined &&
+                configuracao.valor !== "" &&
+                Number.isFinite(
+                    Number(
+                        configuracao.valor
+                    )
+                );
+
+
+            if (
+                bloco &&
+                destino
+            ) {
+
+                bloco.hidden =
+                    !existe;
+
+
+                if (existe) {
+
+                    destino.textContent =
+                        formatarDinheiro(
+                            configuracao.valor
+                        );
+
+
+                    algumValor =
+                        true;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    const labelCrianca =
+        document.getElementById(
+            "label-valor-crianca"
+        );
+
+
+    if (
+        labelCrianca &&
+        acampamento.idade_max_crianca !== null &&
+        acampamento.idade_max_crianca !== undefined
+    ) {
+
+        labelCrianca.textContent =
+            `CRIANÇA ATÉ ${Number(
+                acampamento.idade_max_crianca
+            )} ANOS`;
+
+    }
+
+
+    if (area) {
+
+        area.hidden =
+            !algumValor;
 
     }
 
@@ -314,21 +587,24 @@ function renderizarDias(
     }
 
 
-    if (!dias || dias.length === 0) {
+    if (
+        !dias ||
+        dias.length === 0
+    ) {
 
         lista.innerHTML =
             "<p>Nenhum dia cadastrado.</p>";
 
         return;
-
     }
 
 
     lista.innerHTML =
         dias.map(
-            (dia, indice) => {
+            function (dia, indice) {
 
                 return `
+
                     <div class="dia-opcao">
 
                         <input
@@ -338,16 +614,13 @@ function renderizarDias(
                             value="${dia.id}"
                         >
 
-                        <label
-                            for="dia-${indice}"
-                        >
+                        <label for="dia-${indice}">
 
-                            📅
                             ${escaparHtml(
                                 dia.nome_dia
                             )}
 
-                            -
+                            •
                             ${formatarData(
                                 dia.data
                             )}
@@ -355,10 +628,12 @@ function renderizarDias(
                         </label>
 
                     </div>
+
                 `;
 
             }
-        ).join("");
+        )
+        .join("");
 
 }
 
@@ -382,10 +657,13 @@ function renderizarItens(
     }
 
 
-    if (!itens || itens.length === 0) {
+    if (
+        !itens ||
+        itens.length === 0
+    ) {
 
-        lista.innerHTML =
-            `
+        lista.innerHTML = `
+
             <div class="sem-itens">
 
                 <h3>
@@ -398,195 +676,170 @@ function renderizarItens(
                 </p>
 
             </div>
-            `;
+
+        `;
 
         return;
-
     }
 
 
     lista.innerHTML =
-        itens.map(item => {
+        itens.map(
+            function (item) {
+
+                const necessario =
+                    Number(
+                        item.quantidade_necessaria
+                    );
 
 
-            const necessario =
-                Number(
-                    item.quantidade_necessaria
-                );
+                const doado =
+                    Number(
+                        item.quantidade_doada
+                    );
 
 
-            const doado =
-                Number(
-                    item.quantidade_doada
-                );
+                const faltando =
+                    Math.max(
+                        0,
+                        necessario - doado
+                    );
 
 
-            const faltando =
-                Math.max(
-                    0,
-                    necessario - doado
-                );
+                const porcentagem =
+                    necessario > 0
 
-
-            const porcentagem =
-                necessario > 0
-
-                    ? Math.min(
-                        100,
-                        (
-                            doado /
-                            necessario
-                        ) * 100
-                    )
-
-                    : 0;
-
-
-            const concluido =
-                faltando <= 0;
-
-
-            return `
-                <div class="card-doacao">
-
-
-                    <h3>
-                        ${escaparHtml(
-                            item.nome
-                        )}
-                    </h3>
-
-
-                    <div
-                        class="quantidades-doacao"
-                    >
-
-                        <span>
-                            Necessário:
-                        </span>
-
-                        <strong>
-
-                            ${formatarNumero(
+                        ? Math.min(
+                            100,
+                            (
+                                doado /
                                 necessario
-                            )}
+                            ) * 100
+                        )
 
-                            ${escaparHtml(
-                                item.unidade
-                            )}
-
-                        </strong>
-
-                    </div>
+                        : 0;
 
 
-                    <div
-                        class="quantidades-doacao"
-                    >
-
-                        <span>
-                            Já doado:
-                        </span>
-
-                        <strong>
-
-                            ${formatarNumero(
-                                doado
-                            )}
-
-                            ${escaparHtml(
-                                item.unidade
-                            )}
-
-                        </strong>
-
-                    </div>
+                const concluido =
+                    faltando <= 0;
 
 
-                    <div
-                        class="barra-doacao"
-                    >
+                return `
 
-                        <div
-                            class="progresso-doacao"
-                            style="
-                                width:
-                                ${porcentagem}%
-                            "
-                        >
-                        </div>
+                    <div class="card-doacao">
 
-                    </div>
-
-
-                    <p
-                        class="falta-doacao"
-                    >
-
-                        ${
-                            concluido
-
-                                ? "Meta atingida!"
-
-                                : `
-                                    Faltam
-                                    <strong>
-
-                                        ${formatarNumero(
-                                            faltando
-                                        )}
-
-                                        ${escaparHtml(
-                                            item.unidade
-                                        )}
-
-                                    </strong>
-                                `
-                        }
-
-                    </p>
-
-
-                    <button
-                        type="button"
-
-                        class="botao-doar"
-
-                        data-item-id="
-                            ${item.id}
-                        "
-
-                        data-item-nome="
+                        <h3>
                             ${escaparHtml(
                                 item.nome
                             )}
-                        "
+                        </h3>
 
-                        data-unidade="
-                            ${escaparHtml(
+
+                        <div class="quantidades-doacao">
+
+                            <span>
+                                Necessário
+                            </span>
+
+                            <strong>
+
+                                ${formatarNumero(
+                                    necessario
+                                )}
+
+                                ${escaparHtml(
+                                    item.unidade
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="quantidades-doacao">
+
+                            <span>
+                                Já doado
+                            </span>
+
+                            <strong>
+
+                                ${formatarNumero(
+                                    doado
+                                )}
+
+                                ${escaparHtml(
+                                    item.unidade
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="barra-doacao">
+
+                            <div
+                                class="progresso-doacao"
+                                style="width:${porcentagem}%">
+                            </div>
+
+                        </div>
+
+
+                        <p class="falta-doacao">
+
+                            ${
+                                concluido
+
+                                    ? "Meta atingida!"
+
+                                    : `
+                                        Faltam
+                                        <strong>
+
+                                            ${formatarNumero(
+                                                faltando
+                                            )}
+
+                                            ${escaparHtml(
+                                                item.unidade
+                                            )}
+
+                                        </strong>
+                                    `
+                            }
+
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="botao-doar"
+                            data-item-id="${item.id}"
+                            data-item-nome="${escaparAtributo(
+                                item.nome
+                            )}"
+                            data-unidade="${escaparAtributo(
                                 item.unidade
-                            )}
-                        "
+                            )}"
+                            ${concluido ? "disabled" : ""}>
 
-                        ${concluido
-                            ? "disabled"
-                            : ""
-                        }
-                    >
+                            ${
+                                concluido
+                                    ? "META ATINGIDA"
+                                    : "VOU DOAR"
+                            }
 
-                        ${
-                            concluido
-                                ? "META ATINGIDA"
-                                : "VOU DOAR"
-                        }
+                        </button>
 
-                    </button>
+                    </div>
 
+                `;
 
-                </div>
-            `;
-
-        }).join("");
+            }
+        )
+        .join("");
 
 }
 
@@ -668,29 +921,37 @@ function configurarFormularioInscricao() {
                 );
 
 
-            mensagem.textContent = "";
+            mensagem.textContent =
+                "";
 
 
             if (!acampamentoAtualId) {
+
+                mensagem.style.color =
+                    "#a64039";
+
 
                 mensagem.textContent =
                     "O acampamento ainda não foi carregado.";
 
                 return;
-
             }
 
 
             const nomeCompleto =
                 document.getElementById(
                     "nome"
-                ).value.trim();
+                )
+                .value
+                .trim();
 
 
             const telefone =
                 document.getElementById(
                     "telefone"
-                ).value.trim();
+                )
+                .value
+                .trim();
 
 
             const dias =
@@ -698,18 +959,26 @@ function configurarFormularioInscricao() {
                     document.querySelectorAll(
                         'input[name="dias"]:checked'
                     )
-                ).map(
-                    item => item.value
+                )
+                .map(
+                    function (item) {
+                        return item.value;
+                    }
                 );
 
 
-            if (dias.length === 0) {
+            if (
+                dias.length === 0
+            ) {
+
+                mensagem.style.color =
+                    "#a64039";
+
 
                 mensagem.textContent =
                     "Escolha pelo menos um dia.";
 
                 return;
-
             }
 
 
@@ -723,7 +992,9 @@ function configurarFormularioInscricao() {
                 botao.textContent;
 
 
-            botao.disabled = true;
+            botao.disabled =
+                true;
+
 
             botao.textContent =
                 "SALVANDO...";
@@ -745,7 +1016,6 @@ function configurarFormularioInscricao() {
 
                             body:
                                 JSON.stringify({
-
                                     acampamentoId:
                                         acampamentoAtualId,
 
@@ -754,7 +1024,6 @@ function configurarFormularioInscricao() {
                                     telefone,
 
                                     dias
-
                                 })
 
                         }
@@ -776,7 +1045,7 @@ function configurarFormularioInscricao() {
 
 
                 mensagem.style.color =
-                    "#087a50";
+                    "#176646";
 
 
                 mensagem.textContent =
@@ -789,15 +1058,18 @@ function configurarFormularioInscricao() {
             } catch (erro) {
 
                 mensagem.style.color =
-                    "#b00020";
+                    "#a64039";
 
 
                 mensagem.textContent =
                     erro.message;
 
+
             } finally {
 
-                botao.disabled = false;
+                botao.disabled =
+                    false;
+
 
                 botao.textContent =
                     textoOriginal;
@@ -811,7 +1083,7 @@ function configurarFormularioInscricao() {
 
 
 // =====================================================
-// MODAL
+// MODAL DE DOAÇÃO
 // =====================================================
 
 function configurarModal() {
@@ -820,6 +1092,7 @@ function configurarModal() {
         document.getElementById(
             "modal-doacao"
         );
+
 
     const fechar =
         document.getElementById(
@@ -846,7 +1119,28 @@ function configurarModal() {
         "click",
         function (event) {
 
-            if (event.target === modal) {
+            if (
+                event.target === modal
+            ) {
+
+                fecharModalDoacao();
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                modal.classList.contains(
+                    "aberto"
+                )
+            ) {
 
                 fecharModalDoacao();
 
@@ -888,7 +1182,12 @@ function abrirModalDoacao(
         );
 
 
-    if (!modal) {
+    if (
+        !modal ||
+        !nomeItem ||
+        !itemId ||
+        !quantidade
+    ) {
         return;
     }
 
@@ -903,6 +1202,10 @@ function abrirModalDoacao(
 
     quantidade.placeholder =
         `Quantidade em ${unidade}`;
+
+
+    document.body.style.overflow =
+        "hidden";
 
 
     modal.classList.add(
@@ -920,12 +1223,39 @@ function fecharModalDoacao() {
         );
 
 
-    if (modal) {
+    if (!modal) {
+        return;
+    }
 
-        modal.classList.remove(
-            "aberto"
+
+    modal.classList.remove(
+        "aberto"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+
+    const formulario =
+        document.getElementById(
+            "form-doacao"
         );
 
+
+    const mensagem =
+        document.getElementById(
+            "mensagem-doacao"
+        );
+
+
+    if (formulario) {
+        formulario.reset();
+    }
+
+
+    if (mensagem) {
+        mensagem.textContent = "";
     }
 
 }
@@ -961,32 +1291,39 @@ function configurarFormularioDoacao() {
                 );
 
 
-            mensagem.textContent = "";
+            mensagem.textContent =
+                "";
 
 
             const itemId =
                 document.getElementById(
                     "item-doacao-id"
-                ).value;
+                )
+                .value;
 
 
             const nomeDoador =
                 document.getElementById(
                     "nome-doador"
-                ).value.trim();
+                )
+                .value
+                .trim();
 
 
             const telefone =
                 document.getElementById(
                     "telefone-doador"
-                ).value.trim();
+                )
+                .value
+                .trim();
 
 
             const quantidade =
                 Number(
                     document.getElementById(
                         "quantidade-doacao"
-                    ).value
+                    )
+                    .value
                 );
 
 
@@ -1000,10 +1337,12 @@ function configurarFormularioDoacao() {
                 botao.textContent;
 
 
-            botao.disabled = true;
+            botao.disabled =
+                true;
+
 
             botao.textContent =
-                "SALVANDO...";
+                "REGISTRANDO...";
 
 
             try {
@@ -1022,15 +1361,10 @@ function configurarFormularioDoacao() {
 
                             body:
                                 JSON.stringify({
-
                                     itemId,
-
                                     nomeDoador,
-
                                     telefone,
-
                                     quantidade
-
                                 })
 
                         }
@@ -1052,32 +1386,29 @@ function configurarFormularioDoacao() {
 
 
                 mensagem.style.color =
-                    "#087a50";
+                    "#176646";
 
 
                 mensagem.textContent =
                     "✓ Doação registrada com sucesso!";
 
 
-                formulario.reset();
-
-
                 setTimeout(
-                    async function () {
+                    function () {
 
                         fecharModalDoacao();
 
-                        await carregarAcampamento();
+                        carregarAcampamento();
 
                     },
-                    1000
+                    900
                 );
 
 
             } catch (erro) {
 
                 mensagem.style.color =
-                    "#b00020";
+                    "#a64039";
 
 
                 mensagem.textContent =
@@ -1086,7 +1417,9 @@ function configurarFormularioDoacao() {
 
             } finally {
 
-                botao.disabled = false;
+                botao.disabled =
+                    false;
+
 
                 botao.textContent =
                     textoOriginal;
@@ -1100,7 +1433,7 @@ function configurarFormularioDoacao() {
 
 
 // =====================================================
-// FUNÇÕES AUXILIARES
+// AUXILIARES
 // =====================================================
 
 function formatarData(data) {
@@ -1110,21 +1443,16 @@ function formatarData(data) {
     }
 
 
-    const somenteData =
-        String(data).substring(
-            0,
-            10
-        );
-
-
     const partes =
-        somenteData.split("-");
+        String(data)
+        .substring(0, 10)
+        .split("-");
 
 
-    if (partes.length !== 3) {
-
-        return data;
-
+    if (
+        partes.length !== 3
+    ) {
+        return String(data);
     }
 
 
@@ -1144,24 +1472,26 @@ function formatarPeriodo(
     fim
 ) {
 
-    if (!inicio) {
-        return "Data não informada";
-    }
+    if (
+        inicio &&
+        fim
+    ) {
 
-
-    if (!fim || inicio === fim) {
-
-        return formatarData(
-            inicio
+        return (
+            formatarData(inicio) +
+            " — " +
+            formatarData(fim)
         );
 
     }
 
 
     return (
-        formatarData(inicio) +
-        " a " +
-        formatarData(fim)
+        formatarData(
+            inicio || fim
+        )
+        ||
+        "Data a definir"
     );
 
 }
@@ -1169,11 +1499,27 @@ function formatarPeriodo(
 
 function formatarNumero(valor) {
 
+    return Number(
+        valor || 0
+    )
+    .toLocaleString(
+        "pt-BR",
+        {
+            maximumFractionDigits: 2
+        }
+    );
+
+}
+
+
+function formatarDinheiro(valor) {
+
     return Number(valor)
         .toLocaleString(
             "pt-BR",
             {
-                maximumFractionDigits: 2
+                style: "currency",
+                currency: "BRL"
             }
         );
 
@@ -1182,11 +1528,21 @@ function formatarNumero(valor) {
 
 function escaparHtml(valor) {
 
-    return String(valor ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    return String(
+        valor ?? ""
+    )
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+function escaparAtributo(valor) {
+
+    return escaparHtml(valor)
+        .replaceAll("`", "&#096;");
 
 }
